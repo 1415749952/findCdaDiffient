@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ../sdschemas/CDA.xsd">
+  <realmCode code="CN"/>
+  <typeId extension="POCD_MT000040" root="2.16.840.1.113883.1.3"/>
+  <templateId root="2.16.156.10011.2.1.1.51"/>
+  <!-- 文档流水号 -->
+  <id extension="${docInfo.docId}" root="2.16.156.10011.1.1"/>
+  <code code="C0031" codeSystem="2.16.156.10011.2.4" codeSystemName="卫生信息共享文档规范编码体系"/>
+  <title>其他知情通知书</title>
+  <!-- 文档机器生成时间 -->
+  <effectiveTime value="${docInfo.effectiveTime}"/>
+  <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality" displayName="正常访问保密级别"/>
+  <languageCode code="zh-CN"/>
+  <setId/>
+  <versionNumber/>
+  <!--患者信息-->
+  <recordTarget contextControlCode="OP" typeCode="RCT">
+    <patientRole>
+      <!--门诊号-->
+      <id extension="${otherInformedConsent.outpNo!'NA'}" root="2.16.156.10011.1.11"/>
+      <!--住院号-->
+      <id extension="${otherInformedConsent.inpNo!'NA'}" root="2.16.156.10011.1.12"/>
+      <!-- 知情同意书编号 -->
+      <id extension="${otherInformedConsent.informedConsentNo!'NA'}" root="2.16.156.10011.1.34"/>
+      <patient>
+        <!--患者身份证号标识-->
+        <id extension="${emrBasicpatient.identityNo!'NA'}" root="2.16.156.10011.1.3"/>
+        <name>${otherInformedConsent.patientName!'NA'}</name>
+        <!--性别-->
+        <administrativeGenderCode code="${otherInformedConsent.sexCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${otherInformedConsent.sexCode!'NA'}" datasetCloumn="SEX_CODE">${dict.desc}</@dict_tag>"/>
+        <!--出生日期-->
+        <birthTime value="${emrBasicpatient.birthday!'NA'}"/>
+        <#if otherInformedConsent.ageYear??>
+        <age unit="岁" value="${otherInformedConsent.ageYear!'NA'}"/>
+        <#else>
+        <age unit="月" value="${otherInformedConsent.patientMonth!'NA'}"/>
+        </#if>
+      </patient>
+    </patientRole>
+  </recordTarget>
+  <!--作者-->
+  <author contextControlCode="OP" typeCode="AUT">
+    <time value="${otherInformedConsent.doctorSignDatetime!'NA'}"/>
+    <assignedAuthor classCode="ASSIGNED">
+      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <assignedPerson>
+        <name>${otherInformedConsent.doctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedAuthor>
+  </author>
+  <!--保管机构-->
+  <custodian typeCode="CST">
+    <assignedCustodian classCode="ASSIGNED">
+      <representedCustodianOrganization classCode="ORG" determinerCode="INSTANCE">
+        <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <!--医疗机构名称-->
+        <name>${hospitalInfo.organName!'NA'}</name>
+        <!--医疗机构电话-->
+        <telecom value="${hospitalInfo.organNumber!'NA'}"/>
+        <!--医疗机构地址-->
+        <addr>${hospitalInfo.townShip!'NA'}</addr>
+      </representedCustodianOrganization>
+    </assignedCustodian>
+  </custodian>
+  <!--医师签名-->
+  <legalAuthenticator typeCode="LA">
+    <!-- DE09.00.053.00医师签名日期时间 -->
+    <time value="${otherInformedConsent.doctorSignDatetime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <assignedPerson>
+        <name>${otherInformedConsent.doctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </legalAuthenticator>
+  <!-- 患者签名 -->
+  <authenticator>
+    <!-- DE09.00.053.00	患者/法定代理人签名日期时间 -->
+    <time value="${otherInformedConsent.signDatetime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="NA" root="2.16.156.10011.1.3"/>
+      <assignedPerson>
+        <!-- 患者姓名 -->
+        <name>${emrBasicpatient.patientName!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <!--代理人签名-->
+  <authenticator>
+    <!-- DE09.00.053.00患者/法定代理人签名日期时间 -->
+    <time value="${otherInformedConsent.signDatetime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="NA" root="2.16.156.10011.1.3"/>
+      <!--代理人关系-->
+      <code code="${otherInformedConsent.relationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.8" codeSystemName="家庭关系代码表(GB/T 4761)" displayName="<@dict_tag value="${otherInformedConsent.relationCode!'NA'}" datasetCloumn="RELATION_CODE">${dict.desc}</@dict_tag>"/>
+      <assignedPerson>
+        <!--代理人姓名-->
+        <name>${otherInformedConsent.legalAgentSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <relatedDocument typeCode="RPLC">
+    <parentDocument>
+      <id/>
+      <setId/>
+      <versionNumber/>
+    </parentDocument>
+  </relatedDocument>
+  <!-- 病床号、病房、病区、科室和医院的关联 -->
+  <componentOf>
+    <encompassingEncounter>
+      <effectiveTime/>
+      <location>
+        <healthCareFacility>
+          <serviceProviderOrganization>
+            <asOrganizationPartOf classCode="PART">
+              <!-- DE01.00.026.00病床号 -->
+              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                <id extension="${otherInformedConsent.bedNo!'NA'}" root="2.16.156.10011.1.22"/>
+                <name>${otherInformedConsent.bedNo!'NA'}</name>
+                <asOrganizationPartOf classCode="PART">
+                  <!-- DE01.00.019.00病房号 -->
+                  <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                    <id extension="${otherInformedConsent.areaNo!'NA'}" root="2.16.156.10011.1.21"/>
+                    <name>${otherInformedConsent.areaNo!'NA'}</name>
+                    <asOrganizationPartOf classCode="PART">
+                      <!-- DE08.10.026.00科室名称 -->
+                      <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                        <id extension="${otherInformedConsent.deptName!'NA'}" root="2.16.156.10011.1.26"/>
+                        <name>${otherInformedConsent.deptName!'NA'}</name>
+                        <asOrganizationPartOf classCode="PART">
+                          <!-- DE08.10.054.00病区名称 -->
+                          <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                            <id extension="${otherInformedConsent.areaName!'NA'}" root="2.16.156.10011.1.27"/>
+                            <name>${otherInformedConsent.areaName!'NA'}</name>
+                            <asOrganizationPartOf classCode="PART">
+                              <!--医疗机构名称 -->
+                              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                                <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+                                <name>${hospitalInfo.organName!'NA'}</name>
+                              </wholeOrganization>
+                            </asOrganizationPartOf>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </wholeOrganization>
+                </asOrganizationPartOf>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </serviceProviderOrganization>
+        </healthCareFacility>
+      </location>
+    </encompassingEncounter>
+  </componentOf>
+  <component>
+    <structuredBody>
+      <!--诊断记录章节-->
+      <component>
+        <section>
+          <code code="29548-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Diagnosis"/>
+          <title/>
+          <text/>
+          <!--疾病诊断编码-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="疾病诊断编码"/>
+              <value code="${otherInformedConsent.diagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="<@dict_tag value="${otherInformedConsent.diagCode!'NA'}" datasetCloumn="DIAG_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--知情同意章节-->
+      <component>
+        <section>
+          <code code="34895-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="EDUCATION NOTE"/>
+          <text/>
+          <!-- DE09.00.117.00	知情同意书名称 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE09.00.117.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="知情同意书名称"/>
+              <value xsi:type="ST">${otherInformedConsent.informedConsentName!'NA'}</value>
+            </observation>
+          </entry>
+          <!--知情同意内容-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE09.00.116.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="知情同意内容"/>
+              <value xsi:type="ST">${otherInformedConsent.informedConsentConent!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--意见章节-->
+      <component>
+        <section>
+          <code displayName="意见章节"/>
+          <text/>
+          <!--医疗机构意见-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.018.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="医疗机构的意见"/>
+              <value xsi:type="ST">${otherInformedConsent.orgOpinion!'NA'}</value>
+            </observation>
+          </entry>
+          <!--患者意见-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.018.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="患者的意见"/>
+              <value xsi:type="ST">${otherInformedConsent.patientAgentOpinion!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+    </structuredBody>
+  </component>
+</ClinicalDocument>

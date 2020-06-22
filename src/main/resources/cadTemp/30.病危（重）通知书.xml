@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ../sdschemas/CDA.xsd">
+  <realmCode code="CN"/>
+  <typeId extension="POCD_MT000040" root="2.16.840.1.113883.1.3"/>
+  <templateId root="2.16.156.10011.2.1.1.50"/>
+  <!-- 文档流水号 -->
+  <id extension="${docInfo.docId}" root="2.16.156.10011.1.1"/>
+  <code code="C0030" codeSystem="2.16.156.10011.2.4" codeSystemName="卫生信息共享文档规范编码体系"/>
+  <title>病危（重）通知书</title>
+  <!-- 文档机器生成时间 -->
+  <effectiveTime value="${docInfo.effectiveTime}"/>
+  <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality" displayName="正常访问保密级别"/>
+  <languageCode code="zh-CN"/>
+  <setId/>
+  <versionNumber/>
+  <!--患者信息-->
+  <recordTarget contextControlCode="OP" typeCode="RCT">
+    <patientRole>
+      <!--门诊号-->
+      <id extension="${criticallyIllNotice.outpNo!'NA'}" root="2.16.156.10011.1.11"/>
+      <!--住院号-->
+      <id extension="${criticallyIllNotice.inpNo!'NA'}" root="2.16.156.10011.1.12"/>
+      <!-- 知情同意书编号 -->
+      <id extension="${criticallyIllNotice.informedConsentNo!'NA'}" root="2.16.156.10011.1.34"/>
+      <patient>
+        <!--患者身份证号标识-->
+        <id extension="${emrBasicpatient.identityNo!'NA'}" root="2.16.156.10011.1.3"/>
+        <name>${criticallyIllNotice.patientName!'NA'}</name>
+        <!--性别-->
+        <administrativeGenderCode code="${criticallyIllNotice.sexCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${criticallyIllNotice.sexCode!'NA'}" datasetCloumn="SEX_CODE">${dict.desc}</@dict_tag>"/>
+        <!--出生日期-->
+        <birthTime value="${emrBasicpatient.birthday!'NA'}"/>
+        <#if criticallyIllNotice.ageYear??>
+        <age unit="岁" value="${criticallyIllNotice.ageYear!'NA'}"/>
+        <#else>
+        <age unit="月" value="${criticallyIllNotice.patientMonth!'NA'}"/>
+        </#if>
+      </patient>
+    </patientRole>
+  </recordTarget>
+  <!--作者-->
+  <author contextControlCode="OP" typeCode="AUT">
+    <time value="${criticallyIllNotice.doctorSignDatetime!'NA'}"/>
+    <assignedAuthor classCode="ASSIGNED">
+      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <assignedPerson>
+        <name>${criticallyIllNotice.doctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedAuthor>
+  </author>
+  <!--保管机构-->
+  <custodian typeCode="CST">
+    <assignedCustodian classCode="ASSIGNED">
+      <representedCustodianOrganization classCode="ORG" determinerCode="INSTANCE">
+        <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </representedCustodianOrganization>
+    </assignedCustodian>
+  </custodian>
+  <!--医师签名-->
+  <legalAuthenticator typeCode="LA">
+    <time value="${criticallyIllNotice.doctorSignDatetime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <assignedPerson>
+        <name>${criticallyIllNotice.doctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </legalAuthenticator>
+  <!-- 患者签名 -->
+  <authenticator>
+    <time/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="NA" root="2.16.156.10011.1.3"/>
+      <code displayName="患者"/>
+      <assignedPerson>
+        <name>${criticallyIllNotice.patientName!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <!--代理人签名-->
+  <authenticator>
+    <time value="${criticallyIllNotice.signDatetime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="NA" root="2.16.156.10011.1.3"/>
+      <!--代理人关系-->
+      <code code="${criticallyIllNotice.relationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.8" codeSystemName="家庭关系代码表(GB/T 4761)" displayName="<@dict_tag value="${criticallyIllNotice.relationCode!'NA'}" datasetCloumn="RELATION_CODE">${dict.desc}</@dict_tag>"/>
+      <assignedPerson>
+        <!--代理人姓名-->
+        <name>${criticallyIllNotice.legalAgentSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <relatedDocument typeCode="RPLC">
+    <parentDocument>
+      <id/>
+      <setId/>
+      <versionNumber/>
+    </parentDocument>
+  </relatedDocument>
+  <!-- 病床号、病房、病区、科室和医院的关联 -->
+  <componentOf>
+    <encompassingEncounter>
+      <effectiveTime/>
+      <location>
+        <healthCareFacility>
+          <serviceProviderOrganization>
+            <asOrganizationPartOf classCode="PART">
+              <!-- DE01.00.026.00病床号 -->
+              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                <id extension="${criticallyIllNotice.bedNo!'NA'}" root="2.16.156.10011.1.22"/>
+                <name>${criticallyIllNotice.bedNo!'NA'}</name>
+                <asOrganizationPartOf classCode="PART">
+                  <!-- DE01.00.019.00病房号 -->
+                  <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                    <id extension="${criticallyIllNotice.areaNo!'NA'}" root="2.16.156.10011.1.21"/>
+                    <name>${criticallyIllNotice.areaNo!'NA'}</name>
+                    <asOrganizationPartOf classCode="PART">
+                      <!-- DE08.10.026.00科室名称 -->
+                      <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                        <id extension="${criticallyIllNotice.deptName!'NA'}" root="2.16.156.10011.1.26"/>
+                        <name>${criticallyIllNotice.deptName!'NA'}</name>
+                        <asOrganizationPartOf classCode="PART">
+                          <!-- DE08.10.054.00病区名称 -->
+                          <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                            <id extension="${criticallyIllNotice.areaName!'NA'}" root="2.16.156.10011.1.27"/>
+                            <name>${criticallyIllNotice.areaName!'NA'}</name>
+                            <asOrganizationPartOf classCode="PART">
+                              <!--医疗机构名称 -->
+                              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                                <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+                                <name>${hospitalInfo.organName!'NA'}</name>
+                              </wholeOrganization>
+                            </asOrganizationPartOf>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </wholeOrganization>
+                </asOrganizationPartOf>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </serviceProviderOrganization>
+        </healthCareFacility>
+      </location>
+    </encompassingEncounter>
+  </componentOf>
+  <component>
+    <structuredBody>
+      <!--诊断章节-->
+      <component>
+        <section>
+          <code code="29548-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Diagnosis"/>
+          <text/>
+          <!--疾病诊断编码-->
+          <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="疾病诊断编码"/>
+              <value code="${criticallyIllNotice.diagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="<@dict_tag value="${criticallyIllNotice.diagCode!'NA'}" datasetCloumn="DIAG_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--知情同意章节-->
+      <component>
+        <section>
+          <code code="34895-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="EDUCATION NOTE"/>
+          <text/>
+          <entry>
+            <!--病情概况以及主要抢救措施-->
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.183.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="病情概况以及主要抢救措施"/>
+              <value xsi:type="ST">${criticallyIllNotice.conditionEmergencyMeasures!'NA'}</value>
+              <!--病危（重）通知内容-->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.278.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="病危(重)通知内容"/>
+                  <!--通知时间-->
+                  <effectiveTime value="${criticallyIllNotice.criticalIllnessDatetime!'NA'}"/>
+                  <value xsi:type="ST">${criticallyIllNotice.criticalIllnessContent!'NA'}</value>
+                </observation>
+              </entryRelationship>
+            </observation>
+          </entry>
+        </section>
+      </component>
+    </structuredBody>
+  </component>
+</ClinicalDocument>

@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\sdschemas\CDA.xsd">
+  <realmCode code="CN"/>
+  <typeId extension="POCD_MT000040" root="2.16.840.1.113883.1.3"/>
+  <templateId root="2.16.156.10011.2.1.1.37"/>
+  <!-- 文档流水号 -->
+  <id extension="${docInfo.docId}" root="2.16.156.10011.1.1"/>
+  <code code="C0017" codeSystem="2.16.156.10011.2.4" codeSystemName="卫生信息共享文档规范编码体系"/>
+  <title>一般护理记录</title>
+  <!-- 文档机器生成时间 -->
+  <effectiveTime value="${docInfo.effectiveTime}"/>
+  <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality" displayName="正常访问保密级别"/>
+  <languageCode code="zh-CN"/>
+  <setId/>
+  <versionNumber/>
+  <recordTarget contextControlCode="OP" typeCode="RCT">
+    <patientRole classCode="PAT">
+      <!--住院号：DE01.00.014.00 @@@参照OID分配表修改 -->
+      <id extension="${generalCarerEcords.inpNo!'NA'}" root="2.16.156.10011.1.12"/>
+      <patient classCode="PSN" determinerCode="INSTANCE">
+        <!--患者身份证号标识-->
+        <id extension="${emrBasicpatient.identityNo!'NA'}" root="2.16.156.10011.1.3"/>
+        <name>${generalCarerEcords.patientName!'NA'}</name>
+        <administrativeGenderCode code="${generalCarerEcords.patientSex!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${generalCarerEcords.patientSex!'NA'}" datasetCloumn="PATIENT_SEX">${dict.desc}</@dict_tag>"/>
+        <#if generalCarerEcords.ageYear??>
+        <age unit="岁" value="${generalCarerEcords.ageYear!'NA'}"/>
+        <#else>
+        <age unit="月" value="${generalCarerEcords.patientMonth!'NA'}"/>
+        </#if>
+      </patient>
+      <!--医疗机构信息-->
+      <providerOrganization>
+        <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </providerOrganization>
+    </patientRole>
+  </recordTarget>
+  <!-- 文档作者 -->
+  <author contextControlCode="OP" typeCode="AUT">
+    <!--签名日期时间：DE09.00.053.00-->
+    <time value="${generalCarerEcords.signDatetime!'NA'}"/>
+    <assignedAuthor classCode="ASSIGNED">
+      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <code displayName="护士"/>
+      <assignedPerson>
+        <name>${generalCarerEcords.nurseSign!'NA'}</name>
+      </assignedPerson>
+    </assignedAuthor>
+  </author>
+  <!-- 文档生成机构 -->
+  <custodian typeCode="CST">
+    <assignedCustodian classCode="ASSIGNED">
+      <representedCustodianOrganization classCode="ORG" determinerCode="INSTANCE">
+        <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </representedCustodianOrganization>
+    </assignedCustodian>
+  </custodian>
+  <!-- 护士签名 -->
+  <authenticator>
+    <!--签名日期时间：DE09.00.053.00 -->
+    <time value="${generalCarerEcords.signDatetime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <code displayName="护士"/>
+      <assignedPerson>
+        <name>${generalCarerEcords.nurseSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <relatedDocument typeCode="RPLC">
+    <parentDocument>
+      <id/>
+      <setId/>
+      <versionNumber/>
+    </parentDocument>
+  </relatedDocument>
+  <!--文档中医疗卫生事件的就诊场景,即入院场景记录-->
+  <componentOf typeCode="COMP">
+    <encompassingEncounter classCode="ENC" moodCode="EVN">
+      <code/>
+      <effectiveTime nullFlavor="NI"/>
+      <location typeCode="LOC">
+        <healthCareFacility classCode="SDLOC">
+          <serviceProviderOrganization classCode="ORG" determinerCode="INSTANCE">
+            <asOrganizationPartOf classCode="PART">
+              <!--病床号：DE01.00.026.00-->
+              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                <id extension="${generalCarerEcords.bedNo!'NA'}" root="2.16.156.10011.1.22"/>
+                <name>${generalCarerEcords.bedNo!'NA'}</name>
+                <asOrganizationPartOf classCode="PART">
+                  <!--病房号：DE01.00.019.00-->
+                  <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                    <id extension="${generalCarerEcords.areaNo!'NA'}" root="2.16.156.10011.1.21"/>
+                    <name>${generalCarerEcords.areaNo!'NA'}</name>
+                    <asOrganizationPartOf classCode="PART">
+                      <!--病区名称：DE08.10.054.00-->
+                      <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                        <id extension="${generalCarerEcords.deptName!'NA'}" root="2.16.156.10011.1.27"/>
+                        <name>${generalCarerEcords.deptName!'NA'}</name>
+                        <asOrganizationPartOf classCode="PART">
+                          <!--科室名称：DE08.10.026.00-->
+                          <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                            <id extension="${generalCarerEcords.areaName!'NA'}" root="2.16.156.10011.1.26"/>
+                            <name>${generalCarerEcords.areaName!'NA'}</name>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </wholeOrganization>
+                </asOrganizationPartOf>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </serviceProviderOrganization>
+        </healthCareFacility>
+      </location>
+    </encompassingEncounter>
+  </componentOf>
+  <component>
+    <structuredBody>
+      <!--诊断记录章节-->
+      <component>
+        <section>
+          <code code="29548-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Diagnosis"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="疾病诊断编码"/>
+              <value code="${generalCarerEcords.diagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" xsi:type="CD" displayName="<@dict_tag value="${generalCarerEcords.diagCode!'NA'}" datasetCloumn="DIAG_CODE">${dict.desc}</@dict_tag>"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--过敏史章节-->
+      <component>
+        <section>
+          <code code="48765-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Allergies, adverse reactions, alerts"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE02.10.022.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="过敏史描述"/>
+              <value xsi:type="ST">${generalCarerEcords.allergyHistory!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--生命体征章节-->
+      <component>
+        <section>
+          <code code="8716-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="VITAL SIGNS"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.188.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="体重(kg)"/>
+              <value unit="kg" value="${generalCarerEcords.weight!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.186.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="体温(℃)"/>
+              <value unit="℃" value="${generalCarerEcords.temperature!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.081.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="呼吸频率（次/min）"/>
+              <value unit="次/min" value="${generalCarerEcords.breathFrequency!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.118.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="脉率（次/min）"/>
+              <value unit="次/min" value="${generalCarerEcords.sphygmus!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+          <entry>
+            <organizer classCode="BATTERY" moodCode="EVN">
+              <statusCode/>
+              <component>
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE04.10.174.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="收缩压"/>
+                  <value unit="mmHg" value="${generalCarerEcords.systolicPressure!'NA'}" xsi:type="PQ"/>
+                </observation>
+              </component>
+              <component>
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE04.10.176.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="舒张压"/>
+                  <value unit="mmHg" value="${generalCarerEcords.diastolicPressure!'NA'}" xsi:type="PQ"/>
+                </observation>
+              </component>
+            </organizer>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.50.149.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="血氧饱和度（%）"/>
+              <value unit="%" value="${generalCarerEcords.oxygenSaturation!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--四肢章节-->
+      <component>
+        <section>
+          <code code="10196-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="EXTREMITIES"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.237.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="足背动脉搏动标志"/>
+              <value value="${generalCarerEcords.dpapFlag!'NA'}" xsi:type="BL"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--健康评估章节-->
+      <component>
+        <section>
+          <code code="51848-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Assessment note"/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE03.00.080.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="饮食情况代码"/>
+              <value code="${generalCarerEcords.dietaryStatusCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.34" codeSystemName="饮食情况代码表" displayName="<@dict_tag value="${generalCarerEcords.dietaryStatusCode!'NA'}" datasetCloumn="DIETARY_STATUS_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--健康指导章节-->
+      <component>
+        <section>
+          <code code="69730-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Instructions"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.291.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="饮食指导代码"/>
+              <value code="${generalCarerEcords.dietGuideCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.263" codeSystemName="饮食指导代码表" displayName="<@dict_tag value="${generalCarerEcords.dietGuideCode!'NA'}" datasetCloumn="DIET_GUIDE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--护理记录章节-->
+      <component>
+        <section>
+          <code displayName="护理记录"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.211.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理等级代码"/>
+              <value code="${generalCarerEcords.nursingGradeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.259" codeSystemName="护理等级代码表" displayName="<@dict_tag value="${generalCarerEcords.nursingGradeCode!'NA'}" datasetCloumn="NURSING_GRADE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.212.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理类型代码"/>
+              <value code="${generalCarerEcords.nursingTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.260" codeSystemName="护理类型代码表" displayName="<@dict_tag value="${generalCarerEcords.nursingTypeCode!'NA'}" datasetCloumn="NURSING_TYPE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.209.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="导管护理描述"/>
+              <value xsi:type="ST">${generalCarerEcords.catheterCareCode!'NA'}</value>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.229.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="气管护理代码"/>
+              <value code="${generalCarerEcords.endotrachealCareCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.50" codeSystemName="气管护理代码表" displayName="<@dict_tag value="${generalCarerEcords.endotrachealCareCode!'NA'}" datasetCloumn="ENDOTRACHEAL_CARE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.259.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="体位护理"/>
+              <value xsi:type="ST">${generalCarerEcords.bodyPositionCare!'NA'}</value>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.50.068.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="皮肤护理"/>
+              <value xsi:type="ST">${generalCarerEcords.skinCare!'NA'}</value>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.292.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="营养护理"/>
+              <value xsi:type="ST">${generalCarerEcords.nutritionCare!'NA'}</value>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.283.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="心理护理代码"/>
+              <value code="${generalCarerEcords.psychologicalCareCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.51" codeSystemName="心理护理代码表" displayName="<@dict_tag value="${generalCarerEcords.psychologicalCareCode!'NA'}" datasetCloumn="PSYCHOLOGICAL_CARE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.178.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="安全护理代码"/>
+              <value code="${generalCarerEcords.safetyNursingCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.52" codeSystemName="安全护理代码表" displayName="<@dict_tag value="${generalCarerEcords.safetyNursingCode!'NA'}" datasetCloumn="SAFETY_NURSING_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--护理观察章节-->
+      <component>
+        <section>
+          <code displayName="护理观察"/>
+          <text/>
+          <!--简要病情-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.181.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="简要病情"/>
+              <value xsi:type="ST">${generalCarerEcords.patientCondition!'NA'}</value>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE02.10.031.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理观察项目名称"/>
+              <value xsi:type="ST">${generalCarerEcords.nursingObservationName!'NA'}</value>
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE02.10.028.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理观察结果"/>
+                  <value xsi:type="ST">${generalCarerEcords.nursingObservationResult!'NA'}</value>
+                </observation>
+              </entryRelationship>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--护理操作章节：一个护理操作对应多个操作项目类目，一个操作项目类目又对应多个操作结果-->
+      <component>
+        <section>
+          <code displayName="护理操作"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.342.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理操作名称"/>
+              <value xsi:type="ST">${generalCarerEcords.nursingOperationName!'NA'}</value>
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.210.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理操作项目类目名称"/>
+                  <value xsi:type="ST">${generalCarerEcords.nursingOperationItem!'NA'}</value>
+                  <entryRelationship typeCode="COMP">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <code code="DE06.00.209.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理操作结果"/>
+                      <value xsi:type="ST">${generalCarerEcords.nursingOperationResult!'NA'}</value>
+                    </observation>
+                  </entryRelationship>
+                </observation>
+              </entryRelationship>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--手术评估标志章节-->
+      <component>
+        <section>
+          <code displayName="手术评估标志"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.204.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="发出手术安全核对表标志"/>
+              <value value="${generalCarerEcords.issueSscFlag!'NA'}" xsi:type="BL"/>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.338.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="收回手术安全核对表标志"/>
+              <value value="${generalCarerEcords.withdrawSscFlag!'NA'}" xsi:type="BL"/>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.204.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="发出手术风险评估表标志"/>
+              <value value="${generalCarerEcords.issueOraFlag!'NA'}" xsi:type="BL"/>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.338.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="收回手术风险评估表标志"/>
+              <value value="${generalCarerEcords.withdrawOraFlag!'NA'}" xsi:type="BL"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <#if generalCarerEcords.isolationTypeCode??>
+      <!--护理隔离章节-->
+      <component>
+        <section>
+          <code displayName="护理隔离"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.201.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="隔离标志"/>
+              <value value="${generalCarerEcords.isolationIndicator!'NA'}" xsi:type="BL"/>
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.202.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="隔离种类代码"/>
+                  <value code="${generalCarerEcords.isolationTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.261" codeSystemName="隔离种类代码表" displayName="<@dict_tag value="${generalCarerEcords.isolationTypeCode!'NA'}" datasetCloumn="ISOLATION_TYPE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+                </observation>
+              </entryRelationship>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      </#if>
+    </structuredBody>
+  </component>
+</ClinicalDocument>

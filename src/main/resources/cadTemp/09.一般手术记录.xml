@@ -1,0 +1,451 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\sdschemas\CDA.xsd">
+  <realmCode code="CN"/>
+  <typeId extension="POCD_MT000040" root="2.16.840.1.113883.1.3"/>
+  <templateId root="2.16.156.10011.2.1.1.29"/>
+  <!-- 文档流水号 -->
+  <id extension="${docInfo.docId}" root="2.16.156.10011.1.1"/>
+  <code code="C0009" codeSystem="2.16.156.10011.2.4" codeSystemName="卫生信息共享文档规范编码体系"/>
+  <title>一般手术记录</title>
+  <!-- 文档机器生成时间 -->
+  <effectiveTime value="${docInfo.effectiveTime}"/>
+  <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality" displayName="正常访问保密级别"/>
+  <languageCode code="zh-CN"/>
+  <setId/>
+  <versionNumber/>
+  <!--文档记录对象（患者） [1..*] contextControlCode="OP"表示本信息可以被重载-->
+  <recordTarget contextControlCode="OP" typeCode="RCT">
+    <patientRole classCode="PAT">
+      <!--门诊号标识-->
+      <id extension="${generalOperationRecords.outpNo!'NA'}" root="2.16.156.10011.1.11"/>
+      <!--住院号标识-->
+      <id extension="${generalOperationRecords.inpNo!'NA'}" root="2.16.156.10011.1.12"/>
+      <!--电子申请单编号-->
+      <id extension="${generalOperationRecords.electronicApplyNo!'NA'}" root="2.16.156.10011.1.24"/>
+      <patient classCode="PSN" determinerCode="INSTANCE">
+        <!--患者身份证号标识-->
+        <id extension="${emrBasicpatient.identityNo!'NA'}" root="2.16.156.10011.1.3"/>
+        <name>${generalOperationRecords.patientName!'NA'}</name>
+        <administrativeGenderCode code="${generalOperationRecords.patientSex!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${generalOperationRecords.patientSex!'NA'}" datasetCloumn="PATIENT_SEX">${dict.desc}</@dict_tag>"/>
+        <!-- 年龄 -->
+        <#if generalOperationRecords.ageYear??>
+        <age unit="岁" value="${generalOperationRecords.ageYear!'NA'}"/>
+        <#else>
+        <age unit="月" value="${generalOperationRecords.patientMonth!'NA'}"/>
+        </#if>
+    </patient>
+    </patientRole>
+  </recordTarget>
+  <!-- 文档创作者 -->
+  <author contextControlCode="OP" typeCode="AUT">
+    <time value="${generalOperationRecords.signDatetime!'NA'}"/>
+    <assignedAuthor classCode="ASSIGNED">
+      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <assignedPerson>
+        <name>${generalOperationRecords.operationDoctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedAuthor>
+  </author>
+  <!-- 保管机构 -->
+  <custodian typeCode="CST">
+    <assignedCustodian classCode="ASSIGNED">
+      <representedCustodianOrganization classCode="ORG" determinerCode="INSTANCE">
+        <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </representedCustodianOrganization>
+    </assignedCustodian>
+  </custodian>
+  <!--手术者签名-->
+  <authenticator>
+    <!--签名日期时间-->
+    <time value="${generalOperationRecords.signDatetime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <code displayName="手术者"/>
+      <assignedPerson>
+        <name>${generalOperationRecords.operationDoctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <relatedDocument typeCode="RPLC">
+    <parentDocument>
+      <id/>
+      <setId/>
+      <versionNumber/>
+    </parentDocument>
+  </relatedDocument>
+  <!-- 病床号、病房、病区、科室和医院的关联 -->
+  <componentOf>
+    <encompassingEncounter>
+      <!-- 入院日期时间 -->
+      <effectiveTime value="${generalOperationRecords.operationBeginDatetime!'NA'}"/>
+      <location>
+        <healthCareFacility>
+          <serviceProviderOrganization>
+            <asOrganizationPartOf classCode="PART">
+              <!-- DE01.00.026.00病床号 -->
+              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                <id extension="${generalOperationRecords.bedNo!'NA'}" root="2.16.156.10011.1.22"/>
+                <name>${generalOperationRecords.bedNo!'NA'}</name>
+                <!-- DE01.00.019.00病房号 -->
+                <asOrganizationPartOf classCode="PART">
+                  <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                    <id extension="${generalOperationRecords.areaNo!'NA'}" root="2.16.156.10011.1.21"/>
+                    <name>${generalOperationRecords.areaNo!'NA'}</name>
+                    <!-- DE08.10.026.00科室名称 -->
+                    <asOrganizationPartOf classCode="PART">
+                      <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                        <id extension="${generalOperationRecords.deptName!'NA'}" root="2.16.156.10011.1.26"/>
+                        <name>${generalOperationRecords.deptName!'NA'}</name>
+                        <!-- DE08.10.054.00病区名称 -->
+                        <asOrganizationPartOf classCode="PART">
+                          <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                            <id extension="${generalOperationRecords.areaName!'NA'}" root="2.16.156.10011.1.27"/>
+                            <name>${generalOperationRecords.areaName!'NA'}</name>
+                            <!--医疗机构名称 -->
+                            <asOrganizationPartOf classCode="PART">
+                              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                                <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+                                <name>${hospitalInfo.organName!'NA'}</name>
+                              </wholeOrganization>
+                            </asOrganizationPartOf>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </wholeOrganization>
+                </asOrganizationPartOf>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </serviceProviderOrganization>
+        </healthCareFacility>
+      </location>
+    </encompassingEncounter>
+  </componentOf>
+  <component>
+    <structuredBody>
+      <!--既往史章节-->
+      <component>
+        <section>
+          <code code="11348-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF PAST ILLNESS"/>
+          <text/>
+          <!--手术史-->
+          <entry>
+            <!--手术史标志-->
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE02.10.062.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术史标志"/>
+              <value value="${generalOperationRecords.operationFlag!'NA'}" xsi:type="BL"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <code code="10219-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Surgical operation note preoperative Dx"/>
+          <text/>
+          <!--术前诊断-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <!--术前诊断编码-->
+              <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="术前诊断编码"/>
+              <value code="${generalOperationRecords.preoperationDiagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="<@dict_tag value="${generalOperationRecords.preoperationDiagCode!'NA'}" datasetCloumn="PREOPERATION_DIAG_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <code code="47519-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF PROCEDURES"/>
+          <text/>
+          <!-- 1..1 手术记录 -->
+          <entry>
+            <procedure classCode="PROC" moodCode="EVN">
+              <code code="${generalOperationRecords.operationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.12" codeSystemName="手术(操作)代码表(ICD-9-CM)" displayName="<@dict_tag value="${generalOperationRecords.operationCode!'NA'}" datasetCloumn="OPERATION_CODE">${dict.desc}</@dict_tag>"/>
+              <!--操作日期/时间-->
+              <effectiveTime>
+                <!--手术开始日期时间-->
+                <low value="${generalOperationRecords.operationBeginDatetime!'NA'}"/>
+                <!--手术结束日期时间-->
+                <high value="${generalOperationRecords.operatiionEndDatetime!'NA'}"/>
+              </effectiveTime>
+              <!--手术者-->
+              <performer typeCode="PRF">
+                <assignedEntity>
+                  <id extension="医务人员编号" root="2.16.156.10011.1.4"/>
+                  <assignedPerson>
+                    <name>${generalOperationRecords.operationDoctorName!'NA'}</name>
+                  </assignedPerson>
+                </assignedEntity>
+              </performer>
+              <!--第一助手-->
+              <participant typeCode="ATND">
+                <participantRole classCode="ASSIGNED">
+                  <id extension="医务人员编号" root="2.16.156.10011.1.4"/>
+                  <code displayName="Ⅰ助"/>
+                  <playingEntity classCode="PSN" determinerCode="INSTANCE">
+                    <name>${generalOperationRecords.firstAssistantName!'NA'}</name>
+                  </playingEntity>
+                </participantRole>
+              </participant>
+              <!--第二助手-->
+              <participant typeCode="ATND">
+                <participantRole classCode="ASSIGNED">
+                  <id extension="医务人员编号" root="2.16.156.10011.1.4"/>
+                  <code displayName="Ⅱ助"/>
+                  <playingEntity classCode="PSN" determinerCode="INSTANCE">
+                    <name>${generalOperationRecords.secondeAssistantName!'NA'}</name>
+                  </playingEntity>
+                </participantRole>
+              </participant>
+              <!--器械护士姓名-->
+              <participant typeCode="ATND">
+                <participantRole classCode="ASSIGNED">
+                  <id extension="医务人员编号" root="2.16.156.10011.1.4"/>
+                  <code displayName="器械护士"/>
+                  <playingEntity classCode="PSN" determinerCode="INSTANCE">
+                    <name>${generalOperationRecords.instruNurseName!'NA'}</name>
+                  </playingEntity>
+                </participantRole>
+              </participant>
+              <!--巡台护士姓名-->
+              <participant typeCode="ATND">
+                <participantRole classCode="ASSIGNED">
+                  <id extension="医务人员编号" root="2.16.156.10011.1.4"/>
+                  <code displayName="巡台护士"/>
+                  <playingEntity classCode="PSN" determinerCode="INSTANCE">
+                    <name>${generalOperationRecords.tourNurseName!'NA'}</name>
+                  </playingEntity>
+                </participantRole>
+              </participant>
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.094.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术（操作）名称"/>
+                  <value xsi:type="ST">${generalOperationRecords.operationName!'NA'}</value>
+                </observation>
+              </entryRelationship>
+              <!--手术间编号-->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.256.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="患者实施手术所在的手术室编号"/>
+                  <value xsi:type="ST">${generalOperationRecords.operateRoomNo!'NA'}</value>
+                </observation>
+              </entryRelationship>
+              <!--手术级别 -->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.255.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术级别"/>
+                  <!--手术级别 -->
+                  <value code="${generalOperationRecords.operationLevelCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.258" codeSystemName="手术级别代码表" displayName="<@dict_tag value="${generalOperationRecords.operationLevelCode!'NA'}" datasetCloumn="OPERATION_LEVEL_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+                </observation>
+              </entryRelationship>
+            </procedure>
+          </entry>
+        </section>
+      </component>
+      <!--失血章节-->
+      <component>
+        <section>
+          <code code="55103-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Surgical operation note estimated blood loss"/>
+          <text/>
+          <!--出血量（mL）-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.097.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出血量(mL)"/>
+              <value unit="mL" value="${generalOperationRecords.operationBleeding!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--输血章节-->
+      <component>
+        <section>
+          <code code="56836-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of blood transfusion"/>
+          <text/>
+          <!--输血量（mL）-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.267.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="输血量(mL)"/>
+              <!--输血量（mL）-->
+              <value unit="mL" value="${generalOperationRecords.operationBleeding!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+          <!--输血反应标志-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.264.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="输血反应标志"/>
+              <!--输血反应标志-->
+              <value value="${generalOperationRecords.bloodtransferedReactionCode!'NA'}" xsi:type="BL"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--麻醉章节-->
+      <component>
+        <section>
+          <code code="10213-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Surgical operation note anesthesia"/>
+          <text/>
+          <entry>
+            <!-- 麻醉方式代码 -->
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.073.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="<@dict_tag value="${generalOperationRecords.anesthesiaMethodCode!'NA'}" datasetCloumn="ANESTHESIA_METHOD_CODE">${dict.desc}</@dict_tag>"/>
+              <value code="${generalOperationRecords.anesthesiaMethodCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.159" codeSystemName="麻醉方法代码表" displayName="<@dict_tag value="${generalOperationRecords.anesthesiaMethodCode!'NA'}" datasetCloumn="ANESTHESIA_METHOD_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+              <!-- 麻醉医师姓名 -->
+              <performer>
+                <assignedEntity>
+                  <id/>
+                  <assignedPerson>
+                    <name>${generalOperationRecords.anaesthesiaDoctorName!'NA'}</name>
+                  </assignedPerson>
+                </assignedEntity>
+              </performer>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--用药章节-->
+      <component>
+        <section>
+          <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of medication use"/>
+          <text/>
+          <!--术前用药-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.136.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="术前用药"/>
+              <!--术前用药-->
+              <value xsi:type="ST">${generalOperationRecords.operationPreMedication!'NA'}</value>
+            </observation>
+          </entry>
+          <!--术中用药-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.136.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="术中用药"/>
+              <!--术中用药-->
+              <value xsi:type="ST">${generalOperationRecords.operationAfterMedication!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--输液章节-->
+      <component>
+        <section>
+          <code code="10216-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Surgical operation note fluids"/>
+          <text/>
+          <!--输液量（mL）-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.268.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="输液量(mL)"/>
+              <!--输液量（mL）-->
+              <value unit="mL" value="${generalOperationRecords.operationInfusion!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--术后诊断章节-->
+      <component>
+        <section>
+          <code code="10218-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Surgical operation note postoperative Dx"/>
+          <text/>
+          <!--术后诊断-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <!--术后诊断编码-->
+              <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="术后诊断编码"/>
+              <value code="${generalOperationRecords.afteroperationDiagIcd!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" xsi:type="CD" displayName="<@dict_tag value="${generalOperationRecords.afteroperationDiagIcd!'NA'}" datasetCloumn="AFTEROPERATION_DIAG_ICD">${dict.desc}</@dict_tag>"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--手术过程描述章节-->
+      <component>
+        <section>
+          <code code="8724-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Surgical operation note description"/>
+          <text/>
+          <entry>
+            <!--手术过程描述-->
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.10.063.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术过程描述"/>
+              <value xsi:type="ST">${generalOperationRecords.operationProcessDesc!'NA'}</value>
+              <!--手术目标部位名称 -->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.187.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术目标部位名称"/>
+                  <value xsi:type="ST">${generalOperationRecords.operationPositionName!'NA'}</value>
+                </observation>
+              </entryRelationship>
+              <!--介入物名称 -->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE08.50.037.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="介入物名称"/>
+                  <value xsi:type="ST">${generalOperationRecords.interName!'NA'}</value>
+                </observation>
+              </entryRelationship>
+              <!--手术体位代码 -->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.260.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="<@dict_tag value="${generalOperationRecords.opertationTargetCode!'NA'}" datasetCloumn="OPERTATION_TARGET_CODE">${dict.desc}</@dict_tag>"/>
+                  <value code="${generalOperationRecords.opertationTargetCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.262" codeSystemName="手术体位代码表" displayName="仰卧位" xsi:type="CD"/>
+                </observation>
+              </entryRelationship>
+              <!--皮肤消毒描述-->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE08.50.057.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="皮肤消毒描述"/>
+                  <value xsi:type="ST">${generalOperationRecords.skinDisinfectionDesc!'NA'}</value>
+                </observation>
+              </entryRelationship>
+              <!--手术切口描述-->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.321.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术切口描述"/>
+                  <value xsi:type="ST">${generalOperationRecords.operationIncisionDesc!'NA'}</value>
+                </observation>
+              </entryRelationship>
+              <!--引流标志-->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE05.10.165.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="引流标志"/>
+                  <value value="${generalOperationRecords.isDrainage!'NA'}" xsi:type="BL"/>
+                </observation>
+              </entryRelationship>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--引流章节-->
+      <component>
+        <section>
+          <code code="11537-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Surgical drains"/>
+          <text/>
+          <!--引流标志-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <!--引流标志-->
+              <code code="DE05.10.165.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="引流标志"/>
+              <value value="${generalOperationRecords.isDrainage!'NA'}" xsi:type="BL"/>
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE08.50.044.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="引流材料名称"/>
+                  <value xsi:type="ST">${generalOperationRecords.drainageMaterial!'NA'}</value>
+                </observation>
+              </entryRelationship>
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE08.50.045.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="引流材料数目"/>
+                  <value xsi:type="ST">${generalOperationRecords.drainageMaterialNum!'NA'}</value>
+                </observation>
+              </entryRelationship>
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.341.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="放置部位"/>
+                  <value xsi:type="ST">${generalOperationRecords.operationPlace!'NA'}</value>
+                </observation>
+              </entryRelationship>
+            </observation>
+          </entry>
+        </section>
+      </component>
+    </structuredBody>
+  </component>
+</ClinicalDocument>

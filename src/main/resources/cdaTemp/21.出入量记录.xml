@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\sdschemas\CDA.xsd">
+  <realmCode code="CN"/>
+  <typeId extension="POCD_MT000040" root="2.16.840.1.113883.1.3"/>
+  <templateId root="2.16.156.10011.2.1.1.41"/>
+  <!-- 文档流水号 -->
+  <id extension="${docInfo.docId}" root="2.16.156.10011.1.1"/>
+  <code code="C0021" codeSystem="2.16.156.10011.2.4" codeSystemName="卫生信息共享文档规范编码体系"/>
+  <title>出入量记录</title>
+  <!-- 文档机器生成时间 -->
+  <effectiveTime value="${docInfo.effectiveTime}"/>
+  <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality" displayName="正常访问保密级别"/>
+  <languageCode code="zh-CN"/>
+  <setId/>
+  <versionNumber/>
+  <recordTarget contextControlCode="OP" typeCode="RCT">
+    <patientRole classCode="PAT">
+      <!--住院号：DE01.00.014.00 @@@参照OID分配表修改 -->
+      <id extension="${intakeOutputRecord.inpNo!'NA'}" root="2.16.156.10011.1.12"/>
+      <patient classCode="PSN" determinerCode="INSTANCE">
+        <!--患者身份证号标识-->
+        <id extension="${emrBasicpatient.identityNo!'NA'}" root="2.16.156.10011.1.3"/>
+        <name>${intakeOutputRecord.patientName!'NA'}</name>
+        <administrativeGenderCode code="${intakeOutputRecord.patientSex!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${intakeOutputRecord.patientSex!'NA'}" datasetCloumn="PATIENT_SEX">${dict.desc}</@dict_tag>"/>
+        <#if intakeOutputRecord.ageYear??>
+        <age unit="岁" value="${intakeOutputRecord.ageYear!'NA'}"/>
+        <#else>
+        <age unit="月" value="${intakeOutputRecord.patientMonth!'NA'}"/>
+        </#if>
+      </patient>
+      <providerOrganization>
+        <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </providerOrganization>
+    </patientRole>
+  </recordTarget>
+  <!-- 文档作者 -->
+  <author contextControlCode="OP" typeCode="AUT">
+    <!--签名日期时间：DE09.00.053.00-->
+    <time value="${intakeOutputRecord.createDatetime!'NA'}"/>
+    <assignedAuthor classCode="ASSIGNED">
+      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <code displayName="护士"/>
+      <assignedPerson>
+        <name>${intakeOutputRecord.nurseSign!'NA'}</name>
+      </assignedPerson>
+    </assignedAuthor>
+  </author>
+  <!-- 文档生成机构 -->
+  <custodian typeCode="CST">
+    <assignedCustodian classCode="ASSIGNED">
+      <representedCustodianOrganization classCode="ORG" determinerCode="INSTANCE">
+        <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </representedCustodianOrganization>
+    </assignedCustodian>
+  </custodian>
+  <!-- 护士签名 -->
+  <authenticator>
+  <!--签名日期时间：DE09.00.053.00 -->
+  <time value="${intakeOutputRecord.signDatetime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <code displayName="护士"/>
+      <assignedPerson>
+        <!--护士姓名-->
+        <name>${intakeOutputRecord.nurseSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <relatedDocument typeCode="RPLC">
+    <parentDocument>
+      <id/>
+      <setId/>
+      <versionNumber/>
+    </parentDocument>
+  </relatedDocument>
+  <!--文档中医疗卫生事件的就诊场景,即入院场景记录-->
+  <componentOf typeCode="COMP">
+    <encompassingEncounter classCode="ENC" moodCode="EVN">
+      <code/>
+      <effectiveTime/>
+      <location typeCode="LOC">
+        <healthCareFacility classCode="SDLOC">
+          <serviceProviderOrganization classCode="ORG" determinerCode="INSTANCE">
+            <asOrganizationPartOf classCode="PART">
+              <!--病床号：DE01.00.026.00-->
+              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                <id extension="${intakeOutputRecord.bedNo!'NA'}" root="2.16.156.10011.1.22"/>
+                <name>${intakeOutputRecord.bedNo!'NA'}</name>
+                <asOrganizationPartOf classCode="PART">
+                  <!--病房号：DE01.00.019.00-->
+                  <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                    <id extension="${intakeOutputRecord.areaNo!'NA'}" root="2.16.156.10011.1.21"/>
+                    <name>${intakeOutputRecord.areaNo!'NA'}</name>
+                    <asOrganizationPartOf classCode="PART">
+                      <!--病区名称：DE08.10.054.00-->
+                      <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                        <id extension="${intakeOutputRecord.deptName!'NA'}" root="2.16.156.10011.1.27"/>
+                        <name>${intakeOutputRecord.deptName!'NA'}</name>
+                        <asOrganizationPartOf classCode="PART">
+                          <!--科室名称：DE08.10.026.00-->
+                          <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                            <id extension="${intakeOutputRecord.areaName!'NA'}" root="2.16.156.10011.1.26"/>
+                            <name>${intakeOutputRecord.areaName!'NA'}</name>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </wholeOrganization>
+                </asOrganizationPartOf>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </serviceProviderOrganization>
+        </healthCareFacility>
+      </location>
+    </encompassingEncounter>
+  </componentOf>
+  <component>
+    <structuredBody>
+      <!--诊断章节-->
+      <component>
+        <section>
+          <code code="29548-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Diagnosis"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="疾病诊断编码"/>
+              <value code="${intakeOutputRecord.diagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="<@dict_tag value="${intakeOutputRecord.diagCode!'NA'}" datasetCloumn="DIAG_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--生命体征章节-->
+      <component>
+        <section>
+          <code code="8716-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="VITAL SIGNS"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.188.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="体重(kg)"/>
+              <value unit="kg" value="${intakeOutputRecord.weight!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--护理记录章节-->
+      <component>
+        <section>
+          <code displayName="护理记录"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.211.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理等级代码"/>
+              <value code="${intakeOutputRecord.nursingGradeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.259" codeSystemName="护理等级代码表" displayName="<@dict_tag value="${intakeOutputRecord.nursingGradeCode!'NA'}" datasetCloumn="NURSING_GRADE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.212.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理类型代码"/>
+              <value code="${intakeOutputRecord.nursingTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.260" codeSystemName="护理类型代码表" displayName="<@dict_tag value="${intakeOutputRecord.nursingTypeCode!'NA'}" datasetCloumn="NURSING_TYPE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--护理观察章节-->
+      <component>
+        <section>
+          <code displayName="护理观察"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE02.10.031.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理观察项目名称"/>
+              <value xsi:type="ST"/>
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE02.10.028.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理观察结果"/>
+                  <value xsi:type="ST">${intakeOutputRecord.nursingObservationResult!'NA'}</value>
+                </observation>
+              </entryRelationship>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--护理操作章节：一个护理操作对应多个操作项目类目，一个操作项目类目又对应多个操作结果-->
+      <component>
+        <section>
+          <code displayName="护理操作"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.342.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理操作名称"/>
+              <value xsi:type="ST">${intakeOutputRecord.nursingOperationName!'NA'}</value>
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.210.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理操作项目类目名称"/>
+                  <value xsi:type="ST">${intakeOutputRecord.nursingOperationItem!'NA'}</value>
+                  <entryRelationship typeCode="COMP">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <code code="DE06.00.209.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理操作结果"/>
+                      <value xsi:type="ST">${intakeOutputRecord.nursingOperationResult!'NA'}</value>
+                    </observation>
+                  </entryRelationship>
+                </observation>
+              </entryRelationship>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--用药章节 -->
+      <component>
+        <section>
+          <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF MEDICATION USE"/>
+          <text/>
+          <!--药物使用途径代码：DE06.00.134.00-->
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="EVN">
+              <text/>
+              <routeCode code="${intakeOutputRecord.routeAdministration!'NA'}" codeSystem="2.16.156.10011.2.3.1.158" codeSystemName="用药途径代码表" displayName="<@dict_tag value="${intakeOutputRecord.routeAdministration!'NA'}" datasetCloumn="ROUTE_ADMINISTRATION">${dict.desc}</@dict_tag>"/>
+              <!--用药剂量-单次 -->
+              <doseQuantity unit="${intakeOutputRecord.dosageUnit!'NA'}" value="${intakeOutputRecord.singleDosage!'NA'}"/>
+              <!--用药频率-->
+              <rateQuantity>
+                <translation code="${intakeOutputRecord.frequency!'NA'}" displayName="<@dict_tag value="${intakeOutputRecord.frequency!'NA'}" datasetCloumn="FREQUENCY">${dict.desc}</@dict_tag>"/>
+              </rateQuantity>
+              <consumable>
+                <manufacturedProduct>
+                  <manufacturedLabeledDrug>
+                    <!--药品名称 -->
+                    <code/>
+                    <name>${intakeOutputRecord.drugName!'NA'}</name>
+                  </manufacturedLabeledDrug>
+                </manufacturedProduct>
+              </consumable>
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.136.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="药物用法"/>
+                  <!--药物用法描述-->
+                  <value xsi:type="ST">${intakeOutputRecord.drugUsage!'NA'}</value>
+                </observation>
+              </entryRelationship>
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.164.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中药使用类别代码"/>
+                  <!--中药使用类别代码-->
+                  <value code="${intakeOutputRecord.tcdTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.157" codeSystemName="中药使用类别代码表" displayName="<@dict_tag value="${intakeOutputRecord.tcdTypeCode!'NA'}" datasetCloumn="TCD_TYPE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+                </observation>
+              </entryRelationship>
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.135.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="药物使用总剂量"/>
+                  <!--药物使用总剂量-->
+                  <value unit="${intakeOutputRecord.dosageUnit!'NA'}" value="${intakeOutputRecord.dosageTotal!'NA'}" xsi:type="PQ"/>
+                </observation>
+              </entryRelationship>
+            </substanceAdministration>
+          </entry>
+        </section>
+      </component>
+      <!--护理标志章节-->
+      <component>
+        <section>
+          <code displayName="护理标志" nullFlavor="UNK"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.01.048.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="呕吐标志"/>
+              <value value="${intakeOutputRecord.emesisFlag!'NA'}" xsi:type="BL"/>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.01.051.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="排尿困难标志"/>
+              <value value="${intakeOutputRecord.dysuriaFlag!'NA'}" xsi:type="BL"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+    </structuredBody>
+  </component>
+</ClinicalDocument>

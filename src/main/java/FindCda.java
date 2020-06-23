@@ -6,6 +6,7 @@ import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,19 +24,98 @@ public class FindCda
     public static void main(String[] args) throws IOException
     {
         File directory = new File("");//参数为空
-        String courseFile = directory.getCanonicalPath()+"\\src\\main\\resources\\cadTemp";//标准的路径 ;
+        String courseFile = directory.getCanonicalPath() + "\\src\\main\\resources\\cdaTemp";//标准的路径 ;
+        String shujuyuanFile = directory.getCanonicalPath() + "\\src\\main\\resources\\cda";//标准的路径 ;
         // String author =directory.getAbsolutePath();//绝对路径;
         File cadTempFile = new File(courseFile);
-        String [] cdaFileNames = cadTempFile.list();
+        //所有的cda文档名称
+        String[] cdaFileNames = cadTempFile.list();
+        File shujuji = new File(shujuyuanFile);
+        String[] shujujiList = shujuji.list();
+
+        for (int i = 1; i <= shujujiList.length; i++)
+        {
+            String reallFileAddress = cadTempFile + "\\" + cdaFileNames[i - 1];
+
+            HashSet<String> metadataSet = getMetadata(reallFileAddress);
+
+
+            String cdashujuyunaAddress = shujuji + "\\" + (shujujiList[i - 1]);
+            HashSet<String> strings = readFile(cdashujuyunaAddress);
+            HashSet<String> compare = compare(metadataSet, strings);
+            System.out.println(reallFileAddress);
+            for (String o : compare)
+            {
+                System.out.println(o+"      "+Tool.humpToLine2(o).toUpperCase());
+            }
+            System.out.println("*********************************");
+
+        }
+
+/*
         for (String cdaFileName : cdaFileNames)
         {
             String reallFileAddress = cadTempFile + "\\" + cdaFileName;
-            isOK(reallFileAddress);
+            String cdashujuyunaAddress = cadTempFile + "\\" + cdaFileName;
+
+            findDiffceMetadata(reallFileAddress);
             getCdaMetadataSize(reallFileAddress);
-        }
+        }*/
     }
 
-    private static boolean isOK(String reallFileAddress) throws IOException
+
+    private static HashSet<String> compare(HashSet<String> wendangXML,HashSet<String> shujujiTXT)
+    {
+        HashSet<String> shujujiTXTCopy = new HashSet<>();
+        for (String s : shujujiTXT)
+        {
+            shujujiTXTCopy.add(s);
+        }
+        HashSet<String> chage = new HashSet<>();
+        for (String re : wendangXML)
+        {
+            int s = re.indexOf(".");
+            int l = re.indexOf("!");
+            chage.add(re.substring(s + 1, l));
+        }
+        HashSet<String> result = new HashSet<>();
+        result.clear();
+        result.addAll(shujujiTXT);
+        result.retainAll(chage);
+
+        shujujiTXTCopy.removeAll(result);
+        return shujujiTXTCopy;
+    }
+
+
+    /**
+     * 读取txt文档的内容
+     *
+     * @param reallFileAddress
+     * @return
+     */
+    private static HashSet<String> readFile(String reallFileAddress) throws IOException
+    {
+        List<String> list = FileUtils.readLines(new File(reallFileAddress));
+        HashSet<String> strings = new HashSet<>();
+        for (String s : list)
+        {
+            String[] split = s.split(",");
+            String s1 = split[1].toLowerCase();
+            strings.add(Tool.lineToHump(s1));
+        }
+        return strings;
+    }
+
+
+    /**
+     * 查询一个cda模板是否存在配置两个数据源
+     *
+     * @param reallFileAddress
+     * @return
+     * @throws IOException
+     */
+    private static void findDiffceMetadata(String reallFileAddress) throws IOException
     {
         File cdaFile = new File(reallFileAddress);
         String cdaContent = FileUtils.readFileToString(cdaFile);
@@ -46,22 +126,21 @@ public class FindCda
         {
             int s = re.indexOf("{");
             int l = re.indexOf(".");
-            cdaRes.add(re.substring(s+1, l));
+            cdaRes.add(re.substring(s + 1, l));
         }
-        if (cdaRes.size()>1)
+        if (cdaRes.size() > 1)
         {
-            System.out.println(reallFileAddress+"有两个数据源");
-            return false;
+            System.out.println(reallFileAddress + "有两个数据源");
         }
         else
         {
-            System.out.println(reallFileAddress+"有一个数据源");
-            return true;
+            System.out.println(reallFileAddress + "有一个数据源");
         }
     }
 
     /**
      * 当前cda文档元数据的个数
+     *
      * @param reallFileAddress
      * @return
      */
@@ -89,11 +168,14 @@ public class FindCda
      * dict
      * docInfo
      * hospitalInfo
-     * @param cdaContent
+     *
+     * @param reallFileAddress
      * @return
      */
-    private static HashSet<String> getMetadata(String cdaContent)
+    private static HashSet<String> getMetadata(String reallFileAddress) throws IOException
     {
+        File cdaFile = new File(reallFileAddress);
+        String cdaContent = FileUtils.readFileToString(cdaFile);
         Pattern p = Pattern.compile("\\{(.*?)\\}");//正则表达式，取{和=}之间的字符串
         Matcher m = p.matcher(cdaContent);
         HashSet<String> res = new HashSet<>();
@@ -111,17 +193,20 @@ public class FindCda
              */
             String group = m.group(0);
             //System.out.println(group);
-            if (group.indexOf("dict") == -1 && group.indexOf("docInfo") == -1 && group.indexOf("hospitalInfo") == -1
+           /* if (group.indexOf("dict") == -1 && group.indexOf("docInfo") == -1 && group.indexOf("hospitalInfo") == -1
                     && group.indexOf("emrBasicpatient") == -1 && group.indexOf("emrBasichealth") == -1
                     && group.indexOf("emrHealthevents") == -1 && group.indexOf("emrMedicalbill") == -1 && group.indexOf("privacy") == -1)
+            {
+                res.add(group);
+            }*/
+
+            if (group.indexOf("dict") == -1 && group.indexOf("docInfo") == -1 && group.indexOf("hospitalInfo") == -1 && group.indexOf("privacy") == -1)
             {
                 res.add(group);
             }
         }
         return res;
     }
-
-
 
 
 }

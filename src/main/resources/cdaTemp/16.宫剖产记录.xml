@@ -282,6 +282,7 @@
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.01.044.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="胎方位代码"/>
               <value code="${expectantRecord.fetalPositionCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.106" codeSystemName="胎方位代码表" xsi:type="CD" displayName="<@dict_tag value="${expectantRecord.fetalPositionCode!'NA'}" datasetCloumn="FETAL_POSITION_CODE">${dict.desc}</@dict_tag>"/>
+              <!--<value code="${caesareanSectionRecord.fetalPositionCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.106" codeSystemName="胎方位代码表" xsi:type="CD" displayName="<@dict_tag value="${caesareanSectionRecord.fetalPositionCode!'NA'}" datasetCloumn="FETAL_POSITION_CODE">${dict.desc}</@dict_tag>"/>-->
             </observation>
           </entry>
           <entry>
@@ -313,7 +314,7 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE04.30.054.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="脐带缠绕情况"/>
-              <value value="${caesareanSectionRecord.abnumberrmalUmbilicalCord!'NA'}" xsi:type="ST"/>
+              <value xsi:type="ST">${caesareanSectionRecord.abnumberrmalUmbilicalCord!'NA'}</value>
             </observation>
           </entry>
           <entry>
@@ -579,7 +580,7 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.026.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="分娩结局代码"/>
-              <value code="${caesareanSectionRecord.deliveryOutcomeCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.49" codeSystemName="分娩结局代码表" displayName="活产" xsi:type="CD"/>
+              <value code="${caesareanSectionRecord.deliveryOutcomeCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.49" codeSystemName="分娩结局代码表" displayName="<@dict_tag value="${caesareanSectionRecord.deliveryOutcomeCode!'NA'}" datasetCloumn="DELIVERY_OUTCOME_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
           <entry>

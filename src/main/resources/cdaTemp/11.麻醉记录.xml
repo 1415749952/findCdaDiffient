@@ -219,7 +219,7 @@
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE06.00.133.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="药物使用频率"/>
-                  <value code="${anesthesiaRecords.drugUsageFre!'NA'}" codeSystem="2.16.156.10011.2.3.1.267" codeSystemName="药物使用频次代码表" displayName="bid" xsi:type="CD"/>
+                  <value code="${anesthesiaRecords.drugUsageFre!'NA'}" codeSystem="2.16.156.10011.2.3.1.267" codeSystemName="药物使用频次代码表"  displayName="<@dict_tag value="${anesthesiaRecords.drugUsageFre!'NA'}" datasetCloumn="DRUG_USAGE_FRE">${dict.desc}</@dict_tag>"  xsi:type="CD"/>
                 </observation>
               </entryRelationship>
               <!--药物使用剂量单位 -->
@@ -558,7 +558,7 @@
                 <!--出手术室日期时间-->
                 <high value="${anesthesiaRecords.outOperateroomDatetime!'NA'}"/>
               </effectiveTime>
-              <value xsi:type="ST">${anesthesiaRecords.patientWhereaboutsCode!'NA'}</value>
+              <value xsi:type="ST"/>
             </observation>
           </entry>
         </section>

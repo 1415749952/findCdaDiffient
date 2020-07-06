@@ -35,9 +35,10 @@ public class FindCda
 
         for (int i = 1; i <= shujujiList.length; i++)
         {
-            String reallFileAddress = cadTempFile + "\\" + cdaFileNames[i - 1];
 
-            HashSet<String> metadataSet = getMetadata(reallFileAddress);
+            String reallFileAddress = cadTempFile + "\\" + cdaFileNames[i - 1];
+            findDiffceMetadata(reallFileAddress);
+/*            HashSet<String> metadataSet = getMetadata(reallFileAddress);
 
 
             String cdashujuyunaAddress = shujuji + "\\" + (shujujiList[i - 1]);
@@ -49,7 +50,7 @@ public class FindCda
                 System.out.println(o+"      "+Tool.humpToLine2(o).toUpperCase());
             }
             System.out.println("*********************************");
-
+*/
         }
 
 /*
@@ -117,9 +118,9 @@ public class FindCda
      */
     private static void findDiffceMetadata(String reallFileAddress) throws IOException
     {
-        File cdaFile = new File(reallFileAddress);
-        String cdaContent = FileUtils.readFileToString(cdaFile);
-        HashSet<String> res = getMetadata(cdaContent);
+        /*File cdaFile = new File(reallFileAddress);
+        String cdaContent = FileUtils.readFileToString(cdaFile);*/
+        HashSet<String> res = getMetadata(reallFileAddress);
 
         HashSet<String> cdaRes = new HashSet<>();
         for (String re : res)
@@ -193,17 +194,17 @@ public class FindCda
              */
             String group = m.group(0);
             //System.out.println(group);
-           /* if (group.indexOf("dict") == -1 && group.indexOf("docInfo") == -1 && group.indexOf("hospitalInfo") == -1
+            if (group.indexOf("dict") == -1 && group.indexOf("docInfo") == -1 && group.indexOf("hospitalInfo") == -1
                     && group.indexOf("emrBasicpatient") == -1 && group.indexOf("emrBasichealth") == -1
                     && group.indexOf("emrHealthevents") == -1 && group.indexOf("emrMedicalbill") == -1 && group.indexOf("privacy") == -1)
             {
                 res.add(group);
-            }*/
+            }
 
-            if (group.indexOf("dict") == -1 && group.indexOf("docInfo") == -1 && group.indexOf("hospitalInfo") == -1 && group.indexOf("privacy") == -1)
+            /*if (group.indexOf("dict") == -1 && group.indexOf("docInfo") == -1 && group.indexOf("hospitalInfo") == -1 && group.indexOf("privacy") == -1)
             {
                 res.add(group);
-            }
+            }*/
         }
         return res;
     }

@@ -209,6 +209,7 @@
           </entry>
         </section>
       </component>
+      <#if intakeOutputRecord.drugName??>
       <!--用药章节 -->
       <component>
         <section>
@@ -259,6 +260,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--护理标志章节-->
       <component>
         <section>

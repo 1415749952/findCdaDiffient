@@ -38,8 +38,8 @@
         <postalCode>${emrBasicpatient.zipCode!'NA'}</postalCode>
         </#if>
       </addr>
-      <!--患者电话-->
       <#if emrBasicpatient.currentPhone??>
+      <!--患者电话-->
       <telecom value="<@privacy_tag value="${emrBasicpatient.currentPhone!'NA'}" privacyId="5">${privacy}</@privacy_tag>"/>
       </#if>
       <patient classCode="PSN" determinerCode="INSTANCE">

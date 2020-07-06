@@ -1022,7 +1022,6 @@
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.194.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院31天内再住院标志"/>
               <entryRelationship negationInd="${cnInpatientMedicalRecord.outhosFlag!'NA'}" typeCode="GEVL">
-              <entryRelationship negationInd="false" typeCode="GEVL">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE06.00.195.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院31天内再住院目的"/>
                   <value xsi:type="ST">${cnInpatientMedicalRecord.outhosPurpose!'NA'}</value>

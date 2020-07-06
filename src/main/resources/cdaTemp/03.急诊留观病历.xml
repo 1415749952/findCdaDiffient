@@ -342,7 +342,7 @@
                     <!--医嘱开立日期时间：DE06.00.220.00-->
                     <time value="${emergencyMedicalRecords.adviceOpenDatetime!'NA'}"/>
                     <assignedAuthor>
-                      <id extension="医务人员编号" root="2.16.156.10011.1.4"/>
+                      <id extension="NA" root="2.16.156.10011.1.4"/>
                       <!--医嘱开立者签名：DE02.01.039.00-->
                       <assignedPerson>
                         <name>${emergencyMedicalRecords.adviceOpendoctorSign!'NA'}</name>

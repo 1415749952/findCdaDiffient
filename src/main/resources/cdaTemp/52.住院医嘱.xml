@@ -87,14 +87,14 @@
                     <id extension="${hospitalizationOrder.areaNo!'NA'}" root="2.16.156.10011.1.21"/>
                     <name>${hospitalizationOrder.areaNo!'NA'}</name>
                     <asOrganizationPartOf classCode="PART">
-                      <!--病区-->
+                      <!--科室-->
                       <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                        <id extension="${hospitalizationOrder.deptName!'NA'}" root="2.16.156.10011.1.27"/>
+                        <id extension="${hospitalizationOrder.deptName!'NA'}" root="2.16.156.10011.1.26"/>
                         <name>${hospitalizationOrder.deptName!'NA'}</name>
                         <asOrganizationPartOf classCode="PART">
-                          <!--科室-->
+                          <!--病区-->
                           <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                            <id extension="${hospitalizationOrder.areaName!'NA'}" root="2.16.156.10011.1.26"/>
+                            <id extension="${hospitalizationOrder.areaName!'NA'}" root="2.16.156.10011.1.27"/>
                             <name>${hospitalizationOrder.areaName!'NA'}</name>
                           </wholeOrganization>
                         </asOrganizationPartOf>

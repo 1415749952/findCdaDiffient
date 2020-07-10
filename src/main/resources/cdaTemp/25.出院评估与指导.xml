@@ -49,12 +49,12 @@
                   <!--HDSD00.09.036 DE08.10.026.00 科室名称 -->
                   <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
                     <id extension="${dischargeAssessment.deptName!'NA'}" root="2.16.156.10011.1.26"/>
-                    <name>${dischargeAssessment.areaName!'NA'}</name>
+                    <name>${dischargeAssessment.deptName!'NA'}</name>
                     <asOrganizationPartOf classCode="PART">
                       <!--HDSD00.09.005 DE08.10.054.00 病区名称 -->
                       <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
                         <id extension="${dischargeAssessment.areaName!'NA'}" root="2.16.156.10011.1.27"/>
-                        <name>${dischargeAssessment.deptName!'NA'}</name>
+                        <name>${dischargeAssessment.areaName!'NA'}</name>
                         <asOrganizationPartOf classCode="PART">
                           <!--医疗机构名称 -->
                           <wholeOrganization classCode="ORG" determinerCode="INSTANCE">

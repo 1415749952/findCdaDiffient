@@ -55,7 +55,7 @@
     <time value="${dischargeRecord.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id root="2.16.156.10011.1.4" extension="10316"/>
+      <id root="2.16.156.10011.1.4" extension="NA"/>
       <code displayName="主任医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${dischargeRecord.archiaterDoctorSign!'NA'}</name>
@@ -67,7 +67,7 @@
     <time value="${dischargeRecord.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id root="2.16.156.10011.1.4" extension="10262"/>
+      <id root="2.16.156.10011.1.4" extension="NA"/>
       <code displayName="主治医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${dischargeRecord.physicianDoctorSign!'NA'}</name>
@@ -79,7 +79,7 @@
     <time value="${dischargeRecord.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id root="2.16.156.10011.1.4" extension="10262"/>
+      <id root="2.16.156.10011.1.4" extension="NA"/>
       <code displayName="住院医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${dischargeRecord.inpDoctorSign!'NA'}</name>
@@ -277,7 +277,7 @@
                   <name displayName="中医病名代码"/>
                 </qualifier>
               </code>
-              <value code="${dischargeRecord.outhosTcmDisCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="关格病" xsi:type="CD"/>
+              <value code="${dischargeRecord.outhosTcmDisCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="<@dict_tag value="${dischargeRecord.outhosTcmDisCode!'NA'}" datasetCloumn="OUTHOS_TCM_DIS_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
           </#if>

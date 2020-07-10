@@ -192,12 +192,6 @@
           </entry>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
-              <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="术后诊断编码"/>
-              <value code="${postoperatFirstCourse.afteroperationDiagIcd!'NA'}" codeSystem="2.16.156.10011.2.3.3.11.3" codeSystemName="ICD-10诊断编码表" xsi:type="CD"/>
-            </observation>
-          </entry>
-          <entry>
-            <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.01.070.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="诊断依据"/>
               <value xsi:type="ST">${postoperatFirstCourse.diagEvidence!'NA'}</value>
             </observation>

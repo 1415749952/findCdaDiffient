@@ -96,14 +96,14 @@
                     <id extension="${generalCarerEcords.areaNo!'NA'}" root="2.16.156.10011.1.21"/>
                     <name>${generalCarerEcords.areaNo!'NA'}</name>
                     <asOrganizationPartOf classCode="PART">
-                      <!--病区名称：DE08.10.054.00-->
+                      <!--科室名称：DE08.10.026.00-->
                       <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                        <id extension="${generalCarerEcords.deptName!'NA'}" root="2.16.156.10011.1.27"/>
+                        <id extension="${generalCarerEcords.deptName!'NA'}" root="2.16.156.10011.1.26"/>
                         <name>${generalCarerEcords.deptName!'NA'}</name>
                         <asOrganizationPartOf classCode="PART">
-                          <!--科室名称：DE08.10.026.00-->
+                          <!--病区名称：DE08.10.054.00-->
                           <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                            <id extension="${generalCarerEcords.areaName!'NA'}" root="2.16.156.10011.1.26"/>
+                            <id extension="${generalCarerEcords.areaName!'NA'}" root="2.16.156.10011.1.27"/>
                             <name>${generalCarerEcords.areaName!'NA'}</name>
                           </wholeOrganization>
                         </asOrganizationPartOf>

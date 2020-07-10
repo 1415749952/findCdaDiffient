@@ -413,10 +413,10 @@
               <statusCode/>
               <component>
                 <observation classCode="OBS" moodCode="EVN">
-                  <id root="2.16.156.10011.1.8" extension="-"/>
+                  <id root="2.16.156.10011.1.8" extension="${inpatientMedicalRecord.pathologyDiagnosticCode!'NA'}"/>
                   <code code="DE05.01.025.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="病理诊断-疾病名称">
                     <qualifier>
-                      <name displayName="病理诊断"/>
+                      <name displayName="病理诊断名称"/>
                     </qualifier>
                   </code>
                   <value xsi:type="ST">${inpatientMedicalRecord.diagResult!'NA'}</value>
@@ -426,7 +426,7 @@
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="病理诊断-疾病编码">
                     <qualifier>
-                      <name displayName="病理诊断"/>
+                      <name displayName="病理诊断代码"/>
                     </qualifier>
                   </code>
                   <value xsi:type="CD" code="${inpatientMedicalRecord.pathologyDiagnosticCode!'NA'}" displayName="<@dict_tag value="${inpatientMedicalRecord.pathologyDiagnosticCode!'NA'}" datasetCloumn="PATHOLOGY_DIAGNOSTIC_CODE">${dict.desc}</@dict_tag>" codeSystemName="ICD-10" codeSystem="2.16.156.10011.2.3.3.11"/>
@@ -448,6 +448,7 @@
               <value code="9" codeSystem="2.16.156.10011.2.3.1.100" codeSystemName="住院者疾病状态代码表" displayName="其他" xsi:type="CD"/>
             </observation>
           </entry>
+          <#if inpatientMedicalRecord.injuryDiseaseCode??>
           <!--住院患者损伤和中毒外部原因-->
           <entry typeCode="COMP">
             <observation classCode="OBS" moodCode="EVN">
@@ -461,6 +462,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          </#if>
           <!--颅脑损伤患者入院前昏迷时间-->
           <entry typeCode="COMP">
             <organizer classCode="CLUSTER" moodCode="EVN">
@@ -817,12 +819,12 @@
                   <id/>
                   <representedOrganization>
                     <!--住院患者出院病房-->
-                    <id extension="003" root="2.16.156.10011.1.21"/>
+                    <id extension="${inpatientMedicalRecord.dishospitalRoom!'NA'}" root="2.16.156.10011.1.21"/>
                     <name>${inpatientMedicalRecord.dishospitalRoom!'NA'}</name>
                     <asOrganizationPartOf classCode="PART">
                       <!--住院患者出院科室名称-->
                       <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                        <id extension="567" root="2.16.156.10011.1.26"/>
+                        <id extension="${inpatientMedicalRecord.dishospitalDeptName!'NA'}" root="2.16.156.10011.1.26"/>
                         <name>${inpatientMedicalRecord.dishospitalDeptName!'NA'}</name>
                       </wholeOrganization>
                     </asOrganizationPartOf>

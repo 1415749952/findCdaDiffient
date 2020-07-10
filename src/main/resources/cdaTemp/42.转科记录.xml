@@ -167,7 +167,7 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="入院诊断-西医诊断编码"/>
-              <value code="${transferenceRecord.inhosDiagWmDiagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="肠梗阻" xsi:type="CD"/>
+              <value code="${transferenceRecord.inhosDiagWmDiagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="<@dict_tag value="${transferenceRecord.inhosDiagWmDiagCode!'NA'}" datasetCloumn="INHOS_DIAG_WM_DIAG_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
           <#if transferenceRecord.inhosDiagCmSyndromeCode??>
@@ -179,7 +179,7 @@
                   <name displayName="中医病名代码"/>
                 </qualifier>
               </code>
-              <value code="${transferenceRecord.inhosDiagCmDisCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="急喉痹病" xsi:type="CD"/>
+              <value code="${transferenceRecord.inhosDiagCmDisCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="<@dict_tag value="${transferenceRecord.inhosDiagCmDisCode!'NA'}" datasetCloumn="INHOS_DIAG_CM_DIS_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
           </#if>
@@ -192,7 +192,7 @@
                   <name displayName="中医症候名称"/>
                 </qualifier>
               </code>
-              <value code="${transferenceRecord.inhosDiagCmSyndromeCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="痰瘀互结证" xsi:type="CD"/>
+              <value code="${transferenceRecord.inhosDiagCmSyndromeCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="<@dict_tag value="${transferenceRecord.inhosDiagCmSyndromeCode!'NA'}" datasetCloumn="INHOS_DIAG_CM_SYNDROME_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
           </#if>
@@ -214,7 +214,7 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="目前诊断-西医诊断编码"/>
-              <value code="${transferenceRecord.currentlyWmDiagcode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="肠梗阻" xsi:type="CD"/>
+              <value code="${transferenceRecord.currentlyWmDiagcode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="<@dict_tag value="${transferenceRecord.currentlyWmDiagcode!'NA'}" datasetCloumn="CURRENTLY_WM_DIAGCODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
           <#if transferenceRecord.transferTcmDiseasesCode??>
@@ -226,7 +226,7 @@
                   <name displayName="中医病名代码"/>
                 </qualifier>
               </code>
-              <value code="${transferenceRecord.transferTcmDiseasesCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="急喉痹病" xsi:type="CD"/>
+              <value code="${transferenceRecord.transferTcmDiseasesCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="<@dict_tag value="${transferenceRecord.transferTcmDiseasesCode!'NA'}" datasetCloumn="TRANSFER_TCM_DISEASES_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
           </#if>
@@ -239,7 +239,7 @@
                   <name displayName="中医症候代码"/>
                 </qualifier>
               </code>
-              <value code="${transferenceRecord.transferTcmSyndromesCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="痰瘀互结证" xsi:type="CD"/>
+              <value code="${transferenceRecord.transferTcmSyndromesCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="<@dict_tag value="${transferenceRecord.transferTcmSyndromesCode!'NA'}" datasetCloumn="TRANSFER_TCM_SYNDROMES_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
           </#if>
@@ -289,7 +289,7 @@
           <entry>
             <observation classCode="OBS " moodCode="EVN">
               <code code="DE06.00.314.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="转科记录类型"/>
-              <value code="${transferenceRecord.transferRcdType!'NA'}" codeSystem="2.16.156.10011.2.3.2.56" codeSystemName="转科记录类型代码表" displayName="转入记录" xsi:type="CD"/>
+              <value code="${transferenceRecord.transferRcdType!'NA'}" codeSystem="2.16.156.10011.2.3.2.56" codeSystemName="转科记录类型代码表" displayName="<@dict_tag value="${transferenceRecord.transferRcdType!'NA'}" datasetCloumn="TRANSFER_RCD_TYPE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
           <!--转出科室-->

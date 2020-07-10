@@ -155,13 +155,13 @@
                     <asOrganizationPartOf classCode="PART">
                       <!--HDSD00.09.036 DE08.10.026.00 科室名称 -->
                       <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                        <id extension="${vbncRecord.areaName!'NA'}" root="2.16.156.10011.1.26"/>
-                        <name>${vbncRecord.areaName!'NA'}</name>
+                        <id extension="${vbncRecord.deptName!'NA'}" root="2.16.156.10011.1.26"/>
+                        <name>${vbncRecord.deptName!'NA'}</name>
                         <asOrganizationPartOf classCode="PART">
                           <!--HDSD00.09.005 DE08.10.054.00 病区名称-->
                           <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                            <id extension="${vbncRecord.deptName!'NA'}" root="2.16.156.10011.1.27"/>
-                            <name>${vbncRecord.deptName!'NA'}</name>
+                            <id extension="${vbncRecord.areaName!'NA'}" root="2.16.156.10011.1.27"/>
+                            <name>${vbncRecord.areaName!'NA'}</name>
                             <asOrganizationPartOf classCode="PART">
                               <!--医疗机构名称 -->
                               <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
@@ -349,7 +349,11 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.145.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="脐带异常情况标志"/>
-              <value value="${vbncRecord.umbilicalCordAbnormalities!'NA'}" xsi:type="BL"/>
+              <#if vbncRecord.umbilicalCordAbnormalities??>
+              <value value="true" xsi:type="BL"/>
+              <#else>
+              <value value="false" xsi:type="BL"/>
+              </#if>
             </observation>
           </entry>
           <entry>
@@ -633,7 +637,7 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.026.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="分娩结局代码"/>
-              <value code="${vbncRecord.deliveryOutcomeCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.49" codeSystemName="分娩结局代码表" displayName="活产" xsi:type="CD"/>
+              <value code="${vbncRecord.deliveryOutcomeCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.49" codeSystemName="分娩结局代码表" displayName="<@dict_tag value="${vbncRecord.deliveryOutcomeCode!'NA'}" datasetCloumn="DELIVERY_OUTCOME_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
           <entry>

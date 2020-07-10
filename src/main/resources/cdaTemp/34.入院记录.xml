@@ -523,7 +523,7 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.143.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="陈述内容可靠标志"/>
-              <value value="${admissionRecord.isCredible!'true'}" xsi:type="BL"/>
+              <value value="${admissionRecord.isCredible!'NA'}" xsi:type="BL"/>
             </observation>
           </entry>
           <!--初步诊断-西医条目-->

@@ -138,14 +138,14 @@
                     <id extension="${operationCareRecord.areaNo!'NA'}" root="2.16.156.10011.1.21"/>
                     <name>${operationCareRecord.areaNo!'NA'}</name>
                     <asOrganizationPartOf classCode="PART">
-                      <!--病区名称：DE08.10.054.00-->
+                      <!--科室名称：DE08.10.026.00-->
                       <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                        <id extension="${operationCareRecord.deptName!'NA'}" root="2.16.156.10011.1.27"/>
+                        <id extension="${operationCareRecord.deptName!'NA'}" root="2.16.156.10011.1.26"/>
                         <name>${operationCareRecord.deptName!'NA'}</name>
                         <asOrganizationPartOf classCode="PART">
-                          <!--科室名称：DE08.10.026.00-->
+                          <!--病区名称：DE08.10.054.00-->
                           <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                            <id extension="${operationCareRecord.areaName!'NA'}" root="2.16.156.10011.1.26"/>
+                            <id extension="${operationCareRecord.areaName!'NA'}" root="2.16.156.10011.1.27"/>
                             <name>${operationCareRecord.areaName!'NA'}</name>
                           </wholeOrganization>
                         </asOrganizationPartOf>
@@ -478,7 +478,7 @@
                 <high value="${operationCareRecord.endDateTime!'NA'}"/>
               </effectiveTime>
               <!--手术目标部位名称：DE06.00.187.00-->
-              <targetSiteCode code="${operationCareRecord.operativeSiteName!'NA'}" codeSystem="2.16.156.10011.2.3.1.266" codeSystemName="手术目标部位编码" displayName="${operationCareRecord.operativeSiteName!'NA'}"/>
+              <targetSiteCode code="${operationCareRecord.operativeSiteName!'NA'}" codeSystem="2.16.156.10011.2.3.1.266" codeSystemName="手术目标部位编码" displayName="<@dict_tag value="${operationCareRecord.operativeSiteName!'NA'}" datasetCloumn="OPERATIVE_SITE_NAME">${dict.desc}</@dict_tag>"/>
               <!--手术操作者：DE02.01.039.00-->
               <performer>
                 <assignedEntity>

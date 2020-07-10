@@ -317,7 +317,7 @@
                 <observation classCode="OBS" moodCode="EVN">
                   <!--死亡诊断-中医证候代码-名称-->
                   <code code="DE05.10.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="死亡诊断-中医证候代码"/>
-                  <value code="${hours24AdmissionDeathRecord.deathDiagCmSyndromeCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="<@dict_tag value="${hours24AdmissionDeathRecord.inhosDiagCmSyndromeCode!'NA'}" datasetCloumn="INHOS_DIAG_CM_SYNDROME_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+                  <value code="${hours24AdmissionDeathRecord.deathDiagCmSyndromeCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="<@dict_tag value="${hours24AdmissionDeathRecord.deathDiagCmSyndromeCode!'NA'}" datasetCloumn="DEATH_DIAG_CM_SYNDROME_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
                 </observation>
               </entryRelationship>
             </observation>

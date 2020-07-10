@@ -489,7 +489,7 @@
           <entry>
             <!-- 1..1 手术记录 -->
             <procedure classCode="PROC" moodCode="EVN">
-              <code code="${anesthesiaRecords.operationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.12" codeSystemName="手术(操作)代码表(ICD-9-CM)"/>
+              <code code="${anesthesiaRecords.operationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.12" codeSystemName="手术(操作)代码表(ICD-9-CM)" displayName="<@dict_tag value="${anesthesiaRecords.operationCode!'NA'}" datasetCloumn="OPERATION_CODE">${dict.desc}</@dict_tag>"/>
               <!--操作日期/时间-->
               <effectiveTime>
                 <!--手术开始日期时间-->
@@ -500,7 +500,7 @@
               <!--手术者姓名-->
               <performer>
                 <assignedEntity>
-                  <id extension="医务人员编号" root="2.16.156.10011.1.4"/>
+                  <id extension="NA" root="2.16.156.10011.1.4"/>
                   <assignedPerson>
                     <name>${anesthesiaRecords.operationDoctorName!'NA'}</name>
                   </assignedPerson>

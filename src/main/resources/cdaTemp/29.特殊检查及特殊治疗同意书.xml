@@ -63,7 +63,7 @@
     <time value="${specialTreatmentConsent.doctorSignDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="医务人员编号" root="2.16.156.10011.1.4"/>
+      <id extension="NA" root="2.16.156.10011.1.4"/>
       <assignedPerson>
         <!--医务人员签名-->
         <name>${specialTreatmentConsent.doctorSign!'NA'}</name>

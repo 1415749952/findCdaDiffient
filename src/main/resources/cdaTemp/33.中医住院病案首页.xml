@@ -832,7 +832,7 @@
           <entry>
             <!-- 1..1 手术记录 -->
             <procedure classCode="PROC" moodCode="EVN">
-              <code code="${cnInpatientMedicalRecord.operationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.12" codeSystemName="手术(操作)代码表(ICD-9-CM)" displayName="${cnInpatientMedicalRecord.operationCode!'NA'}"/>
+              <code code="${cnInpatientMedicalRecord.operationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.12" codeSystemName="手术(操作)代码表(ICD-9-CM)" displayName="<@dict_tag value="${cnInpatientMedicalRecord.operationCode!'NA'}" datasetCloumn="OPERATION_CODE">${dict.desc}</@dict_tag>"/>
               <statusCode/>
               <!--操作日期/时间-->
               <effectiveTime value="${cnInpatientMedicalRecord.operationStartDatetime!'NA'}"/>
@@ -899,8 +899,8 @@
               <!--麻醉方式代码表-->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
-                  <code code="DE06.00.073.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="<@dict_tag value="${cnInpatientMedicalRecord.anesthesiaMethodCode!'NA'}" datasetCloumn="ANESTHESIA_METHOD_CODE">${dict.desc}</@dict_tag>"/>
-                  <value code="${cnInpatientMedicalRecord.anesthesiaMethodCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.159" codeSystemName="麻醉方式代码表" displayName="局麻" xsi:type="CD"/>
+                  <code code="DE06.00.073.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="麻醉方法代码"/>
+                  <value code="${cnInpatientMedicalRecord.anesthesiaMethodCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.159" codeSystemName="麻醉方式代码表" displayName="<@dict_tag value="${cnInpatientMedicalRecord.anesthesiaMethodCode!'NA'}" datasetCloumn="ANESTHESIA_METHOD_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
                   <performer>
                     <assignedEntity>
                       <id extension="NA" root="2.16.156.10011.1.4"/>

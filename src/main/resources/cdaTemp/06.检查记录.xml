@@ -152,13 +152,13 @@
                     <!-- DE08.10.026.00科室名称 -->
                     <asOrganizationPartOf classCode="PART">
                       <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                        <id extension="${inspectionRecord.areaName!'NA'}" root="2.16.156.10011.1.26"/>
-                        <name>${inspectionRecord.areaName!'NA'}</name>
+                        <id extension="${inspectionRecord.deptName!'NA'}" root="2.16.156.10011.1.26"/>
+                        <name>${inspectionRecord.deptName!'NA'}</name>
                         <!-- DE08.10.054.00病区名称 -->
                         <asOrganizationPartOf classCode="PART">
                           <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                            <id extension="${inspectionRecord.deptName!'NA'}" root="2.16.156.10011.1.27"/>
-                            <name>${inspectionRecord.deptName!'NA'}</name>
+                            <id extension="${inspectionRecord.areaName!'NA'}" root="2.16.156.10011.1.27"/>
+                            <name>${inspectionRecord.areaName!'NA'}</name>
                             <asOrganizationPartOf classCode="PART">
                               <!--医院信息 -->
                               <wholeOrganization classCode="ORG" determinerCode="INSTANCE">

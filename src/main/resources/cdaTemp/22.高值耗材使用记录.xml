@@ -96,14 +96,14 @@
                     <id extension="${preciousConsumUsageRecord.areaNo!'NA'}" root="2.16.156.10011.1.21"/>
                     <name>${preciousConsumUsageRecord.areaNo!'NA'}</name>
                     <asOrganizationPartOf classCode="PART">
-                      <!--病区名称：DE08.10.054.00-->
+                      <!--科室名称：DE08.10.026.00-->
                       <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                        <id extension="${preciousConsumUsageRecord.deptName!'NA'}" root="2.16.156.10011.1.27"/>
+                        <id extension="${preciousConsumUsageRecord.deptName!'NA'}" root="2.16.156.10011.1.26"/>
                         <name>${preciousConsumUsageRecord.deptName!'NA'}</name>
                         <asOrganizationPartOf classCode="PART">
-                          <!--科室名称：DE08.10.026.00-->
+                          <!--病区名称：DE08.10.054.00-->
                           <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                            <id extension="${preciousConsumUsageRecord.areaName!'NA'}" root="2.16.156.10011.1.26"/>
+                            <id extension="${preciousConsumUsageRecord.areaName!'NA'}" root="2.16.156.10011.1.27"/>
                             <name>${preciousConsumUsageRecord.areaName!'NA'}</name>
                           </wholeOrganization>
                         </asOrganizationPartOf>

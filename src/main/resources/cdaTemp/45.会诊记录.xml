@@ -242,7 +242,7 @@
                   <name displayName="中医病名代码"/>
                 </qualifier>
               </code>
-              <value code="${consultationRecord.chineseDiagnosisCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD" displayName="${consultationRecord.chineseDiagnosisCode!'NA'}"/>
+              <value code="${consultationRecord.chineseDiagnosisCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD" displayName="<@dict_tag value="${consultationRecord.chineseDiagnosisCode!'NA'}" datasetCloumn="CHINESE_DIAGNOSIS_CODE">${dict.desc}</@dict_tag>"/>
             </observation>
           </entry>
           <!--中医诊断症候名称-->
@@ -264,7 +264,7 @@
                   <name displayName="中医症候代码"/>
                 </qualifier>
               </code>
-              <value code="${consultationRecord.chineseSyndromeCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD"/>
+              <value code="${consultationRecord.chineseSyndromeCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD" displayName="<@dict_tag value="${consultationRecord.chineseSyndromeCode!'NA'}" datasetCloumn="CHINESE_SYNDROME_CODE">${dict.desc}</@dict_tag>"/>
             </observation>
           </entry>
           <!--中医“四诊”观察结果-->

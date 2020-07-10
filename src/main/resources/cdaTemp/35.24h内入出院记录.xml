@@ -289,7 +289,7 @@
           <entry>
             <observation classCode="OBS" moodCode="INT">
               <code code="DE06.00.300.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="治则治法"/>
-              <value code="${h24AdmissionDischargeRecord.therapeuticPrinciple!'NA'}" codeSystem="2.16.156.10011.2.3.3.15" codeSystemName="治则治法代码表(GB/T16751.3-1997)" displayName="疏风解表" xsi:type="CD"/>
+              <value code="${h24AdmissionDischargeRecord.therapeuticPrinciple!'NA'}" codeSystem="2.16.156.10011.2.3.3.15" codeSystemName="治则治法代码表(GB/T16751.3-1997)" displayName="<@dict_tag value="${h24AdmissionDischargeRecord.therapeuticPrinciple!'NA'}" datasetCloumn="THERAPEUTIC_PRINCIPLE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
         </section>

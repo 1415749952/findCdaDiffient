@@ -146,13 +146,13 @@
                     <!--DE08.10.026.00科室名称-->
                     <asOrganizationPartOf classCode="PART">
                       <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                        <id extension="${surveyRecord.areaName!'NA'}" root="2.16.156.10011.1.26"/>
-                        <name>${surveyRecord.areaName!'NA'}</name>
+                        <id extension="${surveyRecord.deptName!'NA'}" root="2.16.156.10011.1.26"/>
+                        <name>${surveyRecord.deptName!'NA'}</name>
                         <!--DE08.10.054.00病区名称-->
                         <asOrganizationPartOf classCode="PART">
                           <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                            <id extension="${surveyRecord.deptName!'NA'}" root="2.16.156.10011.1.27"/>
-                            <name>${surveyRecord.deptName!'NA'}</name>
+                            <id extension="${surveyRecord.areaName!'NA'}" root="2.16.156.10011.1.27"/>
+                            <name>${surveyRecord.areaName!'NA'}</name>
                             <!--医疗机构名称-->
                             <asOrganizationPartOf classCode="PART">
                               <wholeOrganization classCode="ORG" determinerCode="INSTANCE">

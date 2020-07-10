@@ -173,7 +173,7 @@
               <!--手术者-->
               <performer typeCode="PRF">
                 <assignedEntity>
-                  <id extension="医务人员编号" root="2.16.156.10011.1.4"/>
+                  <id extension="NA" root="2.16.156.10011.1.4"/>
                   <assignedPerson>
                     <name>${generalOperationRecords.operationDoctorName!'NA'}</name>
                   </assignedPerson>
@@ -182,7 +182,7 @@
               <!--第一助手-->
               <participant typeCode="ATND">
                 <participantRole classCode="ASSIGNED">
-                  <id extension="医务人员编号" root="2.16.156.10011.1.4"/>
+                  <id extension="NA" root="2.16.156.10011.1.4"/>
                   <code displayName="Ⅰ助"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <name>${generalOperationRecords.firstAssistantName!'NA'}</name>
@@ -192,7 +192,7 @@
               <!--第二助手-->
               <participant typeCode="ATND">
                 <participantRole classCode="ASSIGNED">
-                  <id extension="医务人员编号" root="2.16.156.10011.1.4"/>
+                  <id extension="NA" root="2.16.156.10011.1.4"/>
                   <code displayName="Ⅱ助"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <name>${generalOperationRecords.secondeAssistantName!'NA'}</name>
@@ -202,7 +202,7 @@
               <!--器械护士姓名-->
               <participant typeCode="ATND">
                 <participantRole classCode="ASSIGNED">
-                  <id extension="医务人员编号" root="2.16.156.10011.1.4"/>
+                  <id extension="NA" root="2.16.156.10011.1.4"/>
                   <code displayName="器械护士"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <name>${generalOperationRecords.instruNurseName!'NA'}</name>
@@ -212,7 +212,7 @@
               <!--巡台护士姓名-->
               <participant typeCode="ATND">
                 <participantRole classCode="ASSIGNED">
-                  <id extension="医务人员编号" root="2.16.156.10011.1.4"/>
+                  <id extension="NA" root="2.16.156.10011.1.4"/>
                   <code displayName="巡台护士"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <name>${generalOperationRecords.tourNurseName!'NA'}</name>
@@ -384,8 +384,8 @@
               <!--手术体位代码 -->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
-                  <code code="DE06.00.260.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="<@dict_tag value="${generalOperationRecords.opertationTargetCode!'NA'}" datasetCloumn="OPERTATION_TARGET_CODE">${dict.desc}</@dict_tag>"/>
-                  <value code="${generalOperationRecords.opertationTargetCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.262" codeSystemName="手术体位代码表" displayName="仰卧位" xsi:type="CD"/>
+                  <code code="DE06.00.260.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术体位代码"/>
+                  <value code="${generalOperationRecords.opertationTargetCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.262" codeSystemName="手术体位代码表" displayName="<@dict_tag value="${generalOperationRecords.opertationTargetCode!'NA'}" datasetCloumn="OPERTATION_TARGET_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
                 </observation>
               </entryRelationship>
               <!--皮肤消毒描述-->

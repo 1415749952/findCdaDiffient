@@ -140,15 +140,15 @@
                     <id extension="${admissionAssessment.wardNo!'NA'}" root="2.16.156.10011.1.21"/>
                     <name>${admissionAssessment.wardNo!'NA'}</name>
                     <asOrganizationPartOf classCode="PART">
-                      <!--HDSD00.09.005 DE08.10.054.00 病区名称 -->
+                      <!--HDSD00.09.036 DE08.10.026.00 科室名称-->
                       <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                        <id extension="${admissionAssessment.areaName!'NA'}" root="2.16.156.10011.1.27"/>
-                        <name>${admissionAssessment.areaName!'NA'}</name>
+                        <id extension="${admissionAssessment.deptName!'NA'}" root="2.16.156.10011.1.26"/>
+                        <name>${admissionAssessment.deptName!'NA'}</name>
                         <asOrganizationPartOf classCode="PART">
-                          <!--HDSD00.09.036 DE08.10.026.00 科室名称-->
+                          <!--HDSD00.09.005 DE08.10.054.00 病区名称 -->
                           <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                            <id extension="${admissionAssessment.deptName!'NA'}" root="2.16.156.10011.1.26"/>
-                            <name>${admissionAssessment.deptName!'NA'}</name>
+                            <id extension="${admissionAssessment.areaName!'NA'}" root="2.16.156.10011.1.27"/>
+                            <name>${admissionAssessment.areaName!'NA'}</name>
                             <asOrganizationPartOf classCode="PART">
                               <!--医疗机构名称 -->
                               <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
@@ -354,6 +354,7 @@
         <section>
           <code code="51848-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Assessment note"/>
           <text/>
+          <#if admissionAssessment.apgarGrade??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.001.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="Apgar评分值"/>
@@ -361,6 +362,7 @@
               <value value="${admissionAssessment.apgarGrade!'NA'}" xsi:type="INT"/>
             </observation>
           </entry>
+          </#if>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.022.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="发育程度代码"/>

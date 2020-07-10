@@ -111,15 +111,15 @@
                     <id extension="${monitorVitalSignsRecord.areaNo!'NA'}" root="2.16.156.10011.1.21"/>
                     <name>${monitorVitalSignsRecord.areaNo!'NA'}</name>
                     <asOrganizationPartOf classCode="PART">
-                      <!--病区名称：DE08.10.054.00-->
+                      <!--科室名称：DE08.10.026.00-->
                       <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                        <id extension="${monitorVitalSignsRecord.areaName!'NA'}" root="2.16.156.10011.1.27"/>
-                        <name>${monitorVitalSignsRecord.areaName!'NA'}</name>
+                        <id extension="${monitorVitalSignsRecord.deptName!'NA'}" root="2.16.156.10011.1.26"/>
+                        <name>${monitorVitalSignsRecord.deptName!'NA'}</name>
                         <asOrganizationPartOf classCode="PART">
-                          <!--科室名称：DE08.10.026.00-->
+                          <!--病区名称：DE08.10.054.00-->
                           <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
-                            <id extension="${monitorVitalSignsRecord.deptName!'NA'}" root="2.16.156.10011.1.26"/>
-                            <name>${monitorVitalSignsRecord.deptName!'NA'}</name>
+                            <id extension="${monitorVitalSignsRecord.areaName!'NA'}" root="2.16.156.10011.1.27"/>
+                            <name>${monitorVitalSignsRecord.areaName!'NA'}</name>
                           </wholeOrganization>
                         </asOrganizationPartOf>
                       </wholeOrganization>

@@ -298,8 +298,8 @@
               <!--HDSD00.16.029 DE05.10.147.00 切口愈合等级代码 -->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
-                  <code code="DE05.10.147.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="<@dict_tag value="${dischargeAbstract.operatIncisHealTypeCode!'NA'}" datasetCloumn="OPERAT_INCIS_HEAL_TYPE_CODE">${dict.desc}</@dict_tag>"/>
-                  <value code="${dischargeAbstract.operatIncisHealTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.252" codeSystemName="切口愈合等级代码" displayName="切口等级Ⅰ/愈合类型甲" xsi:type="CD"/>
+                  <code code="DE05.10.147.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="切口愈合等级代码"/>
+                  <value code="${dischargeAbstract.operatIncisHealTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.252" codeSystemName="切口愈合等级代码" displayName="<@dict_tag value="${dischargeAbstract.operatIncisHealTypeCode!'NA'}" datasetCloumn="OPERAT_INCIS_HEAL_TYPE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
                 </observation>
               </entryRelationship>
               <!--HDSD00.16.025 DE06.00.073.00 麻醉方法代码 -->

@@ -24,8 +24,9 @@ public class FindCda
     public static void main(String[] args) throws IOException
     {
         File directory = new File("");//参数为空
-        String courseFile = directory.getCanonicalPath() + "\\src\\main\\resources\\cdaTemp";//标准的路径 ;
-        String shujuyuanFile = directory.getCanonicalPath() + "\\src\\main\\resources\\cda";//标准的路径 ;
+        String  separator= File.separator;
+        String courseFile = directory.getCanonicalPath() +separator+"src"+separator+"main"+separator+"resources"+separator+"cdaTemp";//标准的路径 ;
+        String shujuyuanFile = directory.getCanonicalPath() + separator+"src"+separator+"main"+separator+"resources"+separator+"cda";//标准的路径 ;
         // String author =directory.getAbsolutePath();//绝对路径;
         File cadTempFile = new File(courseFile);
         //所有的cda文档名称
@@ -36,7 +37,7 @@ public class FindCda
         for (int i = 1; i <= shujujiList.length; i++)
         {
 
-            String reallFileAddress = cadTempFile + "\\" + cdaFileNames[i - 1];
+            String reallFileAddress = cadTempFile + separator + cdaFileNames[i - 1];
             findDiffceMetadata(reallFileAddress);
 /*            HashSet<String> metadataSet = getMetadata(reallFileAddress);
 

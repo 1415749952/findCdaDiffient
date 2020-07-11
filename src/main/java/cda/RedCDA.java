@@ -23,6 +23,7 @@ public class RedCDA
     public static void main(String[] args) throws IOException
     {
         File directory = new File("");//参数为空
+        //不同操作系统显示不同的。windows上面代表/。macos和Linux代表\
         String  separator= File.separator;
         String courseFile = directory.getCanonicalPath() +separator+"src"+separator+"main"+separator+"resources"+separator+"cdaTemp";//标准的路径 ;
         File cadTempFile = new File(courseFile);

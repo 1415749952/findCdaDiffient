@@ -96,7 +96,7 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE02.10.023.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="过敏史标志"/>
-              <value value="${emergencyMedicalRecords.allergyHostoryFlag!'false'}" xsi:type="BL"/>
+              <value value="${emergencyMedicalRecords.allergyHostoryFlag!'NA'}" xsi:type="BL"/>
               <entryRelationship typeCode="SUBJ">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE05.01.022.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="过敏史"/>

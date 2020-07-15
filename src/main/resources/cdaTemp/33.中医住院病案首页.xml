@@ -505,7 +505,7 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.119.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="住院者疾病状态代码"/>
-              <value code="9" codeSystem="2.16.156.10011.2.3.1.100" codeSystemName="住院者疾病状态代码表" displayName="其他" xsi:type="CD"/>
+              <value code="${cnInpatientMedicalRecord.diseaseStatusCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.100" codeSystemName="住院者疾病状态代码表" displayName="<@dict_tag value="${cnInpatientMedicalRecord.diseaseStatusCode!'NA'}" datasetCloumn="DISEASE_STATUS_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
           <!--住院患者损伤和中毒外部原因-->

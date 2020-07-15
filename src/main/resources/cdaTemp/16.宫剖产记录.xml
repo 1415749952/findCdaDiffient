@@ -321,7 +321,7 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE04.30.056.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="脐带扭转（周）"/>
-              <value unit="周" value="0" xsi:type="PQ"/>
+              <value unit="周" value="${caesareanSectionRecord.umbilicalCordTwist!'NA'}" xsi:type="PQ"/>
             </observation>
           </entry>
           <entry>
@@ -381,7 +381,7 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.166.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="宫腔探查肌瘤标志"/>
-              <value value="false" xsi:type="BL"/>
+              <value value="${caesareanSectionRecord.exploreFibroidsFlag!'NA'}" xsi:type="BL"/>
             </observation>
           </entry>
           <entry>

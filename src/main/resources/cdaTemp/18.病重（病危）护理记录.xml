@@ -130,11 +130,7 @@
               <entryRelationship typeCode="SUBJ">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE02.10.023.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="过敏史标志"/>
-                  <#if worsePatientCareRecord.allergyHistory??>
-                  <value value="true" xsi:type="BL"/>
-                  <#else>
-                  <value value="false" xsi:type="BL"/>
-                  </#if>
+                  <value value="${worsePatientCareRecord.allergyHistoryFlag!'NA'}" xsi:type="BL"/>
                   <participant typeCode="CSM">
                     <participantRole classCode="MANU">
                       <playingEntity classCode="MMAT">

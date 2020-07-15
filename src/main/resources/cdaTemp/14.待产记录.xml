@@ -319,7 +319,7 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE04.10.247.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出口横径（cm）"/>
-              <value unit="cm" value="9" xsi:type="PQ"/>
+              <value unit="cm" value="${expectantRecord.exitDiameter!'NA'}" xsi:type="PQ"/>
             </observation>
           </entry>
           <entry>

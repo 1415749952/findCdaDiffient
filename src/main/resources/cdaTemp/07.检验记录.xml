@@ -267,47 +267,6 @@
               </#if> 
             </organizer>
           </entry>
-          <entry>
-            <observation classCode="OBS" moodCode="EVN">
-              <code code="DE04.30.019.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="检验项目代码"/>
-              <effectiveTime value="${surveyRecord.inspectionDate!'NA'}"/>
-              <value xsi:type="ST">${surveyRecord.inspectionItemCode!'NA'}</value>
-              <entryRelationship typeCode="COMP">
-                <observation classCode="OBS" moodCode="EVN">
-                  <code code="DE04.50.134.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="标本类别"/>
-                  <effectiveTime>
-                    <low value="${surveyRecord.specimenSampleDate!'NA'}"/>
-                    <high value="${surveyRecord.receiveSpecimenDate!'NA'}"/>
-                  </effectiveTime>
-                  <value xsi:type="ST">${surveyRecord.sampleType!'NA'}</value>
-                </observation>
-              </entryRelationship>
-              <entryRelationship typeCode="COMP">
-                <observation classCode="OBS" moodCode="EVN">
-                  <code code="DE04.50.135.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="标本状态"/>
-                  <value xsi:type="ST">${surveyRecord.sampleState!'NA'}</value>
-                </observation>
-              </entryRelationship>
-            </observation>
-          </entry>
-          <entry>
-            <observation classCode="OBS" moodCode="EVN">
-              <code code="DE04.30.017.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="检验结果代码"/>
-              <value code="${surveyRecord.inspectionResultCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.38" codeSystemName="检查(检验)结果代码表" xsi:type="CD" displayName="<@dict_tag value="${surveyRecord.inspectionResultCode!'NA'}" datasetCloumn="INSPECTION_RESULT_CODE">${dict.desc}</@dict_tag>"/>
-            </observation>
-          </entry>
-          <entry>
-            <observation classCode="OBS" moodCode="EVN">
-              <code code="DE04.30.015.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="检验定量结果"/>
-              <value value="${surveyRecord.inspectionQuantifyResult!'NA'}" xsi:type="REAL"/>
-              <entryRelationship typeCode="COMP">
-                <observation classCode="OBS" moodCode="EVN">
-                  <code code="DE04.30.016.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="检查定量结果计量单位"/>
-                  <value xsi:type="ST">${surveyRecord.examinationQuantifyUnit!'NA'}</value>
-                </observation>
-              </entryRelationship>
-            </observation>
-          </entry>
         </section>
       </component>
       <!--检验报告章节-->

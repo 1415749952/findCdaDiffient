@@ -296,7 +296,7 @@
                     <!--医嘱计划开始日期时间-->
                     <low value="${outpatientEmergencyRecords.adviceOpenDatetime!'NA'}"/>
                     <!--医嘱计划结束日期时间-->
-                    <high value="${outpatientEmergencyRecords.cancelAdviceDatetime!'NA'}"/>
+                    <high value="${outpatientEmergencyRecords.adviceExecDatetime!'NA'}"/>
                   </effectiveTime>
                   <!--医嘱计划信息-->
                   <value xsi:type="ST">${outpatientEmergencyRecords.adviceItemContent!'NA'}</value>
@@ -350,6 +350,7 @@
                       </playingEntity>
                     </participantRole>
                   </participant>
+                  <#if outpatientEmergencyRecords.cancelAdviceDatetime??>
                   <!--医嘱取消-->
                   <participant typeCode="ATND">
                     <!--医嘱取消日期时间：DE06.00.234.00-->
@@ -364,6 +365,7 @@
                       </playingEntity>
                     </participantRole>
                   </participant>
+                  </#if>
                   <!--医嘱备注信息-->
                   <entryRelationship typeCode="COMP">
                     <observation classCode="OBS" moodCode="EVN">

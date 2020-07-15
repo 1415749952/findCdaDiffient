@@ -238,6 +238,7 @@
           </entry>
         </section>
       </component>
+      <#if inspectionRecord.operationName??>
       <!-- 手术操作章节 -->
       <component>
         <section>
@@ -310,6 +311,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!-- 体格检查章节-->
       <component>
         <section>

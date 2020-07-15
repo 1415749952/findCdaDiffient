@@ -38,20 +38,19 @@ public class FindCda
         {
 
             String reallFileAddress = cadTempFile + separator + cdaFileNames[i - 1];
-            findDiffceMetadata(reallFileAddress);
-/*            HashSet<String> metadataSet = getMetadata(reallFileAddress);
+            //findDiffceMetadata(reallFileAddress);
+            HashSet<String> metadataSet = getMetadata(reallFileAddress);
 
 
-            String cdashujuyunaAddress = shujuji + "\\" + (shujujiList[i - 1]);
+            String cdashujuyunaAddress = shujuji + separator + (shujujiList[i - 1]);
             HashSet<String> strings = readFile(cdashujuyunaAddress);
             HashSet<String> compare = compare(metadataSet, strings);
             System.out.println(reallFileAddress);
-            for (String o : compare)
+            /*for (String o : compare)
             {
                 System.out.println(o+"      "+Tool.humpToLine2(o).toUpperCase());
-            }
+            }*/
             System.out.println("*********************************");
-*/
         }
 
 /*

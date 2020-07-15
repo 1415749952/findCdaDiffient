@@ -117,13 +117,13 @@ public class RedCDA
                 }
             }*/
             //查看cda模版是否有配置常量true和false情况
-            /*if (s.contains("true") || s.contains("false"))
+            if (s.contains("true") || s.contains("false"))
             {
                 if (!s.contains("component") && !s.contains("entry"))
                 {
                     System.out.println(s);
                 }
-            }*/
+            }
         }
     }
 }

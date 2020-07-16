@@ -38,7 +38,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${transferenceRecord.overintoDatatime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${transferenceRecord.overintoDeptSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${transferenceRecord.overintoDeptSign!'NA'}</name>
       </assignedPerson>
@@ -59,7 +59,7 @@
     <time value="${transferenceRecord.transferDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${transferenceRecord.turnoutDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="转出医师签名"/>
       <assignedPerson>
         <name>${transferenceRecord.turnoutDoctorSign!'NA'}</name>
@@ -72,7 +72,7 @@
     <time value="${transferenceRecord.overintoDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${transferenceRecord.overintoDeptSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="转入医师签名"/>
       <assignedPerson>
         <name>${transferenceRecord.overintoDeptSign!'NA'}</name>

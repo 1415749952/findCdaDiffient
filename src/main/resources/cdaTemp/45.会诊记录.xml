@@ -40,7 +40,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${consultationRecord.consultationDatatime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${consultationRecord.consultationDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${consultationRecord.consultationDoctorSign!'NA'}</name>
       </assignedPerson>
@@ -60,7 +60,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${consultationRecord.applyDoctorName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="会诊申请医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${consultationRecord.applyDoctorName!'NA'}</name>
@@ -72,7 +72,7 @@
     <time value="${consultationRecord.consultationDatatime!'NA'}" xsi:type="TS"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${consultationRecord.consultationDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="会诊医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${consultationRecord.consultationDoctorSign!'NA'}</name>

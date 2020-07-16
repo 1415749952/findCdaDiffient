@@ -69,7 +69,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${dischargeAbstract.signDatetime!'NA'}" xsi:type="TS"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${dischargeAbstract.superiorDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${dischargeAbstract.superiorDoctorSign!'NA'}</name>
       </assignedPerson>
@@ -90,7 +90,7 @@
     <time value="${dischargeAbstract.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${dischargeAbstract.inpDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="住院医师"/>
       <assignedPerson>
         <!--HDSD00.16.053 DE02.01.039.00 住院医师签名-->
@@ -104,7 +104,7 @@
     <time value="${dischargeAbstract.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${dischargeAbstract.superiorDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="上级医师"/>
       <assignedPerson classCode="PSN">
         <!--HDSD00.16.035 DE02.01.039.00 上级医师签名 -->

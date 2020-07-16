@@ -41,7 +41,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${anesthesiaRecords.signDatetime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${anesthesiaRecords.anesthesiaDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${anesthesiaRecords.anesthesiaDoctorSign!'NA'}</name>
       </assignedPerson>
@@ -62,7 +62,7 @@
     <time value="${anesthesiaRecords.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${anesthesiaRecords.anesthesiaDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="麻醉医师"/>
       <assignedPerson>
         <name>${anesthesiaRecords.anesthesiaDoctorSign!'NA'}</name>
@@ -500,7 +500,7 @@
               <!--手术者姓名-->
               <performer>
                 <assignedEntity>
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${anesthesiaRecords.operationDoctorName!'NA'}" root="2.16.156.10011.1.4"/>
                   <assignedPerson>
                     <name>${anesthesiaRecords.operationDoctorName!'NA'}</name>
                   </assignedPerson>

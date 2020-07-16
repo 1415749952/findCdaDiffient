@@ -41,7 +41,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${operationInformedConsent.doctorSignDatetime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${operationInformedConsent.treatingDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${operationInformedConsent.treatingDoctorSign!'NA'}</name>
       </assignedPerson>
@@ -61,7 +61,7 @@
     <time value="${operationInformedConsent.doctorSignDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${operationInformedConsent.treatingDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <assignedPerson>
         <!-- DE02.01.039.00经治医师签名 -->
         <name>${operationInformedConsent.treatingDoctorSign!'NA'}</name>
@@ -73,7 +73,7 @@
     <time value="${operationInformedConsent.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${operationInformedConsent.operatorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <assignedPerson>
         <!-- 手术者姓名 -->
         <name>${operationInformedConsent.operatorSign!'NA'}</name>
@@ -85,7 +85,7 @@
     <time value="${operationInformedConsent.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.3"/>
+      <id extension="${operationInformedConsent.patientSign!'NA'}" root="2.16.156.10011.1.3"/>
       <assignedPerson>
         <!-- 患者姓名 -->
         <name>${operationInformedConsent.patientSign!'NA'}</name>
@@ -98,7 +98,7 @@
     <time value="${operationInformedConsent.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.3"/>
+      <id extension="${operationInformedConsent.legalAgentSign!'NA'}" root="2.16.156.10011.1.3"/>
       <!--代理人关系-->
       <code code="${operationInformedConsent.relationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.8" codeSystemName="家庭关系代码表(GB/T 4761)" displayName="<@dict_tag value="${operationInformedConsent.relationCode!'NA'}" datasetCloumn="RELATION_CODE">${dict.desc}</@dict_tag>"/>
       <assignedPerson>

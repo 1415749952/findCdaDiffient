@@ -43,7 +43,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${specialTreatmentConsent.doctorSignDatetime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${specialTreatmentConsent.doctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${specialTreatmentConsent.doctorSign!'NA'}</name>
       </assignedPerson>
@@ -63,7 +63,7 @@
     <time value="${specialTreatmentConsent.doctorSignDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${specialTreatmentConsent.doctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <assignedPerson>
         <!--医务人员签名-->
         <name>${specialTreatmentConsent.doctorSign!'NA'}</name>
@@ -76,7 +76,7 @@
     <time value="${specialTreatmentConsent.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.3"/>
+      <id extension="${specialTreatmentConsent.patientName!'NA'}" root="2.16.156.10011.1.3"/>
       <code displayName="患者"/>
       <assignedPerson>
         <name>${specialTreatmentConsent.patientName!'NA'}</name>
@@ -89,7 +89,7 @@
     <time value="${specialTreatmentConsent.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.3"/>
+      <id extension="${specialTreatmentConsent.patientAgentSign!'NA'}" root="2.16.156.10011.1.3"/>
       <!--代理人关系-->
       <code code="${specialTreatmentConsent.relationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.8" codeSystemName="家庭关系代码表(GB/T 4761)" displayName="<@dict_tag value="${specialTreatmentConsent.relationCode!'NA'}" datasetCloumn="RELATION_CODE">${dict.desc}</@dict_tag>"/>
       <assignedPerson>

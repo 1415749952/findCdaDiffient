@@ -55,7 +55,7 @@
     <!-- 检查报告日期 -->
     <time value="${inspectionRecord.examinationRtDate!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${inspectionRecord.reportDoctor!'NA'}" root="2.16.156.10011.1.7"/>
       <!-- 医师姓名 -->
       <assignedPerson>
         <name>${inspectionRecord.reportDoctor!'NA'}</name>
@@ -76,7 +76,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${inspectionRecord.reportaudit!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="审核医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${inspectionRecord.reportaudit!'NA'}</name>
@@ -88,7 +88,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${inspectionRecord.inspectEngineerName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="检查技师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${inspectionRecord.inspectEngineerName!'NA'}</name>
@@ -100,7 +100,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${inspectionRecord.examinationDoctor!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="检查医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${inspectionRecord.examinationDoctor!'NA'}</name>

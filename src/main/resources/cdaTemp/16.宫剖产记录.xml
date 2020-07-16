@@ -30,7 +30,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${caesareanSectionRecord.operateEndTime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${caesareanSectionRecord.recordSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${caesareanSectionRecord.recordSign!'NA'}</name>
       </assignedPerson>
@@ -50,7 +50,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${caesareanSectionRecord.operationDoctorName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="手术者"/>
       <assignedPerson>
         <name>${caesareanSectionRecord.operationDoctorName!'NA'}</name>
@@ -62,7 +62,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${caesareanSectionRecord.doctorAnes!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="麻醉医师"/>
       <assignedPerson>
         <name>${caesareanSectionRecord.doctorAnes!'NA'}</name>
@@ -74,7 +74,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${caesareanSectionRecord.nstrumentNurseName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="器械护士"/>
       <assignedPerson>
         <name>${caesareanSectionRecord.nstrumentNurseName!'NA'}</name>
@@ -86,7 +86,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${caesareanSectionRecord.operationAssistantName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="助手"/>
       <assignedPerson>
         <name>${caesareanSectionRecord.operationAssistantName!'NA'}</name>
@@ -98,7 +98,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${caesareanSectionRecord.pediatricianSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="护婴者"/>
       <assignedPerson>
         <name>${caesareanSectionRecord.pediatricianSign!'NA'}</name>
@@ -110,7 +110,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${caesareanSectionRecord.operationDoctorName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="指导者"/>
       <assignedPerson>
         <name>${caesareanSectionRecord.operationDoctorName!'NA'}</name>
@@ -122,7 +122,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${caesareanSectionRecord.recordSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="记录人"/>
       <assignedPerson>
         <name>${caesareanSectionRecord.recordSign!'NA'}</name>

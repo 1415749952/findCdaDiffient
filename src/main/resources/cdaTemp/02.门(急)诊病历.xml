@@ -50,7 +50,7 @@
     <!-- 就诊日期时间 -->
     <time value="${outpatientEmergencyRecords.visitDatetime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${outpatientEmergencyRecords.doctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <!-- 就诊医师 -->
       <assignedPerson>
         <name>${outpatientEmergencyRecords.doctorSign!'NA'}</name>
@@ -71,7 +71,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${outpatientEmergencyRecords.doctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="责任医生"/>
       <assignedPerson>
         <name>${outpatientEmergencyRecords.doctorSign!'NA'}</name>

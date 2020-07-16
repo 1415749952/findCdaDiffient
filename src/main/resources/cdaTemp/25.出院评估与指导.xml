@@ -78,7 +78,7 @@
     <!-- 填表日期 -->
     <time value="${dischargeAssessment.signDatetime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${dischargeAssessment.nursingSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <!-- 访视医生姓名 -->
         <name>${dischargeAssessment.nursingSign!'NA'}</name>
@@ -100,7 +100,7 @@
     <time value="${dischargeAssessment.signDatetime!'NA'}"/>
     <signatureCode code="S"/>
     <assignedEntity classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${dischargeAssessment.nursingSign!'NA'}" root="2.16.156.10011.1.4"/>
       <assignedPerson classCode="PSN">
         <!--HDSD00.09.025 DE02.01.039.00 护士签名 -->
         <name>${dischargeAssessment.nursingSign!'NA'}</name>

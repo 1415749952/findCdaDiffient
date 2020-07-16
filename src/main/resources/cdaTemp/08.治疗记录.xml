@@ -41,7 +41,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${treatmentRecord.signDatetime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${treatmentRecord.adviceExecSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${treatmentRecord.adviceExecSign!'NA'}</name>
       </assignedPerson>
@@ -62,7 +62,7 @@
     <time value="${treatmentRecord.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${treatmentRecord.adviceExecSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="医嘱执行者"/>
       <assignedPerson>
         <name>${treatmentRecord.adviceExecSign!'NA'}</name>

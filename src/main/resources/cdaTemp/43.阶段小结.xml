@@ -38,7 +38,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${phaseSummary.signDatatime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${phaseSummary.doctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${phaseSummary.doctorSign!'NA'}</name>
       </assignedPerson>
@@ -59,7 +59,7 @@
     <time value="${phaseSummary.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${phaseSummary.doctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="医师签名"/>
       <assignedPerson>
         <name>${phaseSummary.doctorSign!'NA'}</name>

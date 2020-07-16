@@ -48,7 +48,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${visitsRecAftAnesthesia.signDatetime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${visitsRecAftAnesthesia.anesthesiaDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${visitsRecAftAnesthesia.anesthesiaDoctorSign!'NA'}</name>
       </assignedPerson>
@@ -69,7 +69,7 @@
     <time value="${visitsRecAftAnesthesia.consciousDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${visitsRecAftAnesthesia.anesthesiaDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="麻醉医师"/>
       <assignedPerson>
         <name>${visitsRecAftAnesthesia.anesthesiaDoctorSign!'NA'}</name>

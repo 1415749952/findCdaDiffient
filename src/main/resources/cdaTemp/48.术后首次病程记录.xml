@@ -35,7 +35,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${postoperatFirstCourse.recordDatatime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${postoperatFirstCourse.doctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${postoperatFirstCourse.doctorSign!'NA'}</name>
       </assignedPerson>
@@ -55,7 +55,7 @@
     <time value="${postoperatFirstCourse.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${postoperatFirstCourse.doctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code code="医师"/>
       <assignedPerson>
         <name>${postoperatFirstCourse.doctorSign!'NA'}</name>

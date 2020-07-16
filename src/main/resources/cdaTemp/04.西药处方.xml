@@ -50,7 +50,7 @@
     <!-- 处方开立日期 -->
     <time value="${prescriptionWest.recipeOpenDate!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${prescriptionWest.recipeOpendoctorName!'NA'}" root="2.16.156.10011.1.7"/>
       <!-- 处方开立医师 -->
       <assignedPerson>
         <name>${prescriptionWest.recipeOpendoctorName!'NA'}</name>
@@ -71,7 +71,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${prescriptionWest.checkPersonName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="处方审核药剂师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${prescriptionWest.checkPersonName!'NA'}</name>
@@ -83,7 +83,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${prescriptionWest.allocatePersonName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="处方调配药剂师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${prescriptionWest.allocatePersonName!'NA'}</name>
@@ -95,7 +95,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${prescriptionWest.verifyPersonName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="处方核对药剂师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${prescriptionWest.verifyPersonName!'NA'}</name>
@@ -107,7 +107,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${prescriptionWest.dispensingPersonName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="处方发药药剂师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${prescriptionWest.dispensingPersonName!'NA'}</name>

@@ -41,7 +41,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${generalOperationRecords.signDatetime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${generalOperationRecords.operationDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${generalOperationRecords.operationDoctorSign!'NA'}</name>
       </assignedPerson>
@@ -62,7 +62,7 @@
     <time value="${generalOperationRecords.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${generalOperationRecords.operationDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="手术者"/>
       <assignedPerson>
         <name>${generalOperationRecords.operationDoctorSign!'NA'}</name>
@@ -173,7 +173,7 @@
               <!--手术者-->
               <performer typeCode="PRF">
                 <assignedEntity>
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${generalOperationRecords.operationDoctorName!'NA'}" root="2.16.156.10011.1.4"/>
                   <assignedPerson>
                     <name>${generalOperationRecords.operationDoctorName!'NA'}</name>
                   </assignedPerson>
@@ -182,7 +182,7 @@
               <!--第一助手-->
               <participant typeCode="ATND">
                 <participantRole classCode="ASSIGNED">
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${generalOperationRecords.firstAssistantName!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="Ⅰ助"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <name>${generalOperationRecords.firstAssistantName!'NA'}</name>
@@ -192,7 +192,7 @@
               <!--第二助手-->
               <participant typeCode="ATND">
                 <participantRole classCode="ASSIGNED">
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${generalOperationRecords.secondeAssistantName!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="Ⅱ助"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <name>${generalOperationRecords.secondeAssistantName!'NA'}</name>
@@ -202,7 +202,7 @@
               <!--器械护士姓名-->
               <participant typeCode="ATND">
                 <participantRole classCode="ASSIGNED">
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${generalOperationRecords.instruNurseName!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="器械护士"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <name>${generalOperationRecords.instruNurseName!'NA'}</name>
@@ -212,7 +212,7 @@
               <!--巡台护士姓名-->
               <participant typeCode="ATND">
                 <participantRole classCode="ASSIGNED">
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${generalOperationRecords.tourNurseName!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="巡台护士"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <name>${generalOperationRecords.tourNurseName!'NA'}</name>

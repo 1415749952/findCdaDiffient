@@ -163,7 +163,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${inpatientMedicalRecord.physicianDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${inpatientMedicalRecord.physicianDoctorSign!'NA'}</name>
       </assignedPerson>
@@ -183,7 +183,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${inpatientMedicalRecord.deptDirectorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="科主任"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${inpatientMedicalRecord.deptDirectorSign!'NA'}</name>
@@ -195,7 +195,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${inpatientMedicalRecord.directorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主任(副主任)医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${inpatientMedicalRecord.directorSign!'NA'}</name>
@@ -207,7 +207,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${inpatientMedicalRecord.physicianDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主治医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${inpatientMedicalRecord.physicianDoctorSign!'NA'}</name>
@@ -219,7 +219,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${inpatientMedicalRecord.inpDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="住院医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${inpatientMedicalRecord.inpDoctorSign!'NA'}</name>
@@ -231,7 +231,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${inpatientMedicalRecord.dutyNurseSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="责任护士"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${inpatientMedicalRecord.dutyNurseSign!'NA'}</name>
@@ -243,7 +243,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${inpatientMedicalRecord.refresherDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="进修医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${inpatientMedicalRecord.refresherDoctorSign!'NA'}</name>
@@ -255,7 +255,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${inpatientMedicalRecord.internshipDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="实习医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${inpatientMedicalRecord.internshipDoctorSign!'NA'}</name>
@@ -267,7 +267,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${inpatientMedicalRecord.coderSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="编码员"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${inpatientMedicalRecord.coderSign!'NA'}</name>
@@ -708,7 +708,7 @@
               <!--手术者-->
               <performer>
                 <assignedEntity>
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${inpatientMedicalRecord.operationDoctorName!'NA'}" root="2.16.156.10011.1.4"/>
                   <assignedPerson>
                     <name>${inpatientMedicalRecord.operationDoctorName!'NA'}</name>
                   </assignedPerson>
@@ -717,7 +717,7 @@
               <!--第一助手-->
               <participant typeCode="ATND">
                 <participantRole classCode="ASSIGNED">
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${inpatientMedicalRecord.firstAssistantName!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="第一助手"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <name>${inpatientMedicalRecord.firstAssistantName!'NA'}</name>
@@ -727,7 +727,7 @@
               <!--第二助手-->
               <participant typeCode="ATND">
                 <participantRole classCode="ASSIGNED">
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${inpatientMedicalRecord.secondeAssistantName!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="第二助手"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <name>${inpatientMedicalRecord.secondeAssistantName!'NA'}</name>
@@ -769,7 +769,7 @@
                   <value code="${inpatientMedicalRecord.anesthesiaMethodCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.159" codeSystemName="麻醉方法代码表" xsi:type="CD" displayName="<@dict_tag value="${inpatientMedicalRecord.anesthesiaMethodCode!'NA'}" datasetCloumn="ANESTHESIA_METHOD_CODE">${dict.desc}</@dict_tag>"/>
                   <performer>
                     <assignedEntity>
-                      <id extension="NA" root="2.16.156.10011.1.4"/>
+                      <id extension="${inpatientMedicalRecord.anesthesiaDoctorSignature!'NA'}" root="2.16.156.10011.1.4"/>
                       <assignedPerson>
                         <!--麻醉医生签名-->
                         <name>${inpatientMedicalRecord.anesthesiaDoctorSignature!'NA'}</name>
@@ -856,7 +856,7 @@
               <author>
                 <time/>
                 <assignedAuthor>
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${inpatientMedicalRecord.qcDoctorSignature!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="质控医生"/>
                   <assignedPerson>
                     <!--质控医生签名-->
@@ -867,7 +867,7 @@
               <author>
                 <time/>
                 <assignedAuthor>
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${inpatientMedicalRecord.qcNurseSignature!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="质控护士"/>
                   <assignedPerson>
                     <!--质控护士签名-->

@@ -40,7 +40,7 @@
     <!--签名日期时间：DE09.00.053.00-->
     <time value="${preciousConsumUsageRecord.createDatetime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${preciousConsumUsageRecord.nurseSign!'NA'}" root="2.16.156.10011.1.7"/>
       <code displayName="护士"/>
       <assignedPerson>
         <name>${preciousConsumUsageRecord.nurseSign!'NA'}</name>
@@ -62,7 +62,7 @@
     <time value="${preciousConsumUsageRecord.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${preciousConsumUsageRecord.nurseSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="护士"/>
       <assignedPerson>
         <!--护士姓名-->

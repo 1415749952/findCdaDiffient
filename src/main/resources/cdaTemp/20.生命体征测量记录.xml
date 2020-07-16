@@ -40,7 +40,7 @@
     <!--签名日期时间：DE09.00.053.00-->
     <time value="${monitorVitalSignsRecord.createDatetime!'NA'}" xsi:type="TS"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${monitorVitalSignsRecord.nurseSign!'NA'}" root="2.16.156.10011.1.7"/>
       <code displayName="护士"/>
       <assignedPerson>
         <name>${monitorVitalSignsRecord.nurseSign!'NA'}</name>
@@ -62,7 +62,7 @@
     <time value="${monitorVitalSignsRecord.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${monitorVitalSignsRecord.nurseSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="护士"/>
       <assignedPerson>
         <!--护士签名 -->

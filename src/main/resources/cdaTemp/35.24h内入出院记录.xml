@@ -54,7 +54,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${h24AdmissionDischargeRecord.outhosAdvicOpenDate!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${h24AdmissionDischargeRecord.outhosAdvicOpenerSig!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${h24AdmissionDischargeRecord.outhosAdvicOpenerSig!'NA'}</name>
       </assignedPerson>
@@ -93,7 +93,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${h24AdmissionDischargeRecord.archiaterDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主任医师"/>
       <assignedPerson>
         <name>${h24AdmissionDischargeRecord.archiaterDoctorSign!'NA'}</name>
@@ -105,7 +105,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${h24AdmissionDischargeRecord.receiveDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="接诊医师"/>
       <assignedPerson>
         <name>${h24AdmissionDischargeRecord.receiveDoctorSign!'NA'}</name>
@@ -117,7 +117,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${h24AdmissionDischargeRecord.inpDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="住院医师"/>
       <assignedPerson>
         <name>${h24AdmissionDischargeRecord.inpDoctorSign!'NA'}</name>
@@ -129,7 +129,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${h24AdmissionDischargeRecord.physicianDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主治医师"/>
       <assignedPerson>
         <name>${h24AdmissionDischargeRecord.physicianDoctorSign!'NA'}</name>
@@ -141,7 +141,7 @@
     <time value="${h24AdmissionDischargeRecord.outhosAdvicOpenDate!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id root="2.16.156.10011.1.4" extension="NA"/>
+      <id root="2.16.156.10011.1.4" extension="${h24AdmissionDischargeRecord.outhosAdvicOpenerSig!'NA'}"/>
       <code displayName="出院医嘱开立人"/>
       <assignedPerson>
         <name>${h24AdmissionDischargeRecord.outhosAdvicOpenerSig!'NA'}</name>

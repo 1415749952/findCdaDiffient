@@ -30,7 +30,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${expectantRecord.deliveryDatetime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${expectantRecord.recordSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${expectantRecord.recordSign!'NA'}</name>
       </assignedPerson>
@@ -50,7 +50,7 @@
     <time value="${expectantRecord.deliveryDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${expectantRecord.laborInspectionSig!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="产程检查者"/>
       <assignedPerson>
         <name>${expectantRecord.laborInspectionSig!'NA'}</name>
@@ -62,7 +62,7 @@
     <time value="${expectantRecord.deliveryDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${expectantRecord.recordSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="记录人"/>
       <assignedPerson>
         <name>${expectantRecord.recordSign!'NA'}</name>

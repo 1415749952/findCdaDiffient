@@ -45,7 +45,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${preOperationDiscussion.signDatatime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${preOperationDiscussion.doctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${preOperationDiscussion.doctorSign!'NA'}</name>
       </assignedPerson>
@@ -66,7 +66,7 @@
     <time value="${preOperationDiscussion.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${preOperationDiscussion.operativeSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="手术者"/>
       <assignedPerson>
         <name>${preOperationDiscussion.operativeSign!'NA'}</name>
@@ -81,7 +81,7 @@
     <time value="${preOperationDiscussion.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${preOperationDiscussion.anaesthesiaDoctorName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="麻醉医师"/>
       <assignedPerson>
         <name>${preOperationDiscussion.anaesthesiaDoctorName!'NA'}</name>
@@ -96,7 +96,7 @@
     <time value="${preOperationDiscussion.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${preOperationDiscussion.doctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="医师"/>
       <assignedPerson>
         <name>${preOperationDiscussion.doctorSign!'NA'}</name>
@@ -118,7 +118,7 @@
   <!--讨论主持人信息-->
   <participant typeCode="ORG">
     <associatedEntity classCode="ECON">
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${preOperationDiscussion.compereName!'NA'}" root="2.16.156.10011.1.4"/>
       <associatedPerson>
         <!--主持人姓名-->
         <name>${preOperationDiscussion.compereName!'NA'}</name>

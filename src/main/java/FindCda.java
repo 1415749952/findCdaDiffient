@@ -46,10 +46,10 @@ public class FindCda
             HashSet<String> strings = readFile(cdashujuyunaAddress);
             HashSet<String> compare = compare(metadataSet, strings);
             System.out.println(reallFileAddress);
-            /*for (String o : compare)
+            for (String o : compare)
             {
                 System.out.println(o+"      "+Tool.humpToLine2(o).toUpperCase());
-            }*/
+            }
             System.out.println("*********************************");
         }
 

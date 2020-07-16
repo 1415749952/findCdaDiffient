@@ -30,7 +30,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${vbncRecord.postpartumObservationTime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${vbncRecord.recordSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${vbncRecord.recordSign!'NA'}</name>
       </assignedPerson>
@@ -50,7 +50,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${vbncRecord.midwivesSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="接生者"/>
       <assignedPerson>
         <name>${vbncRecord.midwivesSign!'NA'}</name>
@@ -62,7 +62,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${vbncRecord.midwivesSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="助产者"/>
       <assignedPerson>
         <name>${vbncRecord.midwivesSign!'NA'}</name>
@@ -74,7 +74,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${vbncRecord.midwivesSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="助手"/>
       <assignedPerson>
         <name>${vbncRecord.midwivesSign!'NA'}</name>
@@ -86,7 +86,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${vbncRecord.pediatricianSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="护婴者"/>
       <assignedPerson>
         <name>${vbncRecord.pediatricianSign!'NA'}</name>
@@ -98,7 +98,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${vbncRecord.operationDoctorName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="指导者"/>
       <assignedPerson>
         <name>${vbncRecord.operationDoctorName!'NA'}</name>
@@ -110,7 +110,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${vbncRecord.recordSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="记录人"/>
       <assignedPerson>
         <name>${vbncRecord.recordSign!'NA'}</name>

@@ -38,7 +38,7 @@
     <!-- DE09.00.053.00记录日期时间 完成此项业务活动时的公元纪年日期和时间的完整描述 -->
     <time value="${firstCourseRecord.recordDatatime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${firstCourseRecord.inpDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${firstCourseRecord.inpDoctorSign!'NA'}</name>
       </assignedPerson>
@@ -58,7 +58,7 @@
     <time value="${firstCourseRecord.recordDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${firstCourseRecord.superDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="上级医师签名"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${firstCourseRecord.superDoctorSign!'NA'}</name>
@@ -70,7 +70,7 @@
     <time value="${firstCourseRecord.recordDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${firstCourseRecord.inpDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="住院医师签名"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${firstCourseRecord.inpDoctorSign!'NA'}</name>

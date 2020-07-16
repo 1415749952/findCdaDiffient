@@ -36,7 +36,7 @@
     <!-- DE06.00.218.00小结日期时间 -->
     <time value="${preOperationSummary.stageSummaryDatatime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${preOperationSummary.doctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${preOperationSummary.doctorSign!'NA'}</name>
       </assignedPerson>
@@ -57,7 +57,7 @@
     <time value="${preOperationSummary.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${preOperationSummary.operativeSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="手术者"/>
       <assignedPerson>
         <name>${preOperationSummary.operativeSign!'NA'}</name>
@@ -70,7 +70,7 @@
     <time value="${preOperationSummary.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${preOperationSummary.doctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="医师"/>
       <assignedPerson>
         <name>${preOperationSummary.doctorSign!'NA'}</name>

@@ -47,7 +47,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${intractableDiscussRecord.discussDatatime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${intractableDiscussRecord.doctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${intractableDiscussRecord.doctorSign!'NA'}</name>
       </assignedPerson>
@@ -68,7 +68,7 @@
     <time value="${intractableDiscussRecord.discussDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${intractableDiscussRecord.archiaterDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主任医师签名"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${intractableDiscussRecord.archiaterDoctorSign!'NA'}</name>
@@ -80,7 +80,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${intractableDiscussRecord.doctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${intractableDiscussRecord.doctorSign!'NA'}</name>
@@ -92,7 +92,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${intractableDiscussRecord.physicianDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主治医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${intractableDiscussRecord.physicianDoctorSign!'NA'}</name>
@@ -104,7 +104,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${intractableDiscussRecord.compereName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主持人"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${intractableDiscussRecord.compereName!'NA'}</name>

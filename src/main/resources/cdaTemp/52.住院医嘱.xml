@@ -41,7 +41,7 @@
     <!--医嘱开立日期时间：DE06.00.220.00 -->
     <time value="${hospitalizationOrder.adviceOpenDatetime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${hospitalizationOrder.adviceOpendoctorName!'NA'}" root="2.16.156.10011.1.7"/>
       <code displayName="医嘱开立者"/>
       <assignedPerson>
         <name>${hospitalizationOrder.adviceOpendoctorName!'NA'}</name>
@@ -160,7 +160,7 @@
                     <!--医嘱开立日期时间：DE06.00.220.00-->
                     <time value="${hospitalizationOrder.adviceOpenDatetime!'NA'}"/>
                     <assignedAuthor>
-                      <id extension="NA" root="2.16.156.10011.1.4"/>
+                      <id extension="${hospitalizationOrder.adviceOpendoctorName!'NA'}" root="2.16.156.10011.1.4"/>
                       <code displayName="医嘱开立者"/>
                       <!--医嘱开立者签名：DE02.01.039.00-->
                       <assignedPerson>
@@ -176,7 +176,7 @@
                     <!--医嘱审核日期时间：DE09.00.088.00-->
                     <time value="${hospitalizationOrder.checkAdviceDatetime!'NA'}"/>
                     <participantRole classCode="ASSIGNED">
-                      <id extension="NA" root="2.16.156.10011.1.4"/>
+                      <id extension="${hospitalizationOrder.checkPersonSign!'NA'}" root="2.16.156.10011.1.4"/>
                       <code displayName="医嘱审核人"/>
                       <!--医嘱审核人签名：DE02.01.039.00-->
                       <playingEntity classCode="PSN" determinerCode="INSTANCE">
@@ -189,7 +189,7 @@
                     <!--医嘱核对日期时间：DE06.00.205.00-->
                     <time value="${hospitalizationOrder.adviceCheckDatetime!'NA'}"/>
                     <participantRole classCode="ASSIGNED">
-                      <id extension="NA" root="2.16.156.10011.1.4"/>
+                      <id extension="${hospitalizationOrder.adviceChecknurseSign!'NA'}" root="2.16.156.10011.1.4"/>
                       <code displayName="医嘱核对人"/>
                       <!--医嘱核对护士签名：DE02.01.039.00-->
                       <playingEntity classCode="PSN" determinerCode="INSTANCE">
@@ -202,7 +202,7 @@
                     <!--医嘱停止日期时间：DE06.00.218.00-->
                     <time value="${hospitalizationOrder.adviceEndDatetime!'NA'}"/>
                     <participantRole classCode="ASSIGNED">
-                      <id extension="NA" root="2.16.156.10011.1.4"/>
+                      <id extension="${hospitalizationOrder.adviceEnderSign!'NA'}" root="2.16.156.10011.1.4"/>
                       <code displayName="医嘱停止人"/>
                       <!--停止医嘱者签名：DE02.01.039.00-->
                       <playingEntity classCode="PSN" determinerCode="INSTANCE">
@@ -215,7 +215,7 @@
                     <!--医嘱取消日期时间：DE06.00.234.00-->
                     <time value="${hospitalizationOrder.cancelAdviceDatetime!'NA'}"/>
                     <participantRole classCode="ASSIGNED">
-                      <id extension="NA" root="2.16.156.10011.1.4"/>
+                      <id extension="${hospitalizationOrder.cancelAdviceSign!'NA'}" root="2.16.156.10011.1.4"/>
                       <code displayName="医嘱取消人"/>
                       <!--取消医嘱者签名：DE02.01.039.00-->
                       <playingEntity classCode="PSN" determinerCode="INSTANCE">
@@ -240,7 +240,7 @@
                         <!--医嘱执行日期时间：DE06.00.222.00-->
                         <time value="${hospitalizationOrder.adviceExecDatetime!'NA'}"/>
                         <assignedEntity>
-                          <id extension="NA" root="2.16.156.10011.1.4"/>
+                          <id extension="${hospitalizationOrder.execPersonSign!'NA'}" root="2.16.156.10011.1.4"/>
                           <code displayName="医嘱执行者"/>
                           <!--医嘱执行者签名：DE02.01.039.0-->
                           <assignedPerson>

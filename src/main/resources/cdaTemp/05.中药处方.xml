@@ -52,7 +52,7 @@
     <!-- 处方开立日期 -->
     <time value="${prescriptionChine.recipeOpenDate!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${prescriptionChine.recipeOpendoctorName!'NA'}" root="2.16.156.10011.1.7"/>
       <!--处方开立医师-->
       <assignedPerson>
         <name>${prescriptionChine.recipeOpendoctorName!'NA'}</name>
@@ -74,7 +74,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${prescriptionChine.recipeOpendoctorName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="处方开立医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${prescriptionChine.recipeOpendoctorName!'NA'}</name>
@@ -86,7 +86,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${prescriptionChine.checkPersonName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="处方审核药剂师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${prescriptionChine.checkPersonName!'NA'}</name>
@@ -98,7 +98,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${prescriptionChine.allocatePersonName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="处方调配药剂师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${prescriptionChine.allocatePersonName!'NA'}</name>
@@ -110,7 +110,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${prescriptionChine.verifyPersonName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="处方核对药剂师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${prescriptionChine.verifyPersonName!'NA'}</name>
@@ -122,7 +122,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${prescriptionChine.dispensingPersonName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="处方发药药剂师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${prescriptionChine.dispensingPersonName!'NA'}</name>

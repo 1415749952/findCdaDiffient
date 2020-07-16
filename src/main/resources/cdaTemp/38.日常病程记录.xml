@@ -37,7 +37,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${dailyCourseRecord.recordDatatime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${dailyCourseRecord.doctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${dailyCourseRecord.doctorSign!'NA'}</name>
       </assignedPerson>
@@ -58,7 +58,7 @@
     <time value="${dailyCourseRecord.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${dailyCourseRecord.doctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="医师签名"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${dailyCourseRecord.doctorSign!'NA'}</name>

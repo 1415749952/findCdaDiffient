@@ -43,7 +43,7 @@
     <!--签名日期时间：DE09.00.053.00-->
     <time value="${operationCareRecord.signDatetime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${operationCareRecord.circulatingNurseSing!'NA'}" root="2.16.156.10011.1.7"/>
       <code displayName="巡台护士"/>
       <assignedPerson>
         <name>${operationCareRecord.circulatingNurseSing!'NA'}</name>
@@ -65,7 +65,7 @@
     <time value="${operationCareRecord.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${operationCareRecord.circulatingNurseSing!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="巡台护士"/>
       <assignedPerson>
         <!--姓名-->
@@ -79,7 +79,7 @@
     <time value="${operationCareRecord.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${operationCareRecord.instrumentNurseSing!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="器械护士"/>
       <assignedPerson>
         <name>${operationCareRecord.instrumentNurseSing!'NA'}</name>
@@ -92,7 +92,7 @@
     <time value="${operationCareRecord.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${operationCareRecord.handoverNurseSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="交接护士"/>
       <assignedPerson>
         <name>${operationCareRecord.handoverNurseSign!'NA'}</name>
@@ -105,7 +105,7 @@
     <time value="${operationCareRecord.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${operationCareRecord.transporterSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="转运者"/>
       <assignedPerson>
         <name>${operationCareRecord.transporterSign!'NA'}</name>
@@ -333,7 +333,7 @@
                 <!--签名日期时间：DE09.00.053.00-->
                 <time value="${operationCareRecord.signDatetime!'NA'}"/>
                 <participantRole classCode="ASSIGNED">
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${operationCareRecord.circulatingNurseSing!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="巡台护士"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <!--巡台护士签名：DE02.01.039.00-->
@@ -346,7 +346,7 @@
                 <!--签名日期时间：DE09.00.053.00-->
                 <time value="${operationCareRecord.signDatetime!'NA'}"/>
                 <participantRole classCode="ASSIGNED">
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${operationCareRecord.instrumentNurseSing!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="器械护士"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <!--器械护士签名：DE02.01.039.00-->
@@ -378,7 +378,7 @@
                 <!--签名日期时间：DE09.00.053.00-->
                 <time value="${operationCareRecord.signDatetime!'NA'}"/>
                 <participantRole classCode="ASSIGNED">
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${operationCareRecord.circulatingNurseSing!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="巡台护士"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <!--巡台护士签名：DE02.01.039.00-->
@@ -391,7 +391,7 @@
                 <!--签名日期时间：DE09.00.053.00-->
                 <time value="${operationCareRecord.signDatetime!'NA'}"/>
                 <participantRole classCode="ASSIGNED">
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${operationCareRecord.instrumentNurseSing!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="器械护士"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <!--器械护士签名：DE02.01.039.00-->
@@ -423,7 +423,7 @@
                 <!--签名日期时间：DE09.00.053.00-->
                 <time value="${operationCareRecord.signDatetime!'NA'}"/>
                 <participantRole classCode="ASSIGNED">
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${operationCareRecord.circulatingNurseSing!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="巡台护士"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <!--巡台护士签名：DE02.01.039.00-->
@@ -436,7 +436,7 @@
                 <!--签名日期时间：DE09.00.053.00-->
                 <time value="${operationCareRecord.signDatetime!'NA'}"/>
                 <participantRole classCode="ASSIGNED">
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${operationCareRecord.instrumentNurseSing!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="器械护士"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <!--器械护士签名：DE02.01.039.00-->
@@ -482,7 +482,7 @@
               <!--手术操作者：DE02.01.039.00-->
               <performer>
                 <assignedEntity>
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${operationCareRecord.operatorName!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="手术操作者"/>
                   <assignedPerson>
                     <name>${operationCareRecord.operatorName!'NA'}</name>
@@ -537,7 +537,7 @@
                 <!--交接日期时间：DE09.00.107.00-->
                 <time value="${operationCareRecord.handoverDatetime!'NA'}"/>
                 <assignedAuthor>
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${operationCareRecord.handoverNurseSign!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="交接护士"/>
                   <assignedPerson>
                     <!--交接护士签名：DE02.01.039.00-->
@@ -548,7 +548,7 @@
               <!--转运者-->
               <participant typeCode="ATND">
                 <participantRole classCode="ASSIGNED">
-                  <id extension="NA" root="2.16.156.10011.1.4"/>
+                  <id extension="${operationCareRecord.transporterSign!'NA'}" root="2.16.156.10011.1.4"/>
                   <code displayName="转运者"/>
                   <playingEntity classCode="PSN" determinerCode="INSTANCE">
                     <!--转运者签名：DE02.01.039.00-->

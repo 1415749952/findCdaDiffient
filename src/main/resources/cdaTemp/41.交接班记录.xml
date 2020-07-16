@@ -37,10 +37,10 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${handoverRecord.handoverDatatime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${handoverRecord.handoverSign!'NA'}" root="2.16.156.10011.1.7"/>
       <code displayName="文档创作者"/>
       <assignedPerson>
-        <name>"${handoverRecord.handoverSign!'NA'}</name>
+        <name>${handoverRecord.handoverSign!'NA'}</name>
       </assignedPerson>
     </assignedAuthor>
   </author>
@@ -59,7 +59,7 @@
     <time value="${handoverRecord.handoverDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${handoverRecord.handoverSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="交班者"/>
       <assignedPerson>
         <name>${handoverRecord.handoverSign!'NA'}</name>
@@ -72,7 +72,7 @@
     <time value="${handoverRecord.takeDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${handoverRecord.takeSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="接班者"/>
       <assignedPerson>
         <name>${handoverRecord.takeSign!'NA'}</name>

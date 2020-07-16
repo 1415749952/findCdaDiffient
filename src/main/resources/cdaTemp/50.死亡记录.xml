@@ -36,7 +36,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${deathRecord.signDatatime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${deathRecord.archiaterDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${deathRecord.archiaterDoctorSign!'NA'}</name>
       </assignedPerson>
@@ -56,7 +56,7 @@
     <time value="${deathRecord.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${deathRecord.archiaterDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="住院医师"/>
       <assignedPerson>
         <name>${deathRecord.archiaterDoctorSign!'NA'}</name>
@@ -68,7 +68,7 @@
     <time value="${deathRecord.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${deathRecord.physicianDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主治医师"/>
       <assignedPerson>
         <name>${deathRecord.physicianDoctorSign!'NA'}</name>
@@ -80,7 +80,7 @@
     <time value="${deathRecord.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${deathRecord.inpDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主任医师"/>
       <assignedPerson>
         <name>${deathRecord.inpDoctorSign!'NA'}</name>

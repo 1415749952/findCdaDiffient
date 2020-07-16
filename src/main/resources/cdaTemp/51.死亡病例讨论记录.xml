@@ -45,7 +45,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${deathCaseDiscussionRecord.signDatatime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${deathCaseDiscussionRecord.archiaterDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${deathCaseDiscussionRecord.archiaterDoctorSign!'NA'}</name>
       </assignedPerson>
@@ -65,7 +65,7 @@
     <time value="${deathCaseDiscussionRecord.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${deathCaseDiscussionRecord.compereName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="住院医师"/>
       <assignedPerson>
         <name>${deathCaseDiscussionRecord.compereName!'NA'}</name>
@@ -80,7 +80,7 @@
     <time value="${deathCaseDiscussionRecord.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${deathCaseDiscussionRecord.physicianDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主治医师"/>
       <assignedPerson>
         <name>${deathCaseDiscussionRecord.physicianDoctorSign!'NA'}</name>
@@ -95,7 +95,7 @@
     <time value="${deathCaseDiscussionRecord.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${deathCaseDiscussionRecord.archiaterDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主任医师"/>
       <assignedPerson>
         <name>${deathCaseDiscussionRecord.archiaterDoctorSign!'NA'}</name>
@@ -116,7 +116,7 @@
   <!--讨论主持人信息-->
   <participant typeCode="ORG">
     <associatedEntity classCode="ECON">
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${deathCaseDiscussionRecord.compereName!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主持人"/>
       <!--主持人姓名-->
       <associatedPerson>

@@ -75,7 +75,7 @@
     <!--建档日期-->
     <time value="${emrBasicpatient.inputDate!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${emrBasicpatient.inputName!'NA'}" root="2.16.156.10011.1.7"/>
       <!--建档者姓名-->
       <assignedPerson>
         <name>${emrBasicpatient.inputName!'NA'}</name>

@@ -52,7 +52,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${hours24AdmissionDeathRecord.inpDate!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${hours24AdmissionDeathRecord.receiveDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${hours24AdmissionDeathRecord.receiveDoctorSign!'NA'}</name>
       </assignedPerson>
@@ -84,7 +84,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${hours24AdmissionDeathRecord.archiaterDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主任医师"/>
       <assignedPerson>
         <name>${hours24AdmissionDeathRecord.archiaterDoctorSign!'NA'}</name>
@@ -96,7 +96,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${hours24AdmissionDeathRecord.receiveDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="接诊医师"/>
       <assignedPerson>
         <name>${hours24AdmissionDeathRecord.receiveDoctorSign!'NA'}</name>
@@ -108,7 +108,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${hours24AdmissionDeathRecord.inpDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="住院医师"/>
       <assignedPerson>
         <name>${hours24AdmissionDeathRecord.inpDoctorSign!'NA'}</name>
@@ -120,7 +120,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${hours24AdmissionDeathRecord.physicianDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主治医师"/>
       <assignedPerson>
         <name>${hours24AdmissionDeathRecord.physicianDoctorSign!'NA'}</name>

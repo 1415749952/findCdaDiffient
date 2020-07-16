@@ -35,7 +35,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${dischargeRecord.signDatatime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${dischargeRecord.archiaterDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${dischargeRecord.archiaterDoctorSign!'NA'}</name>
       </assignedPerson>
@@ -55,7 +55,7 @@
     <time value="${dischargeRecord.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id root="2.16.156.10011.1.4" extension="NA"/>
+      <id root="2.16.156.10011.1.4" extension="${dischargeRecord.archiaterDoctorSign!'NA'}"/>
       <code displayName="主任医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${dischargeRecord.archiaterDoctorSign!'NA'}</name>
@@ -67,7 +67,7 @@
     <time value="${dischargeRecord.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id root="2.16.156.10011.1.4" extension="NA"/>
+      <id root="2.16.156.10011.1.4" extension="${dischargeRecord.physicianDoctorSign!'NA'}"/>
       <code displayName="主治医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${dischargeRecord.physicianDoctorSign!'NA'}</name>
@@ -79,7 +79,7 @@
     <time value="${dischargeRecord.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id root="2.16.156.10011.1.4" extension="NA"/>
+      <id root="2.16.156.10011.1.4" extension="${dischargeRecord.inpDoctorSign!'NA'}"/>
       <code displayName="住院医师"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${dischargeRecord.inpDoctorSign!'NA'}</name>

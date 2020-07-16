@@ -38,7 +38,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${superiorDoctorWardround.wardroundsDatatime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${superiorDoctorWardround.physicianDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${superiorDoctorWardround.physicianDoctorSign!'NA'}</name>
       </assignedPerson>
@@ -59,7 +59,7 @@
     <time value="${superiorDoctorWardround.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${superiorDoctorWardround.archiaterDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主任医师签名"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${superiorDoctorWardround.archiaterDoctorSign!'NA'}</name>
@@ -72,7 +72,7 @@
     <time value="${superiorDoctorWardround.signDatatime!'NA'}" xsi:type="TS"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${superiorDoctorWardround.recordSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="记录人签名"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${superiorDoctorWardround.recordSign!'NA'}</name>
@@ -84,7 +84,7 @@
     <time value="${superiorDoctorWardround.signDatatime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${superiorDoctorWardround.physicianDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主治医师签名"/>
       <assignedPerson classCode="PSN" determinerCode="INSTANCE">
         <name>${superiorDoctorWardround.physicianDoctorSign!'NA'}</name>

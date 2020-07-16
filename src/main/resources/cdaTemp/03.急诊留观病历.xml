@@ -51,7 +51,7 @@
     <!-- 记录日期时间 -->
     <time value="${emergencyMedicalRecords.createDatetime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${emergencyMedicalRecords.adviceOpendoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <!-- 就诊医师 -->
       <assignedPerson>
         <name>${emergencyMedicalRecords.adviceOpendoctorSign!'NA'}</name>
@@ -72,7 +72,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${emergencyMedicalRecords.adviceOpendoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="责任医生"/>
       <assignedPerson>
         <name>${emergencyMedicalRecords.adviceOpendoctorSign!'NA'}</name>
@@ -325,7 +325,7 @@
                     <!--医嘱执行日期时间：DE06.00.222.00-->
                     <time value="${emergencyMedicalRecords.adviceExecDatetime!'NA'}"/>
                     <assignedEntity>
-                      <id extension="NA" root="2.16.156.10011.1.4"/>
+                      <id extension="${emergencyMedicalRecords.execPersonSign!'NA'}" root="2.16.156.10011.1.4"/>
                       <code/>
                       <!--医嘱执行者签名：DE02.01.039.00-->
                       <assignedPerson>
@@ -342,7 +342,7 @@
                     <!--医嘱开立日期时间：DE06.00.220.00-->
                     <time value="${emergencyMedicalRecords.adviceOpenDatetime!'NA'}"/>
                     <assignedAuthor>
-                      <id extension="NA" root="2.16.156.10011.1.4"/>
+                      <id extension="${emergencyMedicalRecords.adviceOpendoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
                       <!--医嘱开立者签名：DE02.01.039.00-->
                       <assignedPerson>
                         <name>${emergencyMedicalRecords.adviceOpendoctorSign!'NA'}</name>
@@ -358,7 +358,7 @@
                     <!--医嘱审核日期时间：DE09.00.088.00-->
                     <time value="${emergencyMedicalRecords.checkAdviceDatetime!'NA'}"/>
                     <participantRole classCode="ASSIGNED">
-                      <id extension="NA" root="2.16.156.10011.1.4"/>
+                      <id extension="${emergencyMedicalRecords.checkPersonSign!'NA'}" root="2.16.156.10011.1.4"/>
                       <!--角色-->
                       <code displayName="医嘱审核人"/>
                       <!--医嘱审核人签名：DE02.01.039.00-->
@@ -372,7 +372,7 @@
                     <!--医嘱取消日期时间：DE06.00.234.00-->
                     <time value="${emergencyMedicalRecords.cancelAdviceDatetime!'NA'}"/>
                     <participantRole classCode="ASSIGNED">
-                      <id extension="NA" root="2.16.156.10011.1.4"/>
+                      <id extension="${emergencyMedicalRecords.cancelPersonSign!'NA'}" root="2.16.156.10011.1.4"/>
                       <!--角色-->
                       <code displayName="医嘱取消人"/>
                       <!--取消医嘱者签名：DE02.01.039.00-->

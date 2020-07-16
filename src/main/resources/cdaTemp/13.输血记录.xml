@@ -41,7 +41,7 @@
   <author contextControlCode="OP" typeCode="AUT">
     <time value="${transfusionRecord.signDatetime!'NA'}"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${transfusionRecord.doctorNameSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${transfusionRecord.doctorNameSign!'NA'}</name>
       </assignedPerson>
@@ -62,7 +62,7 @@
     <time value="${transfusionRecord.signDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${transfusionRecord.doctorNameSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="医师"/>
       <assignedPerson>
         <name>${transfusionRecord.doctorNameSign!'NA'}</name>

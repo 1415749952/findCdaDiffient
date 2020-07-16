@@ -54,7 +54,7 @@
     <author contextControlCode="OP" typeCode="AUT">
     <time value="${admissionRecord.inpDate!'NA'}" xsi:type="TS"/>
     <assignedAuthor classCode="ASSIGNED">
-      <id extension="NA" root="2.16.156.10011.1.7"/>
+      <id extension="${admissionRecord.physicianDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
       <assignedPerson>
         <name>${admissionRecord.physicianDoctorSign!'NA'}</name>
       </assignedPerson>
@@ -63,7 +63,7 @@
   <!-- 病史陈述者 -->
   <informant>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.3"/>
+      <id extension="${admissionRecord.medicalhisName!'NA'}" root="2.16.156.10011.1.3"/>
       <#if admissionRecord.presenterPatientRelatCode??>
       <!--陈述者与患者的关系代码-->
       <code code="${admissionRecord.presenterPatientRelatCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.8" codeSystemName="家庭关系代码表(GB/T 4761)" displayName="<@dict_tag value="${admissionRecord.presenterPatientRelatCode!'NA'}" datasetCloumn="PRESENTER_PATIENT_RELAT_CODE">${dict.desc}</@dict_tag>"/>
@@ -88,7 +88,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${admissionRecord.archiaterDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主任医师"/>
       <assignedPerson>
         <name>${admissionRecord.archiaterDoctorSign!'NA'}</name>
@@ -100,7 +100,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${admissionRecord.receiveDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="接诊医师"/>
       <assignedPerson>
         <name>${admissionRecord.receiveDoctorSign!'NA'}</name>
@@ -112,7 +112,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${admissionRecord.inpDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="住院医师"/>
       <assignedPerson>
         <name>${admissionRecord.inpDoctorSign!'NA'}</name>
@@ -124,7 +124,7 @@
     <time/>
     <signatureCode/>
     <assignedEntity>
-      <id extension="NA" root="2.16.156.10011.1.4"/>
+      <id extension="${admissionRecord.physicianDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
       <code displayName="主治医师"/>
       <assignedPerson>
         <name>${admissionRecord.physicianDoctorSign!'NA'}</name>

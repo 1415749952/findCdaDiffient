@@ -401,6 +401,7 @@
           </entry>
         </section>
       </component>
+      <#if emergencyMedicalRecords.opertorCode??>
       <!-- 手术操作章节 -->
       <component>
         <section>
@@ -450,6 +451,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!-- 抢救记录章节 -->
       <component>
         <section>
@@ -460,8 +462,12 @@
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.181.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="急诊抢救记录"/>
               <effectiveTime>
+                <#if emergencyMedicalRecords.rescueBeginDatetime??>
                 <low value="${emergencyMedicalRecords.rescueBeginDatetime!'NA'}"/>
+                </#if>
+                <#if emergencyMedicalRecords.rescueEndDatetime??>
                 <high value="${emergencyMedicalRecords.rescueEndDatetime!'NA'}"/>
+                </#if>
               </effectiveTime>
               <value xsi:type="ST">${emergencyMedicalRecords.emergencyRescueRecord!'NA'}</value>
               <entryRelationship typeCode="COMP">

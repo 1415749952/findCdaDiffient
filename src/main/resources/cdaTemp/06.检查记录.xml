@@ -238,7 +238,7 @@
           </entry>
         </section>
       </component>
-      <#if inspectionRecord.operationName??>
+      <#if inspectionRecord.opertorCode??>
       <!-- 手术操作章节 -->
       <component>
         <section>

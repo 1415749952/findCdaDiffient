@@ -540,6 +540,7 @@
                   <value code="${admissionRecord.pdWestDiagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="<@dict_tag value="${admissionRecord.pdWestDiagCode!'NA'}" datasetCloumn="PD_WEST_DIAG_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
                 </observation>
               </entryRelationship>
+              <#if admissionRecord.inpAdmissionDiagnosisPicks??>
               <!--入院诊断顺位-->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
@@ -547,8 +548,10 @@
                   <value value="${admissionRecord.inpAdmissionDiagnosisPicks!'NA'}" xsi:type="INT"/>
                 </observation>
               </entryRelationship>
+              </#if>
             </observation>
           </entry>
+          <#if admissionRecord.tcmFourResults??>
           <!--中医“四诊”观察结果-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -556,6 +559,8 @@
               <value xsi:type="ST">${admissionRecord.tcmFourResults!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if admissionRecord.diseasesCode??>
           <!--初步诊断-中医条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -597,6 +602,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          </#if>
           <!--修正诊断-西医条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -726,6 +732,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          <#if admissionRecord.supplementaryDiagnosisCode??>
           <!--补充诊断-西医条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -751,6 +758,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--治疗计划章节-->

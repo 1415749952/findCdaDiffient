@@ -444,7 +444,6 @@
           <entry typeCode="COMP">
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.119.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="住院者疾病状态代码"/>
-              <!--（配置的常量）住院案例子集没有，住院者疾病状态代码这个数据元，这里取得是常量 9 字典含义为其他-->
               <value code="${inpatientMedicalRecord.diseaseStatusCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.100" codeSystemName="住院者疾病状态代码表" displayName="<@dict_tag value="${inpatientMedicalRecord.diseaseStatusCode!'NA'}" datasetCloumn="DISEASE_STATUS_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>

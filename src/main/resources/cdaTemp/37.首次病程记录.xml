@@ -206,6 +206,7 @@
               <value xsi:type="ST">${firstCourseRecord.identifyWmDiagname!'NA'}</value>
             </observation>
           </entry>
+          <#if firstCourseRecord.identifyTcmDiagname??>
           <entry>
             <observation classCode="OBS" moodCode="EVN ">
               <code code="DE05.10.172.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="鉴别诊断-中医病名名称">
@@ -216,6 +217,8 @@
               <value xsi:type="ST">${firstCourseRecord.identifyTcmDiagname!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if firstCourseRecord.identifyTcmSymptomname??>
           <entry>
             <observation classCode="OBS" moodCode="EVN ">
               <code code="DE05.10.172.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="鉴别诊断-中医症候名称">
@@ -226,6 +229,7 @@
               <value xsi:type="ST">${firstCourseRecord.identifyTcmSymptomname!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--治疗计划章节-->

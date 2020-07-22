@@ -201,6 +201,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          <#if hours24AdmissionDeathRecord.inhosDiagCmDisCode??>
           <!--入院诊断-中医条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -229,6 +230,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--治疗计划章节-->
@@ -294,6 +296,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          <#if hours24AdmissionDeathRecord.deathDiagCmDisCode??>
           <!--死亡诊断-中医条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -322,6 +325,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
     </structuredBody>

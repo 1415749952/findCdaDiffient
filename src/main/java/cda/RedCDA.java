@@ -26,20 +26,38 @@ public class RedCDA
         //不同操作系统显示不同的。windows上面代表/。macos和Linux代表\
         String separator = File.separator;
         String courseFile = directory.getCanonicalPath() + separator + "src" + separator + "main" + separator + "resources" + separator + "cdaTemp";//标准的路径 ;
+        //String courseFile ="G:\\cdaTemplate";
         File cadTempFile = new File(courseFile);
         //所有的cda文档名称
         String[] cdaFileNames = cadTempFile.list();
 
         for (String cdaFileName : cdaFileNames)
         {
-            File cad = new File(courseFile + separator + cdaFileName);
-            redCDAFile(cad);
+            File cda = new File(courseFile + separator + cdaFileName);
+           /* redCDAFileByLine(cda);*/
+            String s = redCDAFile(cda);
+            StringBuffer sql = new StringBuffer();
+            sql.append("update esb_cda_template set content = '");
+            sql.append(s);
+            sql.append("' ");
+            sql.append("where id = ");
+            String substring = cdaFileName.substring(0, 2);
+            Integer integer = Integer.valueOf(substring);
+            sql.append(String.valueOf(integer));
+            System.out.println(sql);
         }
         //redCDAFile(new File(courseFile+"\\"+"01.病历概要.xml"));
     }
 
+    public static String redCDAFile(File cdaFile) throws IOException
+    {
+        return FileUtils.readFileToString(cdaFile);
+    }
 
-    public static void redCDAFile(File cdaFile) throws IOException
+
+
+
+    public static void redCDAFileByLine(File cdaFile) throws IOException
     {
         System.out.println("******************" + cdaFile.getName() + "*****************************");
         List<String> list = FileUtils.readLines(cdaFile);

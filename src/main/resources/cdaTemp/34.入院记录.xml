@@ -540,7 +540,6 @@
                   <value code="${admissionRecord.pdWestDiagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="<@dict_tag value="${admissionRecord.pdWestDiagCode!'NA'}" datasetCloumn="PD_WEST_DIAG_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
                 </observation>
               </entryRelationship>
-              <#if admissionRecord.inpAdmissionDiagnosisPicks??>
               <!--入院诊断顺位-->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
@@ -548,7 +547,6 @@
                   <value value="${admissionRecord.inpAdmissionDiagnosisPicks!'NA'}" xsi:type="INT"/>
                 </observation>
               </entryRelationship>
-              </#if>
             </observation>
           </entry>
           <#if admissionRecord.tcmFourResults??>

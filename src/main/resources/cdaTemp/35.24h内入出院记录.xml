@@ -36,8 +36,8 @@
         <maritalStatusCode code="${h24AdmissionDischargeRecord.maritalStatusCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.5" codeSystemName="婚姻状况代码表(GB/T 2261.2)" displayName="<@dict_tag value="${h24AdmissionDischargeRecord.maritalStatusCode!'NA'}" datasetCloumn="MARITAL_STATUS_CODE">${dict.desc}</@dict_tag>"/>
         <#if h24AdmissionDischargeRecord.nation??>
         <ethnicGroupCode code="${h24AdmissionDischargeRecord.nation!'NA'}" codeSystem="2.16.156.10011.2.3.3.3" codeSystemName="民族类别代码表(GB 3304)" displayName="<@dict_tag value="${h24AdmissionDischargeRecord.nation!'NA'}" datasetCloumn="NATION">${dict.desc}</@dict_tag>"/>
-        <!-- 年龄 -->
         </#if>
+        <!-- 年龄 -->
         <#if h24AdmissionDischargeRecord.ageYear??>
         <age unit="岁" value="${h24AdmissionDischargeRecord.ageYear!'NA'}"/>
         <#else>
@@ -250,6 +250,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          <#if h24AdmissionDischargeRecord.inhosDiagCmDisCode??>
           <!--入院诊断-中医条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -278,6 +279,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--治疗计划章节-->
@@ -341,6 +343,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          <#if h24AdmissionDischargeRecord.outhosTcmDisCode??>
           <!--出院诊断-中医条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -369,6 +372,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--医嘱章节-->

@@ -212,6 +212,7 @@
             </observation>
           </entry>
           </#if>
+          <#if dischargeAbstract.inhosDiagCmSyndromeCode??>
           <!--HDSD00.16.034 DE05.10.130.00 入院诊断-中医证候代码 条目-->
           <entry typeCode="COMP">
             <observation classCode="OBS" moodCode="EVN">
@@ -219,6 +220,7 @@
               <value code="${dischargeAbstract.inhosDiagCmSyndromeCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD" displayName="<@dict_tag value="${dischargeAbstract.inhosDiagCmSyndromeCode!'NA'}" datasetCloumn="INHOS_DIAG_CM_SYNDROME_CODE">${dict.desc}</@dict_tag>"/>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--出院诊断章节-->

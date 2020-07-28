@@ -354,6 +354,7 @@
         <section>
           <code code="8716-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="VITAL SIGNS"/>
           <text/>
+          <#if inpatientMedicalRecord.newbornInpWeight??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE04.10.019.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="入院体重">
@@ -364,6 +365,8 @@
               <value unit="g" value="${inpatientMedicalRecord.newbornInpWeight!'NA'}" xsi:type="PQ"/>
             </observation>
           </entry>
+          </#if>
+          <#if inpatientMedicalRecord.newbornBirthWeight??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE04.10.019.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出生体重">
@@ -374,6 +377,7 @@
               <value unit="g" value="${inpatientMedicalRecord.newbornBirthWeight!'NA'}" xsi:type="PQ"/>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--诊断章节-->

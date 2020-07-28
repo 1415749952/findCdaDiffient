@@ -259,6 +259,7 @@
               <value code="${dischargeRecord.outpDiagnosisTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11.3" codeSystemName="ICD-10诊断编码表" displayName="<@dict_tag value="${dischargeRecord.outpDiagnosisTypeCode!'NA'}" datasetCloumn="OUTP_DIAGNOSIS_TYPE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
+          <#if dischargeRecord.outpDiagnosisCnName??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.172.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院诊断-中医病名名称">
@@ -269,6 +270,7 @@
               <value xsi:type="ST">${dischargeRecord.outpDiagnosisCnName!'NA'}</value>
             </observation>
           </entry>
+          </#if>
           <#if dischargeRecord.outhosTcmDisCode??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -281,6 +283,7 @@
             </observation>
           </entry>
           </#if>
+          <#if dischargeRecord.outpDiagnosisTcmName??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.172.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院诊断-中医证候名称">
@@ -291,6 +294,8 @@
               <value xsi:type="ST">${dischargeRecord.outpDiagnosisTcmName!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if dischargeRecord.outhosSyndromesDisCode??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院诊断-中医证候代码">
@@ -301,6 +306,7 @@
               <value code="${dischargeRecord.outhosSyndromesDisCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="<@dict_tag value="${dischargeRecord.outhosSyndromesDisCode!'NA'}" datasetCloumn="OUTHOS_SYNDROMES_DIS_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
+          </#if>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE04.01.117.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院时症状与体征"/>

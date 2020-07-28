@@ -164,6 +164,7 @@
               <value xsi:type="CD" code="${phaseSummary.inhosDiagWmDiagCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.256" codeSystemName="ICD-10" displayName="<@dict_tag value="${phaseSummary.inhosDiagWmDiagCode!'NA'}" datasetCloumn="INHOS_DIAG_WM_DIAG_CODE">${dict.desc}</@dict_tag>"/>
             </observation>
           </entry>
+          <#if phaseSummary.inhosDiagCmDisCode??>
           <!--入院诊断-中医病名代码-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -175,6 +176,8 @@
               <value code="${phaseSummary.inhosDiagCmDisCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD" displayName="<@dict_tag value="${phaseSummary.inhosDiagCmDisCode!'NA'}" datasetCloumn="INHOS_DIAG_CM_DIS_CODE">${dict.desc}</@dict_tag>"/>
             </observation>
           </entry>
+          </#if>
+          <#if phaseSummary.inhosDiagCmSyndromeCode??>
           <!--入院诊断-中医症候代码-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -186,6 +189,7 @@
               <value code="${phaseSummary.inhosDiagCmSyndromeCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD" displayName="<@dict_tag value="${phaseSummary.inhosDiagCmSyndromeCode!'NA'}" datasetCloumn="INHOS_DIAG_CM_SYNDROME_CODE">${dict.desc}</@dict_tag>"/>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--诊断章节-->
@@ -207,6 +211,7 @@
               <value code="${phaseSummary.currentlyWmDiagcode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" xsi:type="CD" displayName="<@dict_tag value="${phaseSummary.currentlyWmDiagcode!'NA'}" datasetCloumn="CURRENTLY_WM_DIAGCODE">${dict.desc}</@dict_tag>"/>
             </observation>
           </entry>
+          <#if phaseSummary.diseasesCode??>
           <!--目前诊断-中医病名代码-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -218,6 +223,8 @@
               <value code="${phaseSummary.diseasesCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD" displayName="<@dict_tag value="${phaseSummary.diseasesCode!'NA'}" datasetCloumn="DISEASES_CODE">${dict.desc}</@dict_tag>"/>
             </observation>
           </entry>
+          </#if>
+          <#if phaseSummary.syndromesCode??>
           <!--目前诊断-中医症候代码-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -229,6 +236,7 @@
               <value code="${phaseSummary.syndromesCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD" displayName="<@dict_tag value="${phaseSummary.syndromesCode!'NA'}" datasetCloumn="SYNDROMES_CODE">${dict.desc}</@dict_tag>"/>
             </observation>
           </entry>
+          </#if>
           <!--中医“四诊”观察结果-->
           <entry>
             <observation classCode="OBS" moodCode="EVN ">

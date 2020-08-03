@@ -48,7 +48,7 @@
       <telecom value="${inpatientMedicalRecord.currentPhone!'NA'}"/>
       <patient classCode="PSN" determinerCode="INSTANCE">
         <!--患者身份证号-->
-        <id extension="${inpatientMedicalRecord.identityNo!'NA'}" root="2.16.156.10011.1.3"/>
+        <id extension="${inpatientMedicalRecord.identityNo!'000000000000000000'}" root="2.16.156.10011.1.3"/>
         <!--患者姓名-->
         <name>${inpatientMedicalRecord.patientName!'NA'}</name>
         <!--患者性别-->
@@ -423,7 +423,7 @@
                       <name displayName="病理诊断名称"/>
                     </qualifier>
                   </code>
-                  <value xsi:type="ST">${inpatientMedicalRecord.diagResult!'NA'}</value>
+                  <value xsi:type="ST">${inpatientMedicalRecord.diagResult!'对症治疗'}</value>
                 </observation>
               </component>
               <component>
@@ -433,7 +433,7 @@
                       <name displayName="病理诊断代码"/>
                     </qualifier>
                   </code>
-                  <value xsi:type="CD" code="${inpatientMedicalRecord.pathologyDiagnosticCode!'NA'}" displayName="<@dict_tag value="${inpatientMedicalRecord.pathologyDiagnosticCode!'NA'}" datasetCloumn="PATHOLOGY_DIAGNOSTIC_CODE">${dict.desc}</@dict_tag>" codeSystemName="ICD-10" codeSystem="2.16.156.10011.2.3.3.11"/>
+                  <value xsi:type="CD" code="${inpatientMedicalRecord.pathologyDiagnosticCode!'Z51.901'}" displayName="<@dict_tag value="${inpatientMedicalRecord.pathologyDiagnosticCode!'Z51.901'}" datasetCloumn="PATHOLOGY_DIAGNOSTIC_CODE">${dict.desc}</@dict_tag>" codeSystemName="ICD-10" codeSystem="2.16.156.10011.2.3.3.11"/>
                 </observation>
               </component>
             </organizer>
@@ -705,10 +705,14 @@
           <entry>
             <!-- 1..1 手术记录 -->
             <procedure classCode="PROC" moodCode="EVN">
+              <#if inpatientMedicalRecord.operationCode??>
               <code code="${inpatientMedicalRecord.operationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.12" codeSystemName="手术(操作)代码表(ICD-9-CM)" displayName="<@dict_tag value="${inpatientMedicalRecord.operationCode!'NA'}" datasetCloumn="OPERATION_CODE">${dict.desc}</@dict_tag>"/>
+              </#if>
               <statusCode/>
               <!--手术操作开始日期/时间-->
+              <#if inpatientMedicalRecord.operationStartDatetime??>
               <effectiveTime value="${inpatientMedicalRecord.operationStartDatetime!'NA'}"/>
+              </#if>
               <!--手术者-->
               <performer>
                 <assignedEntity>
@@ -742,35 +746,45 @@
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE06.00.094.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术（操作）名称"/>
+                  <#if inpatientMedicalRecord.operationName??>
                   <value xsi:type="ST">${inpatientMedicalRecord.operationName!'NA'}</value>
+                  </#if>
                 </observation>
               </entryRelationship>
               <!--手术级别 -->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE06.00.255.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术级别"/>
+                  <#if inpatientMedicalRecord.operationLevelCode??>
                   <value code="${inpatientMedicalRecord.operationLevelCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.258" codeSystemName="手术级别代码表" xsi:type="CD" displayName="<@dict_tag value="${inpatientMedicalRecord.operationLevelCode!'NA'}" datasetCloumn="OPERATION_LEVEL_CODE">${dict.desc}</@dict_tag>"/>
+                  </#if>
                 </observation>
               </entryRelationship>
               <!--手术切口类别 -->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE06.00.257.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术切口类别代码"/>
+                  <#if inpatientMedicalRecord.operationTypeCode??>
                   <value code="${inpatientMedicalRecord.operationTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.256" codeSystemName="手术切口类别代码表" xsi:type="CD" displayName="<@dict_tag value="${inpatientMedicalRecord.operationTypeCode!'NA'}" datasetCloumn="OPERATION_TYPE_CODE">${dict.desc}</@dict_tag>"/>
+                  </#if>
                 </observation>
               </entryRelationship>
               <!--手术切口愈合等级-->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE05.10.147.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术切口愈合等级"/>
+                  <#if inpatientMedicalRecord.operatIncisHealTypeCode??>
                   <value code="${inpatientMedicalRecord.operatIncisHealTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.257" codeSystemName="手术切口愈合等级代码表" displayName="<@dict_tag value="${inpatientMedicalRecord.operatIncisHealTypeCode!'NA'}" datasetCloumn="OPERAT_INCIS_HEAL_TYPE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+                  </#if>
                 </observation>
               </entryRelationship>
               <!--麻醉方式代码-->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE06.00.073.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="麻醉方式代码"/>
+                  <#if inpatientMedicalRecord.anesthesiaMethodCode??>
                   <value code="${inpatientMedicalRecord.anesthesiaMethodCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.159" codeSystemName="麻醉方法代码表" xsi:type="CD" displayName="<@dict_tag value="${inpatientMedicalRecord.anesthesiaMethodCode!'NA'}" datasetCloumn="ANESTHESIA_METHOD_CODE">${dict.desc}</@dict_tag>"/>
+                  </#if>
                   <performer>
                     <assignedEntity>
                       <id extension="${inpatientMedicalRecord.anesthesiaDoctorSignature!'NA'}" root="2.16.156.10011.1.4"/>

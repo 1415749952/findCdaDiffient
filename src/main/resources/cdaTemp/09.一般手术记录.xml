@@ -25,7 +25,7 @@
       <id extension="${generalOperationRecords.electronicApplyNo!'NA'}" root="2.16.156.10011.1.24"/>
       <patient classCode="PSN" determinerCode="INSTANCE">
         <!--患者身份证号标识-->
-        <id extension="${emrBasicpatient.identityNo!'NA'}" root="2.16.156.10011.1.3"/>
+        <id extension="${emrBasicpatient.identityNo!'000000000000000000'}" root="2.16.156.10011.1.3"/>
         <name>${generalOperationRecords.patientName!'NA'}</name>
         <administrativeGenderCode code="${generalOperationRecords.patientSex!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${generalOperationRecords.patientSex!'NA'}" datasetCloumn="PATIENT_SEX">${dict.desc}</@dict_tag>"/>
         <!-- 年龄 -->

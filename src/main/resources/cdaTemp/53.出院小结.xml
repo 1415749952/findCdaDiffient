@@ -37,7 +37,7 @@
       <telecom value="${dischargeAbstract.patientPhone!'NA'}"/>
       <patient classCode="PSN" determinerCode="INSTANCE">
         <!--患者身份证号标识-->
-        <id extension="${emrBasicpatient.identityNo!'NA'}" root="2.16.156.10011.1.3"/>
+        <id extension="${emrBasicpatient.identityNo!'000000000000000000'}" root="2.16.156.10011.1.3"/>
         <!--HDSD00.16.019 DE02.01.039.00 患者姓名 -->
         <name>${dischargeAbstract.patientName!'NA'}</name>
         <!--HDSD00.16.041 DE02.01.040.00 性别代码-->
@@ -285,11 +285,15 @@
           <entry>
             <!-- 手术记录 -->
             <procedure classCode="PROC" moodCode="EVN">
-              <code code="${dischargeAbstract.operationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.12" codeSystemName="手术(操作)代码表(ICD-9-CM)" displayName="<@dict_tag value="${dischargeAbstract.operationCode!'NA'}" datasetCloumn="OPERATION_CODE">${dict.desc}</@dict_tag>"/>
+              <code code="${dischargeAbstract.operationCode!'未进行手术'}" codeSystem="2.16.156.10011.2.3.3.12" codeSystemName="手术(操作)代码表(ICD-9-CM)" displayName="<@dict_tag value="${dischargeAbstract.operationCode!'NA'}" datasetCloumn="OPERATION_CODE">${dict.desc}</@dict_tag>"/>
               <statusCode/>
               <!--手术及操作编码、操作日期/时间-->
               <!--HDSD00.16.039 DE06.00.221.00 手术及操作开始日期时间 -->
+              <#if dischargeAbstract.intentOperateDatetime??>
               <effectiveTime value="${dischargeAbstract.intentOperateDatetime!'NA'}"/>
+              <#else>
+              <effectiveTime/>
+              </#if>
               <!--HDSD00.16.040 DE06.00.257.00 手术切口类别代码 -->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">

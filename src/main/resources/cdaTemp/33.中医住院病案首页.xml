@@ -48,7 +48,7 @@
       <telecom value="${cnInpatientMedicalRecord.currentPhone!'NA'}"/>
       <patient classCode="PSN" determinerCode="INSTANCE">
         <!--患者身份证号-->
-        <id extension="${cnInpatientMedicalRecord.identityNo!'NA'}" root="2.16.156.10011.1.3"/>
+        <id extension="${cnInpatientMedicalRecord.identityNo!'000000000000000000'}" root="2.16.156.10011.1.3"/>
         <!--患者姓名-->
         <name>${cnInpatientMedicalRecord.patientName!'NA'}</name>
         <!--患者性别-->

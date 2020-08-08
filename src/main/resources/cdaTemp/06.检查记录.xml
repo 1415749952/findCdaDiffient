@@ -214,7 +214,11 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE04.01.119.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="主诉"/>
+              <#if inspectionRecord.chiefComplaint??>
+              <value xsi:type="ST">${inspectionRecord.chiefComplaint? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
               <value xsi:type="ST">${inspectionRecord.chiefComplaint!'NA'}</value>
+            </#if>
             </observation>
           </entry>
         </section>
@@ -233,7 +237,11 @@
                 <low value="${inspectionRecord.startSymptomsDate!'NA'}"/>
                 <high value="${inspectionRecord.stopSymptomsDate!'NA'}"/>
               </effectiveTime>
+              <#if inspectionRecord.symptomDesc??>
+              <value xsi:type="ST">${inspectionRecord.symptomDesc? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
               <value xsi:type="ST">${inspectionRecord.symptomDesc!'NA'}</value>
+            </#if>
             </observation>
           </entry>
         </section>
@@ -404,7 +412,11 @@
           <entry typeCode="COMP">
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.296.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="诊疗过程描述"/>
+              <#if inspectionRecord.diagDesc??>
+              <value xsi:type="ST">${inspectionRecord.diagDesc? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
               <value xsi:type="ST">${inspectionRecord.diagDesc!'NA'}</value>
+            </#if>
             </observation>
           </entry>
         </section>
@@ -418,7 +430,11 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE04.50.131.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="检查报告结果-客观所见"/>
+              <#if inspectionRecord.objectiveExaminationResult??>
+              <value xsi:type="ST">${inspectionRecord.objectiveExaminationResult? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
               <value xsi:type="ST">${inspectionRecord.objectiveExaminationResult!'NA'}</value>
+            </#if>
             </observation>
           </entry>
           </#if>
@@ -426,7 +442,11 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE04.50.132.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="检查报告结果-主观提示"/>
+              <#if inspectionRecord.subjectiveExaminationResult??>
+              <value xsi:type="ST">${inspectionRecord.subjectiveExaminationResult? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
               <value xsi:type="ST">${inspectionRecord.subjectiveExaminationResult!'NA'}</value>
+              </#if>
             </observation>
           </entry>
           </#if>

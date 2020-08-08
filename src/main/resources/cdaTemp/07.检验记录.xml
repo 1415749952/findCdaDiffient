@@ -264,7 +264,7 @@
                   </entryRelationship>
                 </observation>
               </component>
-              </#if> 
+              </#if>
             </organizer>
           </entry>
         </section>
@@ -277,7 +277,11 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE04.50.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="检验报告结果"/>
+              <#if surveyRecord.inspectionReportResult??>
+              <value xsi:type="ST">${surveyRecord.inspectionReportResult? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
               <value xsi:type="ST">${surveyRecord.inspectionReportResult!'NA'}</value>
+              </#if>
             </observation>
           </entry>
           <entry>

@@ -316,12 +316,14 @@
                   <value xsi:type="TS" value="${emrHealthevents.inpDatetime!'NA'}"/>
                 </observation>
               </component>
+              <#if emrHealthevents.dishospitalDatetime??>
               <component>
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE06.00.017.00" displayName="出院日期时间" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录"/>
                   <value xsi:type="TS" value="${emrHealthevents.dishospitalDatetime!'NA'}"/>
                 </observation>
               </component>
+            </#if>
             </organizer>
           </entry>
           <entry>

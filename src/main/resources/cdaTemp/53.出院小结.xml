@@ -264,14 +264,22 @@
           <entry typeCode="COMP">
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE04.01.117.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院时症状与体征"/>
+              <#if dischargeAbstract.dishospitalSigns??>
+              <value xsi:type="ST">${dischargeAbstract.dishospitalSigns? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
               <value xsi:type="ST">${dischargeAbstract.dishospitalSigns!'NA'}</value>
+              </#if>
             </observation>
           </entry>
           <!--HDSD00.16.004 DE06.00.193.00 出院情况 条目 -->
           <entry typeCode="COMP">
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.193.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院情况"/>
+              <#if dischargeAbstract.dishospitalSituation??>
+              <value xsi:type="ST">${dischargeAbstract.dishospitalSituation? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
               <value xsi:type="ST">${dischargeAbstract.dishospitalSituation!'NA'}</value>
+              </#if>
             </observation>
           </entry>
         </section>
@@ -347,7 +355,11 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.296.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="诊疗过程描述"/>
+              <#if dischargeAbstract.diagTreatDesc??>
+              <value xsi:type="ST">${dischargeAbstract.diagTreatDesc? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
               <value xsi:type="ST">${dischargeAbstract.diagTreatDesc!'NA'}</value>
+              </#if>
             </observation>
           </entry>
           <!--治疗结果代码-->

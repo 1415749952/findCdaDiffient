@@ -7,7 +7,7 @@
   <!-- 文档流水号 -->
   <id extension="${docInfo.docId}" root="2.16.156.10011.1.1"/>
   <code code="C0016" codeSystem="2.16.156.10011.2.4" codeSystemName="卫生信息共享文档规范编码体系"/>
-  <title>宫剖产记录</title>
+  <title>剖宫产记录</title>
   <!-- 文档机器生成时间 -->
   <effectiveTime value="${docInfo.effectiveTime}"/>
   <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality" displayName="正常访问保密级别"/>

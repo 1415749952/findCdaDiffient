@@ -158,7 +158,11 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.181.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="查房记录"/>
+              <#if superiorDoctorWardround.wardroundRecord??>
+              <value xsi:type="ST">${superiorDoctorWardround.wardroundRecord? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
               <value xsi:type="ST">${superiorDoctorWardround.wardroundRecord!'NA'}</value>
+              </#if>
             </observation>
           </entry>
         </section>

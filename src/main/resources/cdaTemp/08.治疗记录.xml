@@ -199,7 +199,11 @@
           <entry>
             <observation classCode="OBS" moodCode="INT">
               <code code="DE06.00.179.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="医嘱使用备注"/>
+              <#if treatmentRecord.adviceRemakr??>
+              <value xsi:type="ST">${treatmentRecord.adviceRemakr? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
               <value xsi:type="ST">${treatmentRecord.adviceRemakr!'NA'}</value>
+            </#if>
             </observation>
           </entry>
           <!--今后治疗方案-->

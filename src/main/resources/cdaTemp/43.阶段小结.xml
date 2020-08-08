@@ -304,7 +304,11 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.296.00" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="卫生信息数据元目录" displayName="诊疗过程描述"/>
+              <#if phaseSummary.diagDesc??>
+              <value xsi:type="ST">${phaseSummary.diagDesc? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
               <value xsi:type="ST">${phaseSummary.diagDesc!'NA'}</value>
+              </#if>
             </observation>
           </entry>
         </section>

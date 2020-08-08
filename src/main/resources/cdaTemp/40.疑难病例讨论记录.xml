@@ -183,7 +183,11 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN ">
               <code code="DE06.00.018.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="讨论意见"/>
+              <#if intractableDiscussRecord.discussSuggestion??>
+              <value xsi:type="ST">${intractableDiscussRecord.discussSuggestion? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
               <value xsi:type="ST">${intractableDiscussRecord.discussSuggestion!'NA'}</value>
+              </#if>
             </observation>
           </entry>
           <entry>

@@ -155,7 +155,11 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN ">
               <code code="DE05.10.133.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="病例特点"/>
+              <#if firstCourseRecord.recordFeature??>
+              <value xsi:type="ST">${firstCourseRecord.recordFeature? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
               <value xsi:type="ST">${firstCourseRecord.recordFeature!'NA'}</value>
+              </#if>
             </observation>
           </entry>
           <entry>

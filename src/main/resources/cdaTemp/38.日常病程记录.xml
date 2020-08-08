@@ -135,7 +135,11 @@
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.309.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="住院病程"/>
+              <#if dailyCourseRecord.inpCourse??>
+              <value xsi:type="ST">${dailyCourseRecord.inpCourse? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
               <value xsi:type="ST">${dailyCourseRecord.inpCourse!'NA'}</value>
+              </#if>
             </observation>
           </entry>
         </section>

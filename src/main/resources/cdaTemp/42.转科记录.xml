@@ -31,7 +31,7 @@
         <#else>
         <age unit="月" value="${transferenceRecord.patientMonth!'NA'}"/>
         </#if>
-    </patient>
+      </patient>
     </patientRole>
   </recordTarget>
   <!-- 文档创作者 -->

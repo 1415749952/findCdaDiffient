@@ -18,7 +18,7 @@
     <patientRole classCode="PAT">
       <!--住院号：DE01.00.014.00 @@@参照OID分配表修改 -->
       <id extension="${hospitalizationOrder.inpNo!'NA'}" root="2.16.156.10011.1.12"/>
-      <telecom value="${emrBasicpatient.contactPhone!'NA'}"/>
+      <telecom value="<@privacy_tag value="${emrBasicpatient.contactPhone!'NA'}" privacyId="5">${privacy}</@privacy_tag>"/>
       <patient classCode="PSN" determinerCode="INSTANCE">
         <!--患者身份证号标识-->
         <id extension="${emrBasicpatient.identityNo!'000000000000000000'}" root="2.16.156.10011.1.3"/>

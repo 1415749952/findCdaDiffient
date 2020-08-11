@@ -31,7 +31,7 @@
       <patientType>
         <patienttypeCode code="${surveyRecord.visitTypeNo!'NA'}" codeSystem="2.16.156.10011.2.3.1.271" codeSystemName="患者类型代码表" displayName="<@dict_tag value="${surveyRecord.visitTypeNo!'NA'}" datasetCloumn="VISIT_TYPE_NO">${dict.desc}</@dict_tag>"/>
       </patientType>
-      <telecom value="${surveyRecord.patientPhone!'NA'}"/>
+      <telecom value="<@privacy_tag value="${surveyRecord.patientPhone!'NA'}" privacyId="5">${privacy}</@privacy_tag>"/>
       <patient classCode="PSN" determinerCode="INSTANCE">
         <!--患者身份证号标识-->
         <id extension="${emrBasicpatient.identityNo!'000000000000000000'}" root="2.16.156.10011.1.3"/>

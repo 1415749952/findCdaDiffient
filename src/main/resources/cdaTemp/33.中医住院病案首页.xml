@@ -45,7 +45,7 @@
         </#if>
       </addr>
       <!--电话号码-->
-      <telecom value="${cnInpatientMedicalRecord.currentPhone!'NA'}"/>
+      <telecom value="<@privacy_tag value="${cnInpatientMedicalRecord.currentPhone!'NA'}" privacyId="5">${privacy}</@privacy_tag>"/>
       <patient classCode="PSN" determinerCode="INSTANCE">
         <!--患者身份证号-->
         <id extension="${cnInpatientMedicalRecord.identityNo!'000000000000000000'}" root="2.16.156.10011.1.3"/>

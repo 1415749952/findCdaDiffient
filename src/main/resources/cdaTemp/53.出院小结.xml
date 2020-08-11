@@ -34,7 +34,7 @@
         </#if>
       </addr>
       <!--HDSD00.16.018 DE02.01.010.00 患者电话号码-->
-      <telecom value="${dischargeAbstract.patientPhone!'NA'}"/>
+      <telecom value="<@privacy_tag value="${dischargeAbstract.patientPhone!'NA'}" privacyId="5">${privacy}</@privacy_tag>"/>
       <patient classCode="PSN" determinerCode="INSTANCE">
         <!--患者身份证号标识-->
         <id extension="${emrBasicpatient.identityNo!'000000000000000000'}" root="2.16.156.10011.1.3"/>

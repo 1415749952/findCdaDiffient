@@ -20,7 +20,6 @@
       <id extension="${emergencyMedicalRecords.outpNo!'NA'}" root="2.16.156.10011.1.11"/>
       <!--电子申请单编号-->
       <id extension="${emergencyMedicalRecords.applyNo!'NA'}" root="2.16.156.10011.1.24"/>
-      <telecom value="${hospitalInfo.organNumber!'NA'}"/>
       <patient classCode="PSN" determinerCode="INSTANCE">
         <!--患者身份证号标识-->
         <id extension="${emrBasicpatient.identityNo!'000000000000000000'}" root="2.16.156.10011.1.3"/>

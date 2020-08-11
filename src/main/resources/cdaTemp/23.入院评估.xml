@@ -23,7 +23,7 @@
       <id extension="${admissionAssessment.inpNo!'NA'}" root="2.16.156.10011.1.12"/>
       <!-- HDSD00.09.027 DE02.01.010.00 患者电话号码 -->
       <!-- 移动电话 -->
-      <telecom use="MP" value="${admissionAssessment.patientPhone!'NA'}"/>
+      <telecom use="MP" value="<@privacy_tag value="${admissionAssessment.patientPhone!'NA'}" privacyId="5">${privacy}</@privacy_tag>"/>
       <!--HDSD00.09.013 DE02.01.010.00 工作单位电话号码-->
       <telecom use="WP" value="${admissionAssessment.workPhone!'NA'}"/>
       <!-- HDSD00.09.028 DE02.01.012.00 患者电子邮件地址 -->

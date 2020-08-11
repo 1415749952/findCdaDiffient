@@ -30,12 +30,13 @@ public class RedCDA
         File cadTempFile = new File(courseFile);
         //所有的cda文档名称
         String[] cdaFileNames = cadTempFile.list();
-
+        HashSet<String> strings = new HashSet<>();
         for (String cdaFileName : cdaFileNames)
         {
             File cda = new File(courseFile + separator + cdaFileName);
-           /* redCDAFileByLine(cda);*/
-            String s = redCDAFile(cda);
+            String s = redCDAFileByLine(cda);
+            strings.add(s);
+            /*String s = redCDAFile(cda);
             StringBuffer sql = new StringBuffer();
             sql.append("update esb_cda_template set content = '");
             sql.append(s);
@@ -44,7 +45,12 @@ public class RedCDA
             String substring = cdaFileName.substring(0, 2);
             Integer integer = Integer.valueOf(substring);
             sql.append(String.valueOf(integer));
-            System.out.println(sql);
+            System.out.println(sql);*/
+        }
+        System.out.println(strings.size());
+        for (String string : strings)
+        {
+            System.out.println(string);
         }
         //redCDAFile(new File(courseFile+"\\"+"01.病历概要.xml"));
     }
@@ -57,8 +63,9 @@ public class RedCDA
 
 
 
-    public static void redCDAFileByLine(File cdaFile) throws IOException
+    public static String redCDAFileByLine(File cdaFile) throws IOException
     {
+        String ch = "";
         System.out.println("******************" + cdaFile.getName() + "*****************************");
         List<String> list = FileUtils.readLines(cdaFile);
         for (String s : list)
@@ -142,10 +149,17 @@ public class RedCDA
                     System.out.println(s);
                 }
             }*/
-            if (s.contains("extension=\"NA\""))
+           /* if (s.contains("extension=\"NA\""))
             {
                 System.out.println(s);
+            }*/
+            if (s.contains("<name><@privacy_tag"))
+            {
+                //System.out.println(s);
+                ch = s;
+                break;
             }
         }
+        return ch;
     }
 }

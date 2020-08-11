@@ -31,7 +31,7 @@
       <patient classCode="PSN" determinerCode="INSTANCE">
         <!--患者身份证号-->
         <id extension="${emrBasicpatient.identityNo!'000000000000000000'}" root="2.16.156.10011.1.3"/>
-        <name>${hours24AdmissionDeathRecord.patientName!'NA'}</name>
+        <name><@privacy_tag value="${hours24AdmissionDeathRecord.patientName!'NA'}" privacyId="2">${privacy}</@privacy_tag></name>
         <administrativeGenderCode code="${hours24AdmissionDeathRecord.patientSex!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${hours24AdmissionDeathRecord.patientSex!'NA'}" datasetCloumn="PATIENT_SEX">${dict.desc}</@dict_tag>"/>
         <maritalStatusCode code="${hours24AdmissionDeathRecord.maritalStatusCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.5" codeSystemName="婚姻状况代码表(GB/T 2261.2)" displayName="<@dict_tag value="${hours24AdmissionDeathRecord.maritalStatusCode!'NA'}" datasetCloumn="MARITAL_STATUS_CODE">${dict.desc}</@dict_tag>"/>
         <ethnicGroupCode code="${hours24AdmissionDeathRecord.nation!'NA'}" codeSystem="2.16.156.10011.2.3.3.3" codeSystemName="民族类别代码表(GB 3304)" displayName="<@dict_tag value="${hours24AdmissionDeathRecord.nation!'NA'}" datasetCloumn="NATION">${dict.desc}</@dict_tag>"/>

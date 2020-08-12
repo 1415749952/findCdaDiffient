@@ -25,7 +25,7 @@
       <id extension="${operationInformedConsent.informedConsentNo!'NA'}" root="2.16.156.10011.1.34"/>
       <patient>
         <!--患者身份证号标识-->
-        <id extension="${emrBasicpatient.identityNo!'000000000000000000'}" root="2.16.156.10011.1.3"/>
+        <id extension="${emrBasicpatient.identityNo!'NA'}" root="2.16.156.10011.1.3"/>
         <name>${operationInformedConsent.patientName!'NA'}</name>
         <!--性别-->
         <administrativeGenderCode code="${operationInformedConsent.sexCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${operationInformedConsent.sexCode!'NA'}" datasetCloumn="SEX_CODE">${dict.desc}</@dict_tag>"/>

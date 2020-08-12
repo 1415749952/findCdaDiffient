@@ -20,7 +20,7 @@
       <id extension="${vbncRecord.inpNo!'NA'}" root="2.16.156.10011.1.12"/>
       <patient classCode="PSN" determinerCode="INSTANCE">
         <!--患者身份证号标识-->
-        <id extension="${emrBasicpatient.identityNo!'000000000000000000'}" root="2.16.156.10011.1.3"/>
+        <id extension="${emrBasicpatient.identityNo!'NA'}" root="2.16.156.10011.1.3"/>
         <name>${vbncRecord.patientName!'NA'}</name>
         <age unit="岁" value="${vbncRecord.ageYear!'NA'}"/>
       </patient>

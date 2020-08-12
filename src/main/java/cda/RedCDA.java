@@ -1,6 +1,7 @@
 package cda;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,8 +60,6 @@ public class RedCDA
     {
         return FileUtils.readFileToString(cdaFile);
     }
-
-
 
 
     public static String redCDAFileByLine(File cdaFile) throws IOException
@@ -153,13 +152,54 @@ public class RedCDA
             {
                 System.out.println(s);
             }*/
-            if (s.contains("<name><@privacy_tag"))
+            if (s.contains("${"))
             {
-                //System.out.println(s);
-                ch = s;
-                break;
+                if (s.contains("${"))
+                {
+                    if (s.contains("NA"))
+                    {
+                        System.out.println(s);
+                    }
+                }
+                //ch = s;
+                //break;
             }
         }
         return ch;
+    }
+
+    /**
+     * 查找一个字符在字符串中出现的次数
+     *
+     * @param findStr 查找的字符
+     * @param str 被查找的字符串
+     */
+    public static int find(String findStr, String str)
+    {
+        //存放每个字符的数组
+        String[] strs = new String[str.length()];
+        //计数该字符出现了多少次
+        int count = 0;
+        //先把字符串转换成数组
+        for (int i = 0; i < strs.length; i++)
+        {
+            strs[i] = str.substring(i, i + 1);
+        }
+        //挨个字符进行查找，查找到之后count++
+        for (int i = 0; i < strs.length; i++)
+        {
+            if (strs[i].equals(findStr))
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+    @Test
+    public void test()
+    {
+        int i = find("{", "<value code=\"${cnInpatientMedicalRecord.mrQualityCode!'NA'}\" codeSystem=\"2.16.156.10011.2.3.2.29\" codeSystemName=\"病案质量等级表\" displayName=\"<@dict_tag value=\"${cnInpatientMedicalRecord.mrQualityCode!'NA'}\" datasetCloumn=\"MR_QUALITY_CODE\">${dict.desc}</@dict_tag>\" xsi:type=\"CD\"/>\n" +
+                "                 ");
+        System.out.println(i);
     }
 }

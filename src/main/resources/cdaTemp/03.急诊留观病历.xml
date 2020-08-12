@@ -22,7 +22,7 @@
       <id extension="${emergencyMedicalRecords.applyNo!'NA'}" root="2.16.156.10011.1.24"/>
       <patient classCode="PSN" determinerCode="INSTANCE">
         <!--患者身份证号标识-->
-        <id extension="<@privacy_tag value="${emrBasicpatient.identityNo!'000000000000000000'}" privacyId="1">${privacy}</@privacy_tag>" root="2.16.156.10011.1.3"/>
+        <id extension="<@privacy_tag value="${emrBasicpatient.identityNo!'NA'}" privacyId="1">${privacy}</@privacy_tag>" root="2.16.156.10011.1.3"/>
         <name><@privacy_tag value="${emergencyMedicalRecords.patientName!'NA'}" privacyId="2">${privacy}</@privacy_tag></name>
         <administrativeGenderCode code="${emergencyMedicalRecords.patientSex!'NA'}" codeSystemName="生理性别代码表(GB/T 2261.1)" codeSystem="2.16.156.10011.2.3.3.4" displayName="<@dict_tag value="${emergencyMedicalRecords.patientSex!'NA'}" datasetCloumn="PATIENT_SEX">${dict.desc}</@dict_tag>"/>
         <birthTime value="${emergencyMedicalRecords.patientBirthday!'NA'}"/>

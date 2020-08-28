@@ -87,6 +87,7 @@
   </relatedDocument>
   <component>
     <structuredBody>
+      <#if (emergencyMedicalRecords.allergyHostoryFlag??) && (emergencyMedicalRecords.allergyHistory??)>
       <!-- 过敏史章节 -->
       <component>
         <section>
@@ -106,6 +107,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!-- 主诉章节 -->
       <component>
         <section>
@@ -273,6 +275,7 @@
           </entry>
         </section>
       </component>
+      <#if (emergencyMedicalRecords.dialecticalAccrod??) && (emergencyMedicalRecords.therapeuticPrinciple??)>
       <!-- 治疗计划章节 -->
       <component>
         <section>
@@ -294,6 +297,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--医嘱章节-->
       <component>
         <section>
@@ -451,6 +455,7 @@
         </section>
       </component>
       </#if>
+      <#if emergencyMedicalRecords.emergencyRescueRecord??>
       <!-- 抢救记录章节 -->
       <component>
         <section>
@@ -492,6 +497,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!-- 住院过程章节 -->
       <component>
         <section>

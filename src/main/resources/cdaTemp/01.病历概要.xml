@@ -113,10 +113,6 @@
         <postalCode>${emrBasicpatient.zipCode!'NA'}</postalCode>
         </#if>
       </addr>
-      <#if emrBasicpatient.currentPhone??>
-      <!--电话号码-->
-      <telecom use="H" value="<@privacy_tag value="${emrBasicpatient.currentPhone!'NA'}" privacyId="5">${privacy}</@privacy_tag>"/>
-      </#if>
       <!--联系人电话-->
       <telecom value="${emrBasicpatient.contactPhone!'NA'}"/>
       <associatedPerson classCode="PSN" determinerCode="INSTANCE">

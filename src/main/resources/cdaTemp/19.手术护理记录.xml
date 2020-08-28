@@ -89,7 +89,7 @@
   <!-- 交接护士签名 -->
   <authenticator>
     <!--签名日期时间：DE09.00.053.00 -->
-    <time value="${operationCareRecord.signDatetime!'NA'}"/>
+    <time value="${operationCareRecord.handoverDatetime!'NA'}"/>
     <signatureCode/>
     <assignedEntity>
       <id extension="${operationCareRecord.handoverNurseSign!'NA'}" root="2.16.156.10011.1.4"/>

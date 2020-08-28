@@ -423,7 +423,7 @@
                       <name displayName="病理诊断名称"/>
                     </qualifier>
                   </code>
-                  <value xsi:type="ST">${inpatientMedicalRecord.diagResult!'对症治疗'}</value>
+                  <value xsi:type="ST">${inpatientMedicalRecord.diagResult!'NA'}</value>
                 </observation>
               </component>
               <component>
@@ -433,7 +433,7 @@
                       <name displayName="病理诊断代码"/>
                     </qualifier>
                   </code>
-                  <value xsi:type="CD" code="${inpatientMedicalRecord.pathologyDiagnosticCode!'Z51.901'}" displayName="<@dict_tag value="${inpatientMedicalRecord.pathologyDiagnosticCode!'Z51.901'}" datasetCloumn="PATHOLOGY_DIAGNOSTIC_CODE">${dict.desc}</@dict_tag>" codeSystemName="ICD-10" codeSystem="2.16.156.10011.2.3.3.11"/>
+                  <value xsi:type="CD" code="${inpatientMedicalRecord.pathologyDiagnosticCode!'NA'}" displayName="<@dict_tag value="${inpatientMedicalRecord.pathologyDiagnosticCode!'NA'}" datasetCloumn="PATHOLOGY_DIAGNOSTIC_CODE">${dict.desc}</@dict_tag>" codeSystemName="ICD-10" codeSystem="2.16.156.10011.2.3.3.11"/>
                 </observation>
               </component>
             </organizer>
@@ -587,19 +587,6 @@
               </component>
             </organizer>
           </entry>
-          <!--离院方式-->
-          <entry typeCode="COMP">
-            <observation classCode="OBS" moodCode="EVN">
-              <code code="DE06.00.223.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="离院方式"/>
-              <value xsi:type="CD" code="${inpatientMedicalRecord.dishospitalDispositionCode!'NA'}" displayName="<@dict_tag value="${inpatientMedicalRecord.dishospitalDispositionCode!'NA'}" datasetCloumn="DISHOSPITAL_DISPOSITION_CODE">${dict.desc}</@dict_tag>" codeSystem="2.16.156.10011.2.3.1.265" codeSystemName="离院方式代码表"/>
-              <entryRelationship typeCode="COMP" negationInd="false">
-                <observation classCode="OBS" moodCode="EVN">
-                  <code code="DE08.10.013.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="拟接收医疗机构名称"/>
-                  <value xsi:type="ST">${inpatientMedicalRecord.receiveOrgName!'NA'}</value>
-                </observation>
-              </entryRelationship>
-            </observation>
-          </entry>
           <!--出院诊断-其他诊断条目-->
           <entry>
             <organizer classCode="CLUSTER" moodCode="EVN">
@@ -639,6 +626,19 @@
                 </observation>
               </component>
             </organizer>
+          </entry>
+          <!--离院方式-->
+          <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.223.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="离院方式"/>
+              <value xsi:type="CD" code="${inpatientMedicalRecord.dishospitalDispositionCode!'NA'}" displayName="<@dict_tag value="${inpatientMedicalRecord.dishospitalDispositionCode!'NA'}" datasetCloumn="DISHOSPITAL_DISPOSITION_CODE">${dict.desc}</@dict_tag>" codeSystem="2.16.156.10011.2.3.1.265" codeSystemName="离院方式代码表"/>
+              <entryRelationship typeCode="COMP" negationInd="false">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE08.10.013.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="拟接收医疗机构名称"/>
+                  <value xsi:type="ST">${inpatientMedicalRecord.receiveOrgName!'NA'}</value>
+                </observation>
+              </entryRelationship>
+            </observation>
           </entry>
         </section>
       </component>
@@ -697,6 +697,7 @@
           </entry>
         </section>
       </component>
+      <#if inpatientMedicalRecord.operationCode??>
       <!--手术操作章节-->
       <component>
         <section>
@@ -800,6 +801,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--住院史章节-->
       <component>
         <section>

@@ -3,6 +3,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,19 +16,18 @@ import java.util.List;
  */
 public class test1
 {
-    public static void main(String[] args) throws IOException
-    {
-        //create table expectant_record_bak as select * from  expectant_record
-        //truncate table expectant_record;
-        List<String> list = FileUtils.readLines(new File("D:\\q.txt"));
-        for (String s : list)
-        {
-            String[] split = s.split(",");
-            String sql = "create table "+split[0]+"_bak as select * from  "+split[0]+";";
-            String sql1 = "truncate table "+split[0]+";";
-            System.out.println(sql);
-            System.out.println(sql1);
-        }
+        public static void main(String[] args) {
+        int count = 0;
+        int index = 0;
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("请输入一个字符串：");
+        String string=scanner.nextLine();
+        System.out.println("请输入要查找的字符：");
+        String string2=scanner.nextLine();
+
+        System.out.println("字符："+string2+" 在字符："+string+" 中共出现了："+count+"次！");
+    }
+
 
 
 
@@ -55,5 +55,5 @@ public class test1
 //                System.out.println(sql);
 //            }
 //        }
-    }
+
 }

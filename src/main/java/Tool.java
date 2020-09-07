@@ -55,11 +55,52 @@ public class Tool
         return sb.toString();
     }
 
+    /**
+     *
+     * @param srcStr 被查找字符串
+     * @param findStr 查找字符串
+     * @return 查找字符串在被查找字符串出现的次数
+     */
+    public static int count2(String srcStr, String findStr)
+    {
+        int count = 0;
+        // 通过静态方法compile(String regex)方法来创建,将给定的正则表达式编译并赋予给Pattern类
+        Pattern pattern = Pattern.compile(findStr);
+        Matcher matcher = pattern.matcher(srcStr);
+        while (matcher.find())
+        {
+            count++;
+        }
+        return count;
+    }
+
+    /**
+     *
+     * @param srcStr 被查找字符串
+     * @param findStr 查找字符串
+     * @return 查找字符串在被查找字符串出现的次数
+     */
+    public static int count(String srcStr, String findStr)
+    {
+        int count = 0;
+        int index = 0;
+        while ((index = srcStr.indexOf(findStr, index)) != -1)
+        {
+            index = index + findStr.length();
+            count++;
+        }
+        return count;
+    }
+
+
     public static void main(String[] args)
     {
-        String lineToHump = lineToHump("f_parent_no_leader");
+        /*String lineToHump = lineToHump("f_parent_no_leader");
         System.out.println(lineToHump);// fParentNoLeader
         System.out.println(humpToLine(lineToHump));// f_parent_no_leader
-        System.out.println(humpToLine2(lineToHump));// f_parent_no_leader
+        System.out.println(humpToLine2(lineToHump));// f_parent_no_leader*/
+        int i = count("<value code=\"${cnInpatientMedicalRecord.mrQualityCode!'NA'}\" codeSystem=\"2.16.156.10011.2.3.2.29\" codeSystemName=\"病案质量等级表\" displayName=\"<@dict_tag value=\"${cnInpatientMedicalRecord.mrQualityCode!'NA'}\" datasetCloumn=\"MR_QUALITY_CODE\">${dict.desc}</@dict_tag>\" xsi:type=\"CD\"/>\n" +
+                "                 ","${cnInpatientMedicalRecord");
+        System.out.println(i);
     }
 }

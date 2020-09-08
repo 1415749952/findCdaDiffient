@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\sdschemas\CDA.xsd">
+  <realmCode code="CN"/>
+  <typeId extension="POCD_MT000040" root="2.16.840.1.113883.1.3"/>
+  <templateId root="2.16.156.10011.2.1.1.61"/>
+  <!-- 文档流水号 -->
+  <id extension="${docInfo.documentUniqueId}" root="2.16.156.10011.1.1"/>
+  <code code="C0041" codeSystem="2.16.156.10011.2.4" codeSystemName="卫生信息共享文档规范编码体系"/>
+  <title>交接班记录</title>
+  <!-- 文档机器生成时间 -->
+  <effectiveTime value="${docInfo.effectiveTime}"/>
+  <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality" displayName="正常访问保密级别"/>
+  <languageCode code="zh-CN"/>
+  <setId/>
+  <versionNumber/>
+  <!--文档记录对象（患者） [1..*] contextControlCode="OP"表示本信息可以被重载-->
+  <recordTarget contextControlCode="OP" typeCode="RCT">
+    <patientRole classCode="PAT">
+      <!--住院号标识-->
+      <id extension="${handoverRecord.inpNo!'NA'}" root="2.16.156.10011.1.12"/>
+      <patient classCode="PSN" determinerCode="INSTANCE">
+        <!--患者身份证号-->
+        <id extension="<@privacy_tag value="${emrBasicpatient.identityNo!'NA'}" privacyId="1">${privacy}</@privacy_tag>" root="2.16.156.10011.1.3"/>
+        <name><@privacy_tag value="${handoverRecord.patientName!'NA'}" privacyId="2">${privacy}</@privacy_tag></name>
+        <administrativeGenderCode code="${handoverRecord.sexCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${handoverRecord.sexCode!'NA'}" datasetCloumn="SEX_CODE">${dict.desc}</@dict_tag>"/>
+        <birthTime value="${emrBasicpatient.birthday!'NA'}"/>
+        <#if handoverRecord.ageYear??>
+        <age unit="岁" value="${handoverRecord.ageYear!'NA'}"/>
+        <#else>
+        <age unit="月" value="${handoverRecord.patientMonth!'NA'}"/>
+        </#if>
+      </patient>
+    </patientRole>
+  </recordTarget>
+  <!-- 文档创作者 -->
+  <author contextControlCode="OP" typeCode="AUT">
+    <time value="${handoverRecord.handoverDatatime!'NA'}"/>
+    <assignedAuthor classCode="ASSIGNED">
+      <id extension="${handoverRecord.handoverSign!'NA'}" root="2.16.156.10011.1.7"/>
+      <code displayName="文档创作者"/>
+      <assignedPerson>
+        <name>${handoverRecord.handoverSign!'NA'}</name>
+      </assignedPerson>
+    </assignedAuthor>
+  </author>
+  <!-- 保管机构 -->
+  <custodian typeCode="CST">
+    <assignedCustodian classCode="ASSIGNED">
+      <representedCustodianOrganization classCode="ORG" determinerCode="INSTANCE">
+        <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </representedCustodianOrganization>
+    </assignedCustodian>
+  </custodian>
+  <!--交班者-->
+  <authenticator>
+    <!--交班日期时间-->
+    <time value="${handoverRecord.handoverDatatime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="${handoverRecord.handoverSign!'NA'}" root="2.16.156.10011.1.4"/>
+      <code displayName="交班者"/>
+      <assignedPerson>
+        <name>${handoverRecord.handoverSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <!--接班者-->
+  <authenticator>
+    <!--接班日期时间-->
+    <time value="${handoverRecord.takeDatatime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="${handoverRecord.takeSign!'NA'}" root="2.16.156.10011.1.4"/>
+      <code displayName="接班者"/>
+      <assignedPerson>
+        <name>${handoverRecord.takeSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <relatedDocument typeCode="RPLC">
+    <parentDocument>
+      <id/>
+      <setId/>
+      <versionNumber/>
+    </parentDocument>
+  </relatedDocument>
+  <!-- 病床号、病房、病区、科室和医院的关联 -->
+  <componentOf>
+    <encompassingEncounter>
+      <code displayName="入院日期时间"/>
+      <!--入院日期时间-->
+      <effectiveTime value="${handoverRecord.inpDate!'NA'}"/>
+      <location>
+        <healthCareFacility>
+          <serviceProviderOrganization>
+            <asOrganizationPartOf classCode="PART">
+              <!-- DE01.00.026.00病床号 -->
+              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                <id extension="${handoverRecord.bedNo!'NA'}" root="2.16.156.10011.1.22"/>
+                <name>${handoverRecord.bedNo!'NA'}</name>
+                <asOrganizationPartOf classCode="PART">
+                  <!-- DE01.00.019.00病房号 -->
+                  <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                    <id extension="${handoverRecord.roomNo!'NA'}" root="2.16.156.10011.1.21"/>
+                    <name>${handoverRecord.roomNo!'NA'}</name>
+                    <asOrganizationPartOf classCode="PART">
+                      <!-- DE08.10.026.00科室名称 -->
+                      <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                        <id extension="${handoverRecord.deptName!'NA'}" root="2.16.156.10011.1.26"/>
+                        <name>${handoverRecord.deptName!'NA'}</name>
+                        <asOrganizationPartOf classCode="PART">
+                          <!-- DE08.10.054.00病区名称 -->
+                          <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                            <id extension="${handoverRecord.areaName!'NA'}" root="2.16.156.10011.1.27"/>
+                            <name>${handoverRecord.areaName!'NA'}</name>
+                            <asOrganizationPartOf classCode="PART">
+                              <!--医疗机构名称 -->
+                              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                                <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+                                <name>${hospitalInfo.organName!'NA'}</name>
+                              </wholeOrganization>
+                            </asOrganizationPartOf>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </wholeOrganization>
+                </asOrganizationPartOf>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </serviceProviderOrganization>
+        </healthCareFacility>
+      </location>
+    </encompassingEncounter>
+  </componentOf>
+  <component>
+    <structuredBody>
+      <!--主诉章节-->
+      <component>
+        <section>
+          <code code="10154-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="CHIEF COMPLAINT"/>
+          <text/>
+          <!-- 主诉-->
+          <entry contextConductionInd="true" typeCode="COMP">
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.01.119.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="主诉"/>
+              <value xsi:type="ST">${handoverRecord.chiefComplaint!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--入院诊断章节-->
+      <component>
+        <section>
+          <code code="46241-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HOSPITAL ADMISSION DX"/>
+          <text/>
+          <!--入院情况-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN ">
+              <code code="DE05.10.148.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="入院情况"/>
+              <value xsi:type="ST">${handoverRecord.inpSituation!'NA'}</value>
+            </observation>
+          </entry>
+          <!--入院诊断-西医诊断编码-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="入院诊断-西医诊断编码"/>
+              <value code="${handoverRecord.inhosDiagWmDiagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="<@dict_tag value="${handoverRecord.inhosDiagWmDiagCode!'NA'}" datasetCloumn="INHOS_DIAG_WM_DIAG_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+          <#if handoverRecord.inhosDiagCmDisCode??>
+          <!--入院诊断-中医病名代码-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.10.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="入院诊断-中医病名代码"/>
+              <value code="${handoverRecord.inhosDiagCmDisCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="<@dict_tag value="${handoverRecord.inhosDiagCmDisCode!'NA'}" datasetCloumn="INHOS_DIAG_CM_DIS_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+          </#if>
+          <#if handoverRecord.inhosDiagCmSyndromeCode??>
+          <!--入院诊断-中医证候代码-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.10.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="入院诊断-中医症候代码"/>
+              <value code="${handoverRecord.inhosDiagCmSyndromeCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="<@dict_tag value="${handoverRecord.inhosDiagCmSyndromeCode!'NA'}" datasetCloumn="INHOS_DIAG_CM_SYNDROME_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+          </#if>
+        </section>
+      </component>
+      <!--诊断章节-->
+      <component>
+        <section>
+          <code code="29548-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Diagnosis"/>
+          <text/>
+          <!--条目:目前情况-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN ">
+              <code code="DE06.00.184.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="目前情况"/>
+              <value xsi:type="ST">${handoverRecord.currentlySituation!'NA'}</value>
+            </observation>
+          </entry>
+          <!--目前诊断-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="目前诊断-西医诊断编码"/>
+              <value code="${handoverRecord.currentlyWmDiagcode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="<@dict_tag value="${handoverRecord.currentlyWmDiagcode!'NA'}" datasetCloumn="CURRENTLY_WM_DIAGCODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+          <#if handoverRecord.currentDiagCmDisName??>
+          <!--目前诊断-中医病名代码-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.10.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="目前诊断-中医病名代码"/>
+              <value code="${handoverRecord.currentDiagCmDisName!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="<@dict_tag value="${handoverRecord.currentDiagCmDisName!'NA'}" datasetCloumn="CURRENT_DIAG_CM_DIS_NAME">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+          </#if>
+          <#if handoverRecord.currentDiagCmSyndromeCode??>
+          <!--目前诊断-中医证候代码-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.10.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="目前诊断-中医症候代码"/>
+              <value code="${handoverRecord.currentDiagCmSyndromeCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="<@dict_tag value="${handoverRecord.currentDiagCmSyndromeCode!'NA'}" datasetCloumn="CURRENT_DIAG_CM_SYNDROME_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+          </#if>
+          <!--中医“四诊”观察结果-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN ">
+              <code code="DE02.10.028.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中医“四诊”观察结果"/>
+              <value xsi:type="ST">${handoverRecord.tcmFourResults!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--治疗计划章节-->
+      <component>
+        <section>
+          <code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="TREATMENT PLAN"/>
+          <text/>
+          <!--接班诊疗计划-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.298.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="接班诊疗计划"/>
+              <value xsi:type="ST">${handoverRecord.succAssessmentPlan!'NA'}</value>
+            </observation>
+          </entry>
+          <!--治则治法-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.300.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="治则治法"/>
+              <value xsi:type="ST">${handoverRecord.therapeuticPrinciple!'NA'}</value>
+            </observation>
+          </entry>
+          <!--注意事项-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN ">
+              <code code="DE09.00.119.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="注意事项"/>
+              <value xsi:type="ST">${handoverRecord.mattersNeedAttention!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--住院过程章节-->
+      <component>
+        <section>
+          <code code="8648-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Hospital Course"/>
+          <text/>
+          <!--诊疗过程描述-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.296.00" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="卫生信息数据元目录" displayName="诊疗过程描述"/>
+              <value xsi:type="ST">${handoverRecord.diagDesc!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+    </structuredBody>
+  </component>
+</ClinicalDocument>

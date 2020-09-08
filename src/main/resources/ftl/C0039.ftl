@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\sdschemas\CDA.xsd">
+  <realmCode code="CN"/>
+  <typeId extension="POCD_MT000040" root="2.16.840.1.113883.1.3"/>
+  <templateId root="2.16.156.10011.2.1.1.59"/>
+  <!-- 文档流水号 -->
+  <id extension="${docInfo.documentUniqueId}" root="2.16.156.10011.1.1"/>
+  <code code="C0039" codeSystem="2.16.156.10011.2.4" codeSystemName="卫生信息共享文档规范编码体系"/>
+  <title>上级医师查房记录</title>
+  <!-- 文档机器生成时间 -->
+  <effectiveTime value="${docInfo.effectiveTime}"/>
+  <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality" displayName="正常访问保密级别"/>
+  <languageCode code="zh-CN"/>
+  <setId/>
+  <versionNumber/>
+  <!--文档记录对象（患者） [1..*] contextControlCode="OP"表示本信息可以被重载-->
+  <recordTarget contextControlCode="OP" typeCode="RCT">
+    <patientRole classCode="PAT">
+      <!--住院号标识-->
+      <id extension="${superiorDoctorWardround.inpNo!'NA'}" root="2.16.156.10011.1.12"/>
+      <patient classCode="PSN" determinerCode="INSTANCE">
+        <!--患者身份证号标识-->
+        <id extension="<@privacy_tag value="${emrBasicpatient.identityNo!'NA'}" privacyId="1">${privacy}</@privacy_tag>" root="2.16.156.10011.1.3"/>
+        <!--患者姓名、性别、年龄-->
+        <name><@privacy_tag value="${superiorDoctorWardround.patientName!'NA'}" privacyId="2">${privacy}</@privacy_tag></name>
+        <administrativeGenderCode code="${superiorDoctorWardround.sexCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${superiorDoctorWardround.sexCode!'NA'}" datasetCloumn="SEX_CODE">${dict.desc}</@dict_tag>"/>
+        <birthTime value="${emrBasicpatient.birthday!'NA'}"/>
+        <#if superiorDoctorWardround.ageYear??>
+        <age unit="岁" value="${superiorDoctorWardround.ageYear!'NA'}"/>
+        <#else>
+        <age unit="月" value="${superiorDoctorWardround.patientMonth!'NA'}"/>
+        </#if>
+      </patient>
+    </patientRole>
+  </recordTarget>
+  <!-- 文档创作者 -->
+  <author contextControlCode="OP" typeCode="AUT">
+    <time value="${superiorDoctorWardround.wardroundsDatatime!'NA'}"/>
+    <assignedAuthor classCode="ASSIGNED">
+      <id extension="${superiorDoctorWardround.physicianDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
+      <assignedPerson>
+        <name>${superiorDoctorWardround.physicianDoctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedAuthor>
+  </author>
+  <!-- 保管机构 -->
+  <custodian typeCode="CST">
+    <assignedCustodian classCode="ASSIGNED">
+      <representedCustodianOrganization classCode="ORG" determinerCode="INSTANCE">
+        <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </representedCustodianOrganization>
+    </assignedCustodian>
+  </custodian>
+  <!-- 主任医师签名 -->
+  <legalAuthenticator>
+    <!--签名日期时间-->
+    <time value="${superiorDoctorWardround.signDatatime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="${superiorDoctorWardround.archiaterDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
+      <code displayName="主任医师签名"/>
+      <assignedPerson classCode="PSN" determinerCode="INSTANCE">
+        <name>${superiorDoctorWardround.archiaterDoctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </legalAuthenticator>
+  <!-- 记录人签名 -->
+  <authenticator>
+    <!--签名日期时间-->
+    <time value="${superiorDoctorWardround.signDatatime!'NA'}" xsi:type="TS"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="${superiorDoctorWardround.recordSign!'NA'}" root="2.16.156.10011.1.4"/>
+      <code displayName="记录人签名"/>
+      <assignedPerson classCode="PSN" determinerCode="INSTANCE">
+        <name>${superiorDoctorWardround.recordSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <!--主治医师 签名 -->
+  <authenticator>
+    <time value="${superiorDoctorWardround.signDatatime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="${superiorDoctorWardround.physicianDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
+      <code displayName="主治医师签名"/>
+      <assignedPerson classCode="PSN" determinerCode="INSTANCE">
+        <name>${superiorDoctorWardround.physicianDoctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <relatedDocument typeCode="RPLC">
+    <parentDocument>
+      <id/>
+      <setId/>
+      <versionNumber/>
+    </parentDocument>
+  </relatedDocument>
+  <!-- 病床号、病房、病区、科室和医院的关联 -->
+  <componentOf>
+    <encompassingEncounter>
+      <code displayName="查房日期时间"/>
+      <!-- 查房日期时间 -->
+      <effectiveTime value="${superiorDoctorWardround.wardroundsDatatime!'NA'}" xsi:type="IVL_TS"/>
+      <location>
+        <healthCareFacility>
+          <serviceProviderOrganization>
+            <asOrganizationPartOf classCode="PART">
+              <!-- DE01.00.026.00病床号 -->
+              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                <id extension="${superiorDoctorWardround.bedNo!'NA'}" root="2.16.156.10011.1.22"/>
+                <name>${superiorDoctorWardround.bedNo!'NA'}</name>
+                <asOrganizationPartOf classCode="PART">
+                  <!-- DE01.00.019.00病房号 -->
+                  <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                    <id extension="${superiorDoctorWardround.roomNo!'NA'}" root="2.16.156.10011.1.21"/>
+                    <name>${superiorDoctorWardround.roomNo!'NA'}</name>
+                    <asOrganizationPartOf classCode="PART">
+                      <!-- DE08.10.026.00科室名称 -->
+                      <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                        <id extension="${superiorDoctorWardround.deptName!'NA'}" root="2.16.156.10011.1.26"/>
+                        <name>${superiorDoctorWardround.deptName!'NA'}</name>
+                        <asOrganizationPartOf classCode="PART">
+                          <!-- DE08.10.054.00病区名称 -->
+                          <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                            <id extension="${superiorDoctorWardround.areaName!'NA'}" root="2.16.156.10011.1.27"/>
+                            <name>${superiorDoctorWardround.areaName!'NA'}</name>
+                            <asOrganizationPartOf classCode="PART">
+                              <!--医疗机构名称 -->
+                              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                                <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+                                <name>${hospitalInfo.organName!'NA'}</name>
+                              </wholeOrganization>
+                            </asOrganizationPartOf>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </wholeOrganization>
+                </asOrganizationPartOf>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </serviceProviderOrganization>
+        </healthCareFacility>
+      </location>
+    </encompassingEncounter>
+  </componentOf>
+  <component>
+    <structuredBody>
+      <!--健康评估章节-->
+      <component>
+        <section>
+          <code code="51848-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Assessment note"/>
+          <text/>
+          <!--条目：查房记录-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.181.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="查房记录"/>
+              <#if superiorDoctorWardround.wardroundRecord??>
+              <value xsi:type="ST">${superiorDoctorWardround.wardroundRecord? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
+              <value xsi:type="ST">${superiorDoctorWardround.wardroundRecord!'NA'}</value>
+              </#if>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--诊断记录章节-->
+      <component>
+        <section>
+          <code code="29548-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Diagnosis"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE02.10.28.00" codeSystem="2.9999" codeSystemName="卫生信息数据元目录" displayName="中医“四诊”结果"/>
+              <value xsi:type="ST">${superiorDoctorWardround.tcmFourResults!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--用药章节-->
+      <component>
+        <section>
+          <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF MEDICATION USE"/>
+          <text/>
+          <!--中药煎煮法-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN ">
+              <code code="DE08.50.047.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中药煎煮方法"/>
+              <value xsi:type="ST">${superiorDoctorWardround.chinDecocDecway!'NA'}</value>
+            </observation>
+          </entry>
+          <!--中药用药方法-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN ">
+              <code code="DE06.00.136.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中药用药方法"/>
+              <value xsi:type="ST">${superiorDoctorWardround.chinDrinkDecway!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--治疗计划章节-->
+      <component>
+        <section>
+          <code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="TREATMENT PLAN"/>
+          <text/>
+          <!--诊疗计划-->
+          <entry>
+            <observation classCode="OBS" moodCode="INT ">
+              <code code="DE05.01.025.00" displayName="诊疗计划"/>
+              <value xsi:type="ST">${superiorDoctorWardround.assessmentPlan!'NA'}</value>
+            </observation>
+          </entry>
+          <!--辩证论治详细描述-->
+          <entry>
+            <observation classCode="OBS" moodCode="INT">
+              <code code="DE05.10.131.00" displayName="辩证论治"/>
+              <value xsi:type="ST">${superiorDoctorWardround.dialecticalDesc!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--医嘱章节-->
+      <component>
+        <section>
+          <code code="46209-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Provider Orders"/>
+          <text/>
+          <!--医嘱内容-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.287.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="医嘱内容"/>
+              <value xsi:type="ST">${superiorDoctorWardround.adviceContent!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+    </structuredBody>
+  </component>
+</ClinicalDocument>

@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\sdschemas\CDA.xsd">
+  <realmCode code="CN"/>
+  <typeId extension="POCD_MT000040" root="2.16.840.1.113883.1.3"/>
+  <templateId root="2.16.156.10011.2.1.1.40"/>
+  <!-- 文档流水号 -->
+  <id extension="${docInfo.documentUniqueId}" root="2.16.156.10011.1.1"/>
+  <code code="C0020" codeSystem="2.16.156.10011.2.4" codeSystemName="卫生信息共享文档规范编码体系"/>
+  <title>生命体征测量记录</title>
+  <!-- 文档机器生成时间 -->
+  <effectiveTime value="${docInfo.effectiveTime}"/>
+  <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality" displayName="正常访问保密级别"/>
+  <languageCode code="zh-CN"/>
+  <setId/>
+  <versionNumber/>
+  <recordTarget contextControlCode="OP" typeCode="RCT">
+    <patientRole classCode="PAT">
+      <!--住院号：DE01.00.014.00 @@@参照OID分配表修改 -->
+      <id extension="${monitorVitalSignsRecord.inpNo!'NA'}" root="2.16.156.10011.1.12"/>
+      <patient classCode="PSN" determinerCode="INSTANCE">
+        <!--患者身份证号标识-->
+        <id extension="<@privacy_tag value="${emrBasicpatient.identityNo!'NA'}" privacyId="1">${privacy}</@privacy_tag>" root="2.16.156.10011.1.3"/>
+        <name><@privacy_tag value="${monitorVitalSignsRecord.patientName!'NA'}" privacyId="2">${privacy}</@privacy_tag></name>
+        <administrativeGenderCode code="${monitorVitalSignsRecord.patientSex!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${monitorVitalSignsRecord.patientSex!'NA'}" datasetCloumn="PATIENT_SEX">${dict.desc}</@dict_tag>"/>
+        <#if monitorVitalSignsRecord.ageYear??>
+        <age unit="岁" value="${monitorVitalSignsRecord.ageYear!'NA'}"/>
+        <#else>
+        <age unit="月" value="${monitorVitalSignsRecord.patientMonth!'NA'}"/>
+        </#if>
+      </patient>
+      <providerOrganization>
+        <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </providerOrganization>
+    </patientRole>
+  </recordTarget>
+  <!-- 文档作者 -->
+  <author contextControlCode="OP" typeCode="AUT">
+    <!--签名日期时间：DE09.00.053.00-->
+    <time value="${monitorVitalSignsRecord.createDatetime!'NA'}" xsi:type="TS"/>
+    <assignedAuthor classCode="ASSIGNED">
+      <id extension="${monitorVitalSignsRecord.nurseSign!'NA'}" root="2.16.156.10011.1.7"/>
+      <code displayName="护士"/>
+      <assignedPerson>
+        <name>${monitorVitalSignsRecord.nurseSign!'NA'}</name>
+      </assignedPerson>
+    </assignedAuthor>
+  </author>
+  <!-- 文档生成机构 -->
+  <custodian typeCode="CST">
+    <assignedCustodian classCode="ASSIGNED">
+      <representedCustodianOrganization classCode="ORG" determinerCode="INSTANCE">
+        <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </representedCustodianOrganization>
+    </assignedCustodian>
+  </custodian>
+  <!--护士签名 -->
+  <authenticator>
+    <!--签名日期时间：DE09.00.053.00 -->
+    <time value="${monitorVitalSignsRecord.signDatetime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="${monitorVitalSignsRecord.nurseSign!'NA'}" root="2.16.156.10011.1.4"/>
+      <code displayName="护士"/>
+      <assignedPerson>
+        <!--护士签名 -->
+        <name>${monitorVitalSignsRecord.nurseSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <documentationOf>
+    <serviceEvent>
+      <code/>
+      <effectiveTime>
+        <!--手术或分娩后天数-->
+        <width unit="天" value="${monitorVitalSignsRecord.afterOperationDay!'NA'}"/>
+      </effectiveTime>
+    </serviceEvent>
+  </documentationOf>
+  <relatedDocument typeCode="RPLC">
+    <parentDocument>
+      <id/>
+      <setId/>
+      <versionNumber/>
+    </parentDocument>
+  </relatedDocument>
+  <!--文档中医疗卫生事件的就诊场景,即入院场景记录-->
+  <componentOf typeCode="COMP">
+    <encompassingEncounter classCode="ENC" moodCode="EVN">
+      <code/>
+      <!--就诊时间-->
+      <effectiveTime>
+        <!--入院日期-->
+        <low value="${monitorVitalSignsRecord.inpDatetime!'NA'}"/>
+        <!--实际住院天数-->
+        <width unit="天" value="${monitorVitalSignsRecord.inpDays!'NA'}"/>
+      </effectiveTime>
+      <location typeCode="LOC">
+        <healthCareFacility classCode="SDLOC">
+          <serviceProviderOrganization classCode="ORG" determinerCode="INSTANCE">
+            <asOrganizationPartOf classCode="PART">
+              <!--病床号：DE01.00.026.00-->
+              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                <id extension="${monitorVitalSignsRecord.bedNo!'NA'}" root="2.16.156.10011.1.22"/>
+                <name>${monitorVitalSignsRecord.bedNo!'NA'}</name>
+                <asOrganizationPartOf classCode="PART">
+                  <!--病房号：DE01.00.019.00-->
+                  <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                    <id extension="${monitorVitalSignsRecord.areaNo!'NA'}" root="2.16.156.10011.1.21"/>
+                    <name>${monitorVitalSignsRecord.areaNo!'NA'}</name>
+                    <asOrganizationPartOf classCode="PART">
+                      <!--科室名称：DE08.10.026.00-->
+                      <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                        <id extension="${monitorVitalSignsRecord.deptName!'NA'}" root="2.16.156.10011.1.26"/>
+                        <name>${monitorVitalSignsRecord.deptName!'NA'}</name>
+                        <asOrganizationPartOf classCode="PART">
+                          <!--病区名称：DE08.10.054.00-->
+                          <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                            <id extension="${monitorVitalSignsRecord.areaName!'NA'}" root="2.16.156.10011.1.27"/>
+                            <name>${monitorVitalSignsRecord.areaName!'NA'}</name>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </wholeOrganization>
+                </asOrganizationPartOf>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </serviceProviderOrganization>
+        </healthCareFacility>
+      </location>
+    </encompassingEncounter>
+  </componentOf>
+  <component>
+    <structuredBody>
+      <!--诊断章节-->
+      <component>
+        <section>
+          <code code="29548-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Diagnosis"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="疾病诊断编码"/>
+              <value code="${monitorVitalSignsRecord.diagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" xsi:type="CD" displayName="<@dict_tag value="${monitorVitalSignsRecord.diagCode!'NA'}" datasetCloumn="DIAG_CODE">${dict.desc}</@dict_tag>"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--生命体征章节-->
+      <component>
+        <section>
+          <code code="8716-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="VITAL SIGNS"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.081.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="呼吸频率（次/min）"/>
+              <value unit="次/min" value="${monitorVitalSignsRecord.breathFrequency!'NA'}" xsi:type="PQ"/>
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.239.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="使用呼吸机标志"/>
+                  <value value="${monitorVitalSignsRecord.respiratorFlag!'NA'}" xsi:type="BL"/>
+                </observation>
+              </entryRelationship>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.118.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="脉率（次/min）"/>
+              <value unit="次/min" value="${monitorVitalSignsRecord.sphygmus!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.206.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="起搏器心率（次/min）"/>
+              <value unit="次/min" value="${monitorVitalSignsRecord.pacemakerHeartrate!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.186.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="体温（℃）"/>
+              <value unit="℃" value="${monitorVitalSignsRecord.temperature!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+          <entry>
+            <organizer classCode="BATTERY" moodCode="EVN">
+              <statusCode/>
+              <component>
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE04.10.174.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="收缩压"/>
+                  <value unit="mmHg" value="${monitorVitalSignsRecord.systolicPressure!'NA'}" xsi:type="PQ"/>
+                </observation>
+              </component>
+              <component>
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE04.10.176.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="舒张压"/>
+                  <value unit="mmHg" value="${monitorVitalSignsRecord.diastolicPressure!'NA'}" xsi:type="PQ"/>
+                </observation>
+              </component>
+            </organizer>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.188.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="体重（kg）"/>
+              <value unit="kg" value="${monitorVitalSignsRecord.weight!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.052.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="腹围（cm）"/>
+              <value unit="cm" value="${monitorVitalSignsRecord.abdominalGirth!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--护理观察章节-->
+      <component>
+        <section>
+          <code displayName="护理观察"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE02.10.031.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理观察项目名称"/>
+              <value xsi:type="ST">${monitorVitalSignsRecord.nursingObservationName!'NA'}</value>
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE02.10.028.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理观察结果"/>
+                  <value xsi:type="ST">${monitorVitalSignsRecord.nursingObservationResult!'NA'}</value>
+                </observation>
+              </entryRelationship>
+            </observation>
+          </entry>
+        </section>
+      </component>
+    </structuredBody>
+  </component>
+</ClinicalDocument>

@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\sdschemas\CDA.xsd">
+  <realmCode code="CN"/>
+  <typeId extension="POCD_MT000040" root="2.16.840.1.113883.1.3"/>
+  <templateId root="2.16.156.10011.2.1.1.73"/>
+  <!-- 文档流水号 -->
+  <id extension="${docInfo.documentUniqueId}" root="2.16.156.10011.1.1"/>
+  <code code="C0053" codeSystem="2.16.156.10011.2.4" codeSystemName="卫生信息共享文档规范编码体系"/>
+  <title>出院小结</title>
+  <!-- 文档机器生成时间 -->
+  <effectiveTime value="${docInfo.effectiveTime}"/>
+  <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality" displayName="正常访问保密级别"/>
+  <languageCode code="zh-CN"/>
+  <setId/>
+  <versionNumber/>
+  <!--文档记录对象（患者） [1..*] contextControlCode="OP"表示本信息可以被重载-->
+  <recordTarget contextControlCode="OP" typeCode="RCT">
+    <patientRole classCode="PAT">
+      <!--HDSD00.16.021 DE01.00.021.00 健康卡号-->
+      <id extension="${dischargeAbstract.healthCardNo!'NA'}" root="2.16.156.10011.1.19"/>
+      <!--HDSD00.16.052 DE01.00.014.00 住院号-->
+      <id extension="${dischargeAbstract.inpNo!'NA'}" root="2.16.156.10011.1.12"/>
+      <!--地址-->
+      <addr use="H">
+        <houseNumber>${dischargeAbstract.addressDoors!'NA'}</houseNumber>
+        <streetName>${dischargeAbstract.addressVillage!'NA'}</streetName>
+        <township>${dischargeAbstract.addressTownship!'NA'}</township>
+        <county>${dischargeAbstract.addressCounty!'NA'}</county>
+        <city>${dischargeAbstract.addressCity!'NA'}</city>
+        <state>${dischargeAbstract.addressProvince!'NA'}</state>
+        <#if dischargeAbstract.zipCode??>
+        <postalCode>${dischargeAbstract.zipCode!'NA'}</postalCode>
+        </#if>
+      </addr>
+      <!--HDSD00.16.018 DE02.01.010.00 患者电话号码-->
+      <telecom value="<@privacy_tag value="${dischargeAbstract.patientPhone!'NA'}" privacyId="5">${privacy}</@privacy_tag>"/>
+      <patient classCode="PSN" determinerCode="INSTANCE">
+        <!--患者身份证号标识-->
+        <id extension="<@privacy_tag value="${emrBasicpatient.identityNo!'NA'}" privacyId="1">${privacy}</@privacy_tag>" root="2.16.156.10011.1.3"/>
+        <!--HDSD00.16.019 DE02.01.039.00 患者姓名 -->
+        <name><@privacy_tag value="${dischargeAbstract.patientName!'NA'}" privacyId="2">${privacy}</@privacy_tag></name>
+        <!--HDSD00.16.041 DE02.01.040.00 性别代码-->
+        <administrativeGenderCode code="${dischargeAbstract.patientSex!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${dischargeAbstract.patientSex!'NA'}" datasetCloumn="PATIENT_SEX">${dict.desc}</@dict_tag>"/>
+        <birthTime value="${emrBasicpatient.birthday!'NA'}"/>
+        <!--HDSD00.16.020 DE02.01.018.00 婚姻状况代码 -->
+        <maritalStatusCode code="${dischargeAbstract.maritalStatusCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.5" codeSystemName="婚姻状况代码表(GB/T 2261.2)" displayName="<@dict_tag value="${dischargeAbstract.maritalStatusCode!'NA'}" datasetCloumn="MARITAL_STATUS_CODE">${dict.desc}</@dict_tag>"/>
+        <!-- 年龄-->
+        <#if dischargeAbstract.ageYear??>
+        <age unit="岁" value="${dischargeAbstract.ageYear!'NA'}"/>
+        <#else>
+        <age unit="月" value="${dischargeAbstract.patientMonth!'NA'}"/>
+        </#if>
+        <!--HDSD00.16.046 DE02.01.052.00 职业类别代码-->
+        <occupation>
+          <occupationCode code="${dischargeAbstract.occupatientionClassCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.13" codeSystemName="从业状况(个人身体)代码表(GB/T 2261.4)" displayName="<@dict_tag value="${dischargeAbstract.occupatientionClassCode!'NA'}" datasetCloumn="OCCUPATIENTION_CLASS_CODE">${dict.desc}</@dict_tag>"/>
+        </occupation>
+      </patient>
+      <!--提供患者服务机构-->
+      <providerOrganization classCode="ORG" determinerCode="INSTANCE">
+        <!--HDSD00.16.043 DE08.10.052.00 医疗机构组织机构代码-->
+        <id extension="${dischargeAbstract.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <!--住院机构名称-->
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </providerOrganization>
+    </patientRole>
+  </recordTarget>
+  <!-- 文档创作者 -->
+  <author contextControlCode="OP" typeCode="AUT">
+    <time value="${dischargeAbstract.signDatetime!'NA'}" xsi:type="TS"/>
+    <assignedAuthor classCode="ASSIGNED">
+      <id extension="${dischargeAbstract.superiorDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
+      <assignedPerson>
+        <name>${dischargeAbstract.superiorDoctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedAuthor>
+  </author>
+  <!-- 保管机构 -->
+  <custodian typeCode="CST">
+    <assignedCustodian classCode="ASSIGNED">
+      <representedCustodianOrganization classCode="ORG" determinerCode="INSTANCE">
+        <id extension="${dischargeAbstract.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </representedCustodianOrganization>
+    </assignedCustodian>
+  </custodian>
+  <!--法定审核者 表达对文档直接起到法律效应的法定审核者信息 -->
+  <legalAuthenticator typeCode="LA">
+  <!-- HDSD00.16.028 DE09.00.053.00 签名日期时间 -->
+    <time value="${dischargeAbstract.signDatetime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="${dischargeAbstract.inpDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
+      <code displayName="住院医师"/>
+      <assignedPerson>
+        <!--HDSD00.16.053 DE02.01.039.00 住院医师签名-->
+        <name>${dischargeAbstract.inpDoctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </legalAuthenticator>
+  <!--文档审核者 该部分信息表达文档经过了一定的审核，但还没达到一定的法律效应 -->
+  <authenticator typeCode="AUTHEN">
+    <!-- HDSD00.16.028 DE09.00.053.00 签名日期时间 -->
+    <time value="${dischargeAbstract.signDatetime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity classCode="ASSIGNED">
+      <id extension="${dischargeAbstract.superiorDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
+      <code displayName="上级医师"/>
+      <assignedPerson classCode="PSN">
+        <!--HDSD00.16.035 DE02.01.039.00 上级医师签名 -->
+        <name>${dischargeAbstract.superiorDoctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <participant typeCode="NOT">
+    <!--联系人@classCode：CON，固定值，表示角色是联系人 -->
+    <associatedEntity classCode="ECON">
+      <!--HDSD00.16.023 DE02.01.010.00 联系人电话号码-->
+      <telecom value="${dischargeAbstract.contactsPhone!'NA'}"/>
+      <associatedPerson>
+        <!--HDSD00.16.024 DE02.01.039.00 联系人姓名-->
+        <name>${dischargeAbstract.contactsName!'NA'}</name>
+      </associatedPerson>
+    </associatedEntity>
+  </participant>
+  <relatedDocument typeCode="RPLC">
+    <parentDocument>
+      <id/>
+      <setId/>
+      <versionNumber/>
+    </parentDocument>
+  </relatedDocument>
+  <!--文档中医疗卫生事件的就诊场景,即入院场景记录-->
+  <componentOf typeCode="COMP">
+    <encompassingEncounter classCode="ENC" moodCode="EVN">
+      <effectiveTime>
+        <!--HDSD00.16.031 DE06.00.092.00 入院日期时间-->
+        <low value="${dischargeAbstract.inpDatetime!'NA'}"/>
+        <!--HDSD00.16.005 DE06.00.017.00 出院日期时间-->
+        <high value="${dischargeAbstract.dishospitalDatetime!'NA'}"/>
+      </effectiveTime>
+      <location>
+        <healthCareFacility>
+          <serviceProviderOrganization>
+            <asOrganizationPartOf classCode="PART">
+              <!--HDSD00.16.001 DE01.00.026.00 病床号 -->
+              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                <id extension="${dischargeAbstract.bedNum!'NA'}" root="2.16.156.10011.1.22"/>
+                <name>${dischargeAbstract.bedNum!'NA'}</name>
+                <asOrganizationPartOf classCode="PART">
+                  <!--HDSD00.16.002 DE01.00.019.00 病房号 -->
+                  <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                    <id extension="${dischargeAbstract.wardNum!'NA'}" root="2.16.156.10011.1.21"/>
+                    <name>${dischargeAbstract.wardNum!'NA'}</name>
+                    <asOrganizationPartOf classCode="PART">
+                      <!--HDSD00.16.022 DE08.10.026.00 科室名称 -->
+                      <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                        <id extension="${dischargeAbstract.deptName!'NA'}" root="2.16.156.10011.1.26"/>
+                        <name>${dischargeAbstract.deptName!'NA'}</name>
+                        <asOrganizationPartOf classCode="PART">
+                          <!--HDSD00.16.003 DE08.10.054.00 病区名称-->
+                          <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                            <id extension="${dischargeAbstract.areaName!'NA'}" root="2.16.156.10011.1.27"/>
+                            <name>${dischargeAbstract.areaName!'NA'}</name>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </wholeOrganization>
+                </asOrganizationPartOf>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </serviceProviderOrganization>
+        </healthCareFacility>
+      </location>
+    </encompassingEncounter>
+  </componentOf>
+  <component>
+    <structuredBody>
+      <!--主要健康问题章节-->
+      <component>
+        <section>
+          <code code="11450-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="PROBLEM LIST"/>
+          <text/>
+          <!--HDSD00.16.030 DE05.10.148.00 入院情况 条目-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.10.148.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="入院情况"/>
+              <value xsi:type="ST">${dischargeAbstract.inpSituation!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--入院诊断章节-->
+      <component>
+        <section>
+          <code code="46241-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HOSPITAL ADMISSION DX"/>
+          <text/>
+          <!--HDSD00.16.032 DE05.01.024.00 入院诊断-西医诊断编码 条目-->
+          <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="入院诊断-西医诊断编码"/>
+              <value code="${dischargeAbstract.inhosDiagWmDiagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" xsi:type="CD" displayName="<@dict_tag value="${dischargeAbstract.inhosDiagWmDiagCode!'NA'}" datasetCloumn="INHOS_DIAG_WM_DIAG_CODE">${dict.desc}</@dict_tag>"/>
+            </observation>
+          </entry>
+          <#if dischargeAbstract.inhosDiagCmDisCode??>
+          <!--HDSD00.16.033 DE05.10.130.00 入院诊断-中医病名代码 条目-->
+          <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.10.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="入院诊断-中医病名代码"/>
+              <value code="${dischargeAbstract.inhosDiagCmDisCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD" displayName="<@dict_tag value="${dischargeAbstract.inhosDiagCmDisCode!'NA'}" datasetCloumn="INHOS_DIAG_CM_DIS_CODE">${dict.desc}</@dict_tag>"/>
+            </observation>
+          </entry>
+          </#if>
+          <#if dischargeAbstract.inhosDiagCmSyndromeCode??>
+          <!--HDSD00.16.034 DE05.10.130.00 入院诊断-中医证候代码 条目-->
+          <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.10.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="入院诊断-中医证候代码"/>
+              <value code="${dischargeAbstract.inhosDiagCmSyndromeCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD" displayName="<@dict_tag value="${dischargeAbstract.inhosDiagCmSyndromeCode!'NA'}" datasetCloumn="INHOS_DIAG_CM_SYNDROME_CODE">${dict.desc}</@dict_tag>"/>
+            </observation>
+          </entry>
+          </#if>
+        </section>
+      </component>
+      <!--出院诊断章节-->
+      <component>
+        <section>
+          <code code="11535-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Discharge Diagnosis"/>
+          <text/>
+          <!--HDSD00.16.008 DE05.01.024.00 出院诊断-西医诊断编码 条目-->
+          <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院诊断-西医诊断编码"/>
+              <value code="${dischargeAbstract.outpDiagnosisTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" xsi:type="CD" displayName="<@dict_tag value="${dischargeAbstract.outpDiagnosisTypeCode!'NA'}" datasetCloumn="OUTP_DIAGNOSIS_TYPE_CODE">${dict.desc}</@dict_tag>"/>
+            </observation>
+          </entry>
+          <#if dischargeAbstract.outhosTcmDisCode??>
+          <!--HDSD00.16.009 DE05.10.130.00 出院诊断-中医病名代码 条目-->
+          <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.10.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院诊断-中医病名代码"/>
+              <value code="${dischargeAbstract.outhosTcmDisCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD" displayName="<@dict_tag value="${dischargeAbstract.outhosTcmDisCode!'NA'}" datasetCloumn="OUTHOS_TCM_DIS_CODE">${dict.desc}</@dict_tag>"/>
+            </observation>
+          </entry>
+          </#if>
+          <#if dischargeAbstract.outhosSyndromesDisCode??>
+          <!--HDSD00.16.010 DE05.10.130.00 出院诊断-中医诊断代码 条目-->
+          <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.10.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院诊断-中医证候代码"/>
+              <value code="${dischargeAbstract.outhosSyndromesDisCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD" displayName="<@dict_tag value="${dischargeAbstract.outhosSyndromesDisCode!'NA'}" datasetCloumn="OUTHOS_SYNDROMES_DIS_CODE">${dict.desc}</@dict_tag>"/>
+            </observation>
+          </entry>
+          </#if>
+          <!--HDSD00.16.051 DE02.10.028.00 中医“四诊”观察结果 条目-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE02.10.028.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中医“四诊”观察结果"/>
+              <value xsi:type="ST">${dischargeAbstract.tcmFourResults!'NA'}</value>
+            </observation>
+          </entry>
+          <!--HDSD00.16.006 DE04.01.117.00 出院时症状与体征 条目-->
+          <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.01.117.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院时症状与体征"/>
+              <#if dischargeAbstract.dishospitalSigns??>
+              <value xsi:type="ST">${dischargeAbstract.dishospitalSigns? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
+              <value xsi:type="ST">${dischargeAbstract.dishospitalSigns!'NA'}</value>
+              </#if>
+            </observation>
+          </entry>
+          <!--HDSD00.16.004 DE06.00.193.00 出院情况 条目 -->
+          <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.193.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院情况"/>
+              <#if dischargeAbstract.dishospitalSituation??>
+              <value xsi:type="ST">${dischargeAbstract.dishospitalSituation? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
+              <value xsi:type="ST">${dischargeAbstract.dishospitalSituation!'NA'}</value>
+              </#if>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--手术操作章节-->
+      <component>
+        <section>
+          <code code="47519-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF PROCEDURES"/>
+          <text/>
+          <!--手术记录条目-->
+          <entry>
+            <!-- 手术记录 -->
+            <procedure classCode="PROC" moodCode="EVN">
+              <code code="${dischargeAbstract.operationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.12" codeSystemName="手术(操作)代码表(ICD-9-CM)" displayName="<@dict_tag value="${dischargeAbstract.operationCode!'NA'}" datasetCloumn="OPERATION_CODE">${dict.desc}</@dict_tag>"/>
+              <statusCode/>
+              <!--手术及操作编码、操作日期/时间-->
+              <!--HDSD00.16.039 DE06.00.221.00 手术及操作开始日期时间 -->
+              <#if dischargeAbstract.intentOperateDatetime??>
+              <effectiveTime value="${dischargeAbstract.intentOperateDatetime!'NA'}"/>
+              <#else>
+              <effectiveTime/>
+              </#if>
+              <!--HDSD00.16.040 DE06.00.257.00 手术切口类别代码 -->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.257.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术切口类别代码"/>
+                  <value code="${dischargeAbstract.operationTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.256" codeSystemName="手术切口类别代码表" xsi:type="CD" displayName="<@dict_tag value="${dischargeAbstract.operationTypeCode!'NA'}" datasetCloumn="OPERATION_TYPE_CODE">${dict.desc}</@dict_tag>"/>
+                </observation>
+              </entryRelationship>
+              <!--HDSD00.16.029 DE05.10.147.00 切口愈合等级代码 -->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE05.10.147.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="切口愈合等级代码"/>
+                  <value code="${dischargeAbstract.operatIncisHealTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.252" codeSystemName="切口愈合等级代码" displayName="<@dict_tag value="${dischargeAbstract.operatIncisHealTypeCode!'NA'}" datasetCloumn="OPERAT_INCIS_HEAL_TYPE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+                </observation>
+              </entryRelationship>
+              <!--HDSD00.16.025 DE06.00.073.00 麻醉方法代码 -->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.073.00" codeSystem="2.16.156.10011.2.2.2" codeSystemName="卫生信息数据元目录" displayName="麻醉方法代码"/>
+                  <value code="${dischargeAbstract.anesthesiaMethodCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.159" codeSystemName="麻醉方法代码表" xsi:type="CD" displayName="<@dict_tag value="${dischargeAbstract.anesthesiaMethodCode!'NA'}" datasetCloumn="ANESTHESIA_METHOD_CODE">${dict.desc}</@dict_tag>"/>
+                </observation>
+              </entryRelationship>
+              <!-- HDSD00.16.037 DE05.10.063.00 手术过程 -->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE05.10.063.00" codeSystem="2.16.156.10011.2.2.2" codeSystemName="卫生信息数据元目录" displayName="手术过程"/>
+                  <value xsi:type="ST">${dischargeAbstract.operationProcessDesc!'NA'}</value>
+                </observation>
+              </entryRelationship>
+            </procedure>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="TREATMENT PLAN"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.300.00" codeSystem="2.16.156.10011.2.3.3.15" codeSystemName="卫生信息数据元目录" displayName="治则治法"/>
+              <value xsi:type="ST">${dischargeAbstract.therapeuticPrinciple!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!-- 治疗计划章节 -->
+      <component>
+        <section>
+          <code code="8648-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Hospital Course"/>
+          <text/>
+          <!--诊疗过程描述-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.296.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="诊疗过程描述"/>
+              <#if dischargeAbstract.diagTreatDesc??>
+              <value xsi:type="ST">${dischargeAbstract.diagTreatDesc? replace('<','小于')? replace('>','大于')}</value>
+              <#else>
+              <value xsi:type="ST">${dischargeAbstract.diagTreatDesc!'NA'}</value>
+              </#if>
+            </observation>
+          </entry>
+          <!--治疗结果代码-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.10.113.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="治疗结果代码"/>
+              <value code="${dischargeAbstract.underlyingDeathCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.148" codeSystemName="病情转归代码表" xsi:type="CD" displayName="<@dict_tag value="${dischargeAbstract.underlyingDeathCode!'NA'}" datasetCloumn="UNDERLYING_DEATH_CODE">${dict.desc}</@dict_tag>"/>
+            </observation>
+          </entry>
+          <!--实际住院天数-->
+          <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.310.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="实际住院天数"/>
+              <value unit="天" value="${dischargeAbstract.inpDays!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!-- 医嘱章节-->
+      <component>
+        <section>
+          <code code="46209-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Provider Orders"/>
+          <text/>
+          <!--HDSD00.16.049 DE08.50.047.00 中药煎煮方法 条目-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN ">
+              <code code="DE08.50.047.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中药煎煮方法"/>
+              <value xsi:type="ST">${dischargeAbstract.tcdDecoctionMethod!'NA'}</value>
+            </observation>
+          </entry>
+          <!--HDSD00.16.050 DE06.00.136.00 中药用药方法 条目-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.136.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中药用药方法"/>
+              <value xsi:type="ST">${dischargeAbstract.tcdMedicationMethod!'NA'}</value>
+            </observation>
+          </entry>
+          <!--HDSD00.16.007 DE06.00.287.00 出院医嘱 条目-->
+          <entry typeCode="COMP">
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.287.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院医嘱"/>
+              <value xsi:type="ST">${dischargeAbstract.outhosAdvic!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--实验室检查章节-->
+      <component>
+        <section>
+          <code code="30954-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="STUDIES SUMMARY"/>
+          <text/>
+          <!--阳性辅助检查结果条目-->
+          <entry contextConductionInd="true" typeCode="COMP">
+            <!--阳性辅助检查结果-->
+            <organizer classCode="BATTERY" moodCode="EVN">
+              <statusCode nullFlavor="UNK"/>
+              <component contextConductionInd="true" typeCode="COMP">
+                <!--HDSD00.16.042 DE04.50.128.00 阳性辅助检查结果 -->
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE04.50.128.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录"/>
+                  <value xsi:type="ST">${dischargeAbstract.positiveTestResults!'NA'}</value>
+                </observation>
+              </component>
+            </organizer>
+          </entry>
+        </section>
+      </component>
+    </structuredBody>
+  </component>
+</ClinicalDocument>

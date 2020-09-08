@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\sdschemas\CDA.xsd">
+  <realmCode code="CN"/>
+  <typeId extension="POCD_MT000040" root="2.16.840.1.113883.1.3"/>
+  <templateId root="2.16.156.10011.2.1.1.72"/>
+  <!-- 文档流水号 -->
+  <id extension="${docInfo.documentUniqueId}" root="2.16.156.10011.1.1"/>
+  <code code="C0052" codeSystem="2.16.156.10011.2.4" codeSystemName="卫生信息共享文档规范编码体系"/>
+  <title>住院医嘱</title>
+  <!-- 文档机器生成时间 -->
+  <effectiveTime value="${docInfo.effectiveTime}"/>
+  <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality" displayName="正常访问保密级别"/>
+  <languageCode code="zh-CN"/>
+  <setId/>
+  <versionNumber/>
+  <recordTarget contextControlCode="OP" typeCode="RCT">
+    <patientRole classCode="PAT">
+      <!--住院号：DE01.00.014.00 @@@参照OID分配表修改 -->
+      <id extension="${hospitalizationOrder.inpNo!'NA'}" root="2.16.156.10011.1.12"/>
+      <telecom value="<@privacy_tag value="${emrBasicpatient.contactPhone!'NA'}" privacyId="5">${privacy}</@privacy_tag>"/>
+      <patient classCode="PSN" determinerCode="INSTANCE">
+        <!--患者身份证号标识-->
+        <id extension="<@privacy_tag value="${emrBasicpatient.identityNo!'NA'}" privacyId="1">${privacy}</@privacy_tag>" root="2.16.156.10011.1.3"/>
+        <name><@privacy_tag value="${hospitalizationOrder.patientName!'NA'}" privacyId="2">${privacy}</@privacy_tag></name>
+        <administrativeGenderCode code="${hospitalizationOrder.patientSex!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${hospitalizationOrder.patientSex!'NA'}" datasetCloumn="PATIENT_SEX">${dict.desc}</@dict_tag>"/>
+        <#if hospitalizationOrder.ageYear??>
+        <age unit="岁" value="${hospitalizationOrder.ageYear!'NA'}"/>
+        <#else>
+        <age unit="月" value="${hospitalizationOrder.patientMonth!'NA'}"/>
+        </#if>
+      </patient>
+      <providerOrganization>
+        <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </providerOrganization>
+    </patientRole>
+  </recordTarget>
+  <!-- 文档作者 -->
+  <author contextControlCode="OP" typeCode="AUT">
+    <!--医嘱开立日期时间：DE06.00.220.00 -->
+    <time value="${hospitalizationOrder.adviceOpenDatetime!'NA'}"/>
+    <assignedAuthor classCode="ASSIGNED">
+      <id extension="${hospitalizationOrder.adviceOpendoctorName!'NA'}" root="2.16.156.10011.1.7"/>
+      <code displayName="医嘱开立者"/>
+      <assignedPerson>
+        <name>${hospitalizationOrder.adviceOpendoctorName!'NA'}</name>
+      </assignedPerson>
+    </assignedAuthor>
+  </author>
+  <!-- 文档生成机构 -->
+  <custodian typeCode="CST">
+    <assignedCustodian classCode="ASSIGNED">
+      <representedCustodianOrganization classCode="ORG" determinerCode="INSTANCE">
+        <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </representedCustodianOrganization>
+    </assignedCustodian>
+  </custodian>
+  <relatedDocument typeCode="RPLC">
+    <parentDocument>
+      <id/>
+      <setId/>
+      <versionNumber/>
+    </parentDocument>
+  </relatedDocument>
+  <!--文档中医疗卫生事件的就诊场景,即入院场景记录-->
+  <componentOf typeCode="COMP">
+    <encompassingEncounter classCode="ENC" moodCode="EVN">
+      <code/>
+      <effectiveTime>
+        <!--就诊时间-->
+        <low value="${hospitalizationOrder.adviceplanStartDatetime!'NA'}"/>
+      </effectiveTime>
+      <location typeCode="LOC">
+        <healthCareFacility classCode="SDLOC">
+          <!--机构角色-->
+          <serviceProviderOrganization classCode="ORG" determinerCode="INSTANCE">
+            <asOrganizationPartOf classCode="PART">
+              <!--床位号-->
+              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                <id extension="${hospitalizationOrder.bedNo!'NA'}" root="2.16.156.10011.1.22"/>
+                <name>${hospitalizationOrder.bedNo!'NA'}</name>
+                <asOrganizationPartOf classCode="PART">
+                  <!--病房号-->
+                  <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                    <id extension="${hospitalizationOrder.areaNo!'NA'}" root="2.16.156.10011.1.21"/>
+                    <name>${hospitalizationOrder.areaNo!'NA'}</name>
+                    <asOrganizationPartOf classCode="PART">
+                      <!--科室-->
+                      <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                        <id extension="${hospitalizationOrder.deptName!'NA'}" root="2.16.156.10011.1.26"/>
+                        <name>${hospitalizationOrder.deptName!'NA'}</name>
+                        <asOrganizationPartOf classCode="PART">
+                          <!--病区-->
+                          <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                            <id extension="${hospitalizationOrder.areaName!'NA'}" root="2.16.156.10011.1.27"/>
+                            <name>${hospitalizationOrder.areaName!'NA'}</name>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </wholeOrganization>
+                </asOrganizationPartOf>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </serviceProviderOrganization>
+        </healthCareFacility>
+      </location>
+    </encompassingEncounter>
+  </componentOf>
+  <component>
+    <structuredBody>
+      <!--生命体征章节-->
+      <component>
+        <section>
+          <code code="8716-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="VITAL SIGNS"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.188.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="体重"/>
+              <value unit="kg" value="${hospitalizationOrder.weight!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--医嘱章节-->
+      <component>
+        <section>
+          <code code="46209-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Provider Orders"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.286.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="医嘱类别"/>
+              <value code="${hospitalizationOrder.orderTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.58" codeSystemName="医嘱类别代码表" displayName="<@dict_tag value="${hospitalizationOrder.orderTypeCode!'NA'}" datasetCloumn="ORDER_TYPE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+          <entry>
+            <organizer classCode="CLUSTER" moodCode="EVN">
+              <statusCode/>
+              <component>
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.289.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="医嘱项目类型"/>
+                  <value code="${hospitalizationOrder.orderItemTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.268" codeSystemName="医嘱项目类型代码表" displayName="<@dict_tag value="${hospitalizationOrder.orderItemTypeCode!'NA'}" datasetCloumn="ORDER_ITEM_TYPE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+                </observation>
+              </component>
+              <component>
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.288.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="医嘱项目内容"/>
+                  <effectiveTime>
+                    <!--医嘱计划开始日期时间-->
+                    <low value="${hospitalizationOrder.adviceplanStartDatetime!'NA'}"/>
+                    <!--医嘱计划结束日期时间-->
+                    <high value="${hospitalizationOrder.adviceplanEndDatetime!'NA'}"/>
+                  </effectiveTime>
+                  <!--医嘱计划信息-->
+                  <value xsi:type="ST">${hospitalizationOrder.adviceItemContent!'NA'}</value>
+                  <!--作者：医嘱开立者-->
+                  <author>
+                    <!--医嘱开立日期时间：DE06.00.220.00-->
+                    <time value="${hospitalizationOrder.adviceOpenDatetime!'NA'}"/>
+                    <assignedAuthor>
+                      <id extension="${hospitalizationOrder.adviceOpendoctorName!'NA'}" root="2.16.156.10011.1.4"/>
+                      <code displayName="医嘱开立者"/>
+                      <!--医嘱开立者签名：DE02.01.039.00-->
+                      <assignedPerson>
+                        <name>${hospitalizationOrder.adviceOpendoctorName!'NA'}</name>
+                      </assignedPerson>
+                      <representedOrganization>
+                        <name>${hospitalizationOrder.adviceOpendeptName!'NA'}</name>
+                      </representedOrganization>
+                    </assignedAuthor>
+                  </author>
+                  <!--医嘱审核-->
+                  <participant typeCode="ATND">
+                    <!--医嘱审核日期时间：DE09.00.088.00-->
+                    <time value="${hospitalizationOrder.checkAdviceDatetime!'NA'}"/>
+                    <participantRole classCode="ASSIGNED">
+                      <id extension="${hospitalizationOrder.checkPersonSign!'NA'}" root="2.16.156.10011.1.4"/>
+                      <code displayName="医嘱审核人"/>
+                      <!--医嘱审核人签名：DE02.01.039.00-->
+                      <playingEntity classCode="PSN" determinerCode="INSTANCE">
+                        <name>${hospitalizationOrder.checkPersonSign!'NA'}</name>
+                      </playingEntity>
+                    </participantRole>
+                  </participant>
+                  <!--医嘱核对-->
+                  <participant typeCode="ATND">
+                    <!--医嘱核对日期时间：DE06.00.205.00-->
+                    <time value="${hospitalizationOrder.adviceCheckDatetime!'NA'}"/>
+                    <participantRole classCode="ASSIGNED">
+                      <id extension="${hospitalizationOrder.adviceChecknurseSign!'NA'}" root="2.16.156.10011.1.4"/>
+                      <code displayName="医嘱核对人"/>
+                      <!--医嘱核对护士签名：DE02.01.039.00-->
+                      <playingEntity classCode="PSN" determinerCode="INSTANCE">
+                        <name>${hospitalizationOrder.adviceChecknurseSign!'NA'}</name>
+                      </playingEntity>
+                    </participantRole>
+                  </participant>
+                  <!--医嘱停止-->
+                  <participant typeCode="ATND">
+                    <!--医嘱停止日期时间：DE06.00.218.00-->
+                    <time value="${hospitalizationOrder.adviceEndDatetime!'NA'}"/>
+                    <participantRole classCode="ASSIGNED">
+                      <id extension="${hospitalizationOrder.adviceEnderSign!'NA'}" root="2.16.156.10011.1.4"/>
+                      <code displayName="医嘱停止人"/>
+                      <!--停止医嘱者签名：DE02.01.039.00-->
+                      <playingEntity classCode="PSN" determinerCode="INSTANCE">
+                        <name>${hospitalizationOrder.adviceEnderSign!'NA'}</name>
+                      </playingEntity>
+                    </participantRole>
+                  </participant>
+                  <#if hospitalizationOrder.cancelAdviceDatetime??>
+                  <!--医嘱取消-->
+                  <participant typeCode="ATND">
+                    <!--医嘱取消日期时间：DE06.00.234.00-->
+                    <time value="${hospitalizationOrder.cancelAdviceDatetime!'NA'}"/>
+                    <participantRole classCode="ASSIGNED">
+                      <id extension="${hospitalizationOrder.cancelAdviceSign!'NA'}" root="2.16.156.10011.1.4"/>
+                      <code displayName="医嘱取消人"/>
+                      <!--取消医嘱者签名：DE02.01.039.00-->
+                      <playingEntity classCode="PSN" determinerCode="INSTANCE">
+                        <name>${hospitalizationOrder.cancelAdviceSign!'NA'}</name>
+                      </playingEntity>
+                    </participantRole>
+                  </participant>
+                  </#if>
+                  <!--医嘱备注信息-->
+                  <entryRelationship typeCode="COMP">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <code code="DE06.00.179.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="医嘱备注信息"/>
+                      <value xsi:type="ST">${hospitalizationOrder.adviceRemark!'NA'}</value>
+                    </observation>
+                  </entryRelationship>
+                  <!--医嘱执行状态-->
+                  <entryRelationship typeCode="COMP">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <code code="DE06.00.290.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="医嘱执行状态"/>
+                      <value xsi:type="ST">${hospitalizationOrder.adviceExecStatus!'NA'}</value>
+                      <!--执行者-->
+                      <performer>
+                        <!--医嘱执行日期时间：DE06.00.222.00-->
+                        <time value="${hospitalizationOrder.adviceExecDatetime!'NA'}"/>
+                        <assignedEntity>
+                          <id extension="${hospitalizationOrder.execPersonSign!'NA'}" root="2.16.156.10011.1.4"/>
+                          <code displayName="医嘱执行者"/>
+                          <!--医嘱执行者签名：DE02.01.039.0-->
+                          <assignedPerson>
+                            <name>${hospitalizationOrder.execPersonSign!'NA'}</name>
+                          </assignedPerson>
+                          <!--医嘱执行科室：DE08.10.026.00-->
+                          <representedOrganization>
+                            <name>${hospitalizationOrder.execDeptName!'NA'}</name>
+                          </representedOrganization>
+                        </assignedEntity>
+                      </performer>
+                    </observation>
+                  </entryRelationship>
+                  <!--电子申请单编号：例如检查检验申请单编号？？？-->
+                  <entryRelationship typeCode="COMP">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <code code="DE01.00.008.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="电子申请单编号"/>
+                      <value xsi:type="ST">${hospitalizationOrder.applyNo!'NA'}</value>
+                    </observation>
+                  </entryRelationship>
+                  <!--处方药品组号：例如如果是用药医嘱的话指向处方单号？？？-->
+                  <entryRelationship typeCode="COMP">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <code code="DE08.50.056.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="处方药品组号"/>
+                      <value xsi:type="ST">${hospitalizationOrder.recipeGroupNo!'NA'}</value>
+                    </observation>
+                  </entryRelationship>
+                </observation>
+              </component>
+            </organizer>
+          </entry>
+        </section>
+      </component>
+    </structuredBody>
+  </component>
+</ClinicalDocument>

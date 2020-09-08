@@ -1,0 +1,410 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\sdschemas\CDA.xsd">
+  <realmCode code="CN"/>
+  <typeId extension="POCD_MT000040" root="2.16.840.1.113883.1.3"/>
+  <templateId root="2.16.156.10011.2.1.1.30"/>
+  <!-- 文档流水号 -->
+  <id extension="${docInfo.documentUniqueId}" root="2.16.156.10011.1.1"/>
+  <code code="C0010" codeSystem="2.16.156.10011.2.4" codeSystemName="卫生信息共享文档规范编码体系"/>
+  <title>麻醉术前访视记录</title>
+  <!-- 文档机器生成时间 -->
+  <effectiveTime value="${docInfo.effectiveTime}"/>
+  <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality" displayName="正常访问保密级别"/>
+  <languageCode code="zh-CN"/>
+  <setId/>
+  <versionNumber/>
+  <!--文档记录对象（患者） [1..*] contextControlCode="OP"表示本信息可以被重载-->
+  <recordTarget contextControlCode="OP" typeCode="RCT">
+    <patientRole classCode="PAT">
+      <!--门诊号标识-->
+      <id extension="${visitsRecBefAnesthesia.outpNo!'NA'}" root="2.16.156.10011.1.11"/>
+      <!--住院号标识-->
+      <id extension="${visitsRecBefAnesthesia.inpNo!'NA'}" root="2.16.156.10011.1.12"/>
+      <!--电子申请单编号-->
+      <id extension="${visitsRecBefAnesthesia.electronicApplyNo!'NA'}" root="2.16.156.10011.1.24"/>
+      <patient classCode="PSN" determinerCode="INSTANCE">
+        <!--患者身份证号标识-->
+        <id extension="<@privacy_tag value="${emrBasicpatient.identityNo!'NA'}" privacyId="1">${privacy}</@privacy_tag>" root="2.16.156.10011.1.3"/>
+        <name><@privacy_tag value="${visitsRecBefAnesthesia.patientName!'NA'}" privacyId="2">${privacy}</@privacy_tag></name>
+        <administrativeGenderCode code="${visitsRecBefAnesthesia.patientSex!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${visitsRecBefAnesthesia.patientSex!'NA'}" datasetCloumn="PATIENT_SEX">${dict.desc}</@dict_tag>"/>
+        <!-- 年龄 -->
+        <#if visitsRecBefAnesthesia.ageYear??>
+        <age unit="岁" value="${visitsRecBefAnesthesia.ageYear!'NA'}"/>
+        <#else>
+        <age unit="月" value="${visitsRecBefAnesthesia.patientMonth!'NA'}"/>
+        </#if>
+      </patient>
+    </patientRole>
+  </recordTarget>
+  <!-- 文档创作者 -->
+  <author contextControlCode="OP" typeCode="AUT">
+    <time value="${visitsRecBefAnesthesia.signDatetime!'NA'}"/>
+    <assignedAuthor classCode="ASSIGNED">
+      <id extension="${visitsRecBefAnesthesia.anesthesiaDoctorSign!'NA'}" root="2.16.156.10011.1.7"/>
+      <assignedPerson>
+        <name>${visitsRecBefAnesthesia.anesthesiaDoctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedAuthor>
+  </author>
+  <!-- 保管机构 -->
+  <custodian typeCode="CST">
+    <assignedCustodian classCode="ASSIGNED">
+      <representedCustodianOrganization classCode="ORG" determinerCode="INSTANCE">
+        <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </representedCustodianOrganization>
+    </assignedCustodian>
+  </custodian>
+  <!--麻醉医师签名-->
+  <authenticator>
+    <!--签名日期时间-->
+    <time value="${visitsRecBefAnesthesia.signDatetime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="${visitsRecBefAnesthesia.anesthesiaDoctorSign!'NA'}" root="2.16.156.10011.1.4"/>
+      <code displayName="麻醉医师"/>
+      <assignedPerson>
+        <name>${visitsRecBefAnesthesia.anesthesiaDoctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <relatedDocument typeCode="RPLC">
+    <parentDocument>
+      <id/>
+      <setId/>
+      <versionNumber/>
+    </parentDocument>
+  </relatedDocument>
+  <!-- 病床号、病房、病区、科室和医院的关联 -->
+  <componentOf>
+    <encompassingEncounter>
+      <!-- 入院日期时间 -->
+      <effectiveTime value="${visitsRecBefAnesthesia.signDatetime!'NA'}"/>
+      <location>
+        <healthCareFacility>
+          <serviceProviderOrganization>
+            <asOrganizationPartOf classCode="PART">
+              <!-- DE01.00.026.00病床号 -->
+              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                <id extension="${visitsRecBefAnesthesia.bedNo!'NA'}" root="2.16.156.10011.1.22"/>
+                <name>${visitsRecBefAnesthesia.bedNo!'NA'}</name>
+                <asOrganizationPartOf classCode="PART">
+                  <!-- DE01.00.019.00病房号 -->
+                  <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                    <id extension="${visitsRecBefAnesthesia.areaNo!'NA'}" root="2.16.156.10011.1.21"/>
+                    <name>${visitsRecBefAnesthesia.areaNo!'NA'}</name>
+                    <asOrganizationPartOf classCode="PART">
+                      <!-- DE08.10.026.00科室名称 -->
+                      <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                        <id extension="${visitsRecBefAnesthesia.deptName!'NA'}" root="2.16.156.10011.1.26"/>
+                        <name>${visitsRecBefAnesthesia.deptName!'NA'}</name>
+                        <asOrganizationPartOf classCode="PART">
+                          <!-- DE08.10.054.00病区名称 -->
+                          <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                            <id extension="${visitsRecBefAnesthesia.areaName!'NA'}" root="2.16.156.10011.1.27"/>
+                            <name>${visitsRecBefAnesthesia.areaName!'NA'}</name>
+                            <asOrganizationPartOf classCode="PART">
+                              <!--医疗机构名称 -->
+                              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                                <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+                                <name>${hospitalInfo.organName!'NA'}</name>
+                              </wholeOrganization>
+                            </asOrganizationPartOf>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </wholeOrganization>
+                </asOrganizationPartOf>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </serviceProviderOrganization>
+        </healthCareFacility>
+      </location>
+    </encompassingEncounter>
+  </componentOf>
+  <component>
+    <structuredBody>
+      <!-- 术前诊断章节 -->
+      <component>
+        <section>
+          <code code="10219-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Surgical operation note preoperative Dx"/>
+          <text/>
+          <!--术前诊断-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <!--术前诊断编码-->
+              <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="术前诊断编码"/>
+              <value code="${visitsRecBefAnesthesia.preoperationDiagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="<@dict_tag value="${visitsRecBefAnesthesia.preoperationDiagCode!'NA'}" datasetCloumn="PREOPERATION_DIAG_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+          <!-- 术前合并疾病 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.01.073.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="<@dict_tag value="${visitsRecBefAnesthesia.preoperativeComorbidity!'NA'}" datasetCloumn="PREOPERATIVE_COMORBIDITY">${dict.desc}</@dict_tag>"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.preoperativeComorbidity!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--现病史章节-->
+      <component>
+        <section>
+          <code code="10164-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF PRESENT ILLNESS"/>
+          <text/>
+          <!--简要病史条目-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.10.140.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="简要病史"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.briefHistory!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--既往史章节-->
+      <component>
+        <section>
+          <code code="11348-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF PAST ILLNESS"/>
+          <text/>
+          <!--过敏史条目-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE02.10.022.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="过敏史"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.allergyHistory!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--体格检查章节-->
+      <component>
+        <section>
+          <code code="29545-1" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="PHYSICAL EXAMINATION"/>
+          <text/>
+          <!-- 体重 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.188.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="体重"/>
+              <value unit="kg" value="${visitsRecBefAnesthesia.bodyWeight!'NA'}" xsi:type="PQ"/>
+            </observation>
+          </entry>
+          <!-- 一般状况检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.219.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="一般状况检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.generalhealthCheckResult!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- 精神状态正常标志 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.10.142.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="精神状态正常标志"/>
+              <value value="${visitsRecBefAnesthesia.mentalStateFlag!'NA'}" xsi:type="BL"/>
+            </observation>
+          </entry>
+          <!-- 心脏听诊结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.207.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="心脏听诊结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.cardiacAuscultationResult!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- 肺部听诊结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.031.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="肺部听诊结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.lungAuscultationResult!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- 四肢检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.179.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="四肢检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.limbsTestResult!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- 脊柱检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.093.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="脊柱检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.spinalResult!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- 腹部检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.046.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="腹部检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.abdominalExamResult!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- 气管检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.230.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="气管检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.tracheaTestResult!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- 牙齿检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.10.264.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="牙齿检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.dentalExaminationResult!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!-- 实验室检查章节 -->
+      <component>
+        <section>
+          <code code="30954-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="STUDIES SUMMARY"/>
+          <text/>
+          <entry typeCode="COMP">
+            <!-- 血型-->
+            <organizer classCode="BATTERY" moodCode="EVN">
+              <statusCode/>
+              <component contextConductionInd="true" typeCode="COMP">
+                <!-- ABO血型 -->
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE04.50.001.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="ABO血型代码"/>
+                  <value code="${visitsRecBefAnesthesia.bloodAboCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.85" codeSystemName="ABO血型代码表" displayName="<@dict_tag value="${visitsRecBefAnesthesia.bloodAboCode!'NA'}" datasetCloumn="BLOOD_ABO_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+                </observation>
+              </component>
+              <component contextConductionInd="true" typeCode="COMP">
+                <!-- Rh血型 -->
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE04.50.010.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="Rh（D）血型代码"/>
+                  <value code="${visitsRecBefAnesthesia.rhBloodCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.250" codeSystemName="Rh(D)血型代码表" displayName="<@dict_tag value="${visitsRecBefAnesthesia.rhBloodCode!'NA'}" datasetCloumn="RH_BLOOD_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+                </observation>
+              </component>
+            </organizer>
+          </entry>
+          <!-- 心电图检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.30.043.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="心电图检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.ecgResults!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- 胸部X线检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.30.045.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="胸部X线检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.xlineResult!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- CT检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.30.005.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="CT检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.ctResult!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- B超检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.30.002.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="B超检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.bInspection!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- MRI检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.30.009.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="MRI检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.mriResult!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- 肺功能检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.30.009.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="肺功能检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.pulmonaryFunctionResults!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- 血常规检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.50.128.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="血常规检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.bloodRoutResult!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- 尿常规检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.50.048.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="尿常规检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.urineTestResults!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- 凝血功能检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.50.142.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="凝血功能检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.coagulationTestResults!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- 肝功能检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.50.026.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="肝功能检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.liverFunctionResult!'NA'}</value>
+            </observation>
+          </entry>
+          <!-- 血气分析检查结果 -->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE04.50.128.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="血气分析检查结果"/>
+              <value xsi:type="ST">${visitsRecBefAnesthesia.bloodgasAnalysisTestResult!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!-- 治疗计划章节 -->
+      <component>
+        <section>
+          <code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="TREATMENT PLAN"/>
+          <text/>
+          <!-- 拟实施手术及操作编码 DE06.00.093.00 -->
+          <entry>
+            <procedure classCode="PROC" moodCode="EVN">
+              <code code="${visitsRecBefAnesthesia.simuloperationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.12" codeSystemName="手术(操作)代码表(ICD-9-CM)" displayName="<@dict_tag value="${visitsRecBefAnesthesia.simuloperationCode!'NA'}" datasetCloumn="SIMULOPERATION_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+              <!--手术间编号-->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.256.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="患者实施手术所在的手术室编号"/>
+                  <value xsi:type="ST">${visitsRecBefAnesthesia.operationRoomNo!'NA'}</value>
+                </observation>
+              </entryRelationship>
+            </procedure>
+          </entry>
+          <entry>
+            <!-- 拟实施麻醉方法代码 -->
+            <observation classCode="OBS" moodCode="INT">
+              <code code="DE06.00.073.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="拟实施麻醉方法代码"/>
+              <value code="${visitsRecBefAnesthesia.intentAnesthesiaCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.159" codeSystemName="麻醉方法代码表" displayName="<@dict_tag value="${visitsRecBefAnesthesia.intentAnesthesiaCode!'NA'}" datasetCloumn="INTENT_ANESTHESIA_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+              <!-- 术前麻醉医嘱 -->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="INT">
+                  <code code="DE06.00.287.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="术前麻醉医嘱"/>
+                  <value xsi:type="ST">${visitsRecBefAnesthesia.operateAnesthesiaAdvice!'NA'}</value>
+                </observation>
+              </entryRelationship>
+              <!-- 麻醉适应证 -->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.227.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="麻醉适应证"/>
+                  <value xsi:type="ST">${visitsRecBefAnesthesia.anesthesiaIndication!'NA'}</value>
+                </observation>
+              </entryRelationship>
+              <!-- 注意事项 -->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE09.00.119.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="注意事项"/>
+                  <value xsi:type="ST">${visitsRecBefAnesthesia.attention!'NA'}</value>
+                </observation>
+              </entryRelationship>
+            </observation>
+          </entry>
+        </section>
+      </component>
+    </structuredBody>
+  </component>
+</ClinicalDocument>

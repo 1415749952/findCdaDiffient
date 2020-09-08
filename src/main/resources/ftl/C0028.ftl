@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ../sdschemas/CDA.xsd">
+  <realmCode code="CN"/>
+  <typeId extension="POCD_MT000040" root="2.16.840.1.113883.1.3"/>
+  <templateId root="2.16.156.10011.2.1.1.48"/>
+  <!-- 文档流水号 -->
+  <id extension="${docInfo.documentUniqueId}" root="2.16.156.10011.1.1"/>
+  <code code="C0028" codeSystem="2.16.156.10011.2.4" codeSystemName="卫生信息共享文档规范编码体系"/>
+  <title>输血治疗同意书</title>
+  <!-- 文档机器生成时间 -->
+  <effectiveTime value="${docInfo.effectiveTime}"/>
+  <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality" displayName="正常访问保密级别"/>
+  <languageCode code="zh-CN"/>
+  <setId/>
+  <versionNumber/>
+  <!--患者信息-->
+  <recordTarget contextControlCode="OP" typeCode="RCT">
+    <patientRole>
+      <!--门诊号-->
+      <id extension="${transfusionInformedConsent.outpNo!'NA'}" root="2.16.156.10011.1.11"/>
+      <!--住院号-->
+      <id extension="${transfusionInformedConsent.inpNo!'NA'}" root="2.16.156.10011.1.12"/>
+      <!-- 知情同意书编号 -->
+      <id extension="${transfusionInformedConsent.informedConsentNo!'NA'}" root="2.16.156.10011.1.34"/>
+      <patient>
+        <!--患者身份证号标识-->
+        <id extension="<@privacy_tag value="${emrBasicpatient.identityNo!'NA'}" privacyId="1">${privacy}</@privacy_tag>" root="2.16.156.10011.1.3"/>
+        <name><@privacy_tag value="${transfusionInformedConsent.patientName!'NA'}" privacyId="2">${privacy}</@privacy_tag></name>
+        <!--性别-->
+        <administrativeGenderCode code="${transfusionInformedConsent.sexCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${transfusionInformedConsent.sexCode!'NA'}" datasetCloumn="SEX_CODE">${dict.desc}</@dict_tag>"/>
+        <#if transfusionInformedConsent.ageYear??>
+        <age unit="岁" value="${transfusionInformedConsent.ageYear!'NA'}"/>
+        <#else>
+        <age unit="月" value="${transfusionInformedConsent.patientMonth!'NA'}"/>
+        </#if>
+      </patient>
+    </patientRole>
+  </recordTarget>
+  <!--作者-->
+  <author contextControlCode="OP" typeCode="AUT">
+    <time value="${transfusionInformedConsent.doctorSignDatetime!'NA'}" xsi:type="TS"/>
+    <assignedAuthor classCode="ASSIGNED">
+      <id extension="${transfusionInformedConsent.doctorSign!'NA'}" root="2.16.156.10011.1.7"/>
+      <assignedPerson>
+        <name>${transfusionInformedConsent.doctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedAuthor>
+  </author>
+  <!--保管机构-->
+  <custodian typeCode="CST">
+    <assignedCustodian classCode="ASSIGNED">
+      <representedCustodianOrganization classCode="ORG" determinerCode="INSTANCE">
+        <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+        <name>${hospitalInfo.organName!'NA'}</name>
+      </representedCustodianOrganization>
+    </assignedCustodian>
+  </custodian>
+  <!--医师签名 -->
+  <legalAuthenticator typeCode="LA">
+    <time value="${transfusionInformedConsent.doctorSignDatetime!'NA'}"/>
+    <signatureCode code="s"/>
+    <assignedEntity>
+      <id extension="${transfusionInformedConsent.doctorSign!'NA'}" root="2.16.156.10011.1.4"/>
+      <assignedPerson>
+        <name>${transfusionInformedConsent.doctorSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </legalAuthenticator>
+  <!--患者签名-->
+  <authenticator>
+  <!--患者/法定代理人签名日期时间 -->
+    <time value="${transfusionInformedConsent.signDatetime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="${transfusionInformedConsent.patientName!'NA'}" root="2.16.156.10011.1.3"/>
+      <assignedPerson>
+        <!--患者签名-->
+        <name>${transfusionInformedConsent.patientName!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <!--代理人签名 -->
+  <authenticator>
+  <!--患者/法定代理人签名日期时间-->
+    <time value="${transfusionInformedConsent.signDatetime!'NA'}"/>
+    <signatureCode/>
+    <assignedEntity>
+      <id extension="${transfusionInformedConsent.patientAgentSign!'NA'}" root="2.16.156.10011.1.3"/>
+      <!--代理人关系-->
+      <code code="${transfusionInformedConsent.relationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.8" codeSystemName="家庭关系代码表(GB/T 4761)" displayName="<@dict_tag value="${transfusionInformedConsent.relationCode!'NA'}" datasetCloumn="RELATION_CODE">${dict.desc}</@dict_tag>"/>
+      <assignedPerson>
+        <!--代理人签名 -->
+        <name>${transfusionInformedConsent.patientAgentSign!'NA'}</name>
+      </assignedPerson>
+    </assignedEntity>
+  </authenticator>
+  <relatedDocument typeCode="RPLC">
+    <parentDocument>
+      <id/>
+      <setId/>
+      <versionNumber/>
+    </parentDocument>
+  </relatedDocument>
+  <!-- 病床号、病房、病区、科室和医院的关联 -->
+  <componentOf>
+    <encompassingEncounter>
+      <code/>
+      <effectiveTime/>
+      <location>
+        <healthCareFacility>
+          <serviceProviderOrganization>
+            <asOrganizationPartOf classCode="PART">
+              <!-- DE01.00.026.00病床号 -->
+              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                <id extension="${transfusionInformedConsent.bedNo!'NA'}" root="2.16.156.10011.1.22"/>
+                <name>${transfusionInformedConsent.bedNo!'NA'}</name>
+                <asOrganizationPartOf classCode="PART">
+                  <!-- DE01.00.019.00病房号 -->
+                  <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                    <id extension="${transfusionInformedConsent.areaNo!'NA'}" root="2.16.156.10011.1.21"/>
+                    <name>${transfusionInformedConsent.areaNo!'NA'}</name>
+                    <asOrganizationPartOf classCode="PART">
+                      <!-- DE08.10.026.00科室名称 -->
+                      <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                        <id extension="${transfusionInformedConsent.deptName!'NA'}" root="2.16.156.10011.1.26"/>
+                        <name>${transfusionInformedConsent.deptName!'NA'}</name>
+                        <asOrganizationPartOf classCode="PART">
+                          <!-- DE08.10.054.00病区名称 -->
+                          <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                            <id extension="${transfusionInformedConsent.areaName!'NA'}" root="2.16.156.10011.1.27"/>
+                            <name>${transfusionInformedConsent.areaName!'NA'}</name>
+                            <asOrganizationPartOf classCode="PART">
+                              <!--医疗机构名称 -->
+                              <wholeOrganization classCode="ORG" determinerCode="INSTANCE">
+                                <id extension="${hospitalInfo.organCode!'NA'}" root="2.16.156.10011.1.5"/>
+                                <name>${hospitalInfo.organName!'NA'}</name>
+                              </wholeOrganization>
+                            </asOrganizationPartOf>
+                          </wholeOrganization>
+                        </asOrganizationPartOf>
+                      </wholeOrganization>
+                    </asOrganizationPartOf>
+                  </wholeOrganization>
+                </asOrganizationPartOf>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </serviceProviderOrganization>
+        </healthCareFacility>
+      </location>
+    </encompassingEncounter>
+  </componentOf>
+  <component>
+    <structuredBody>
+      <!--诊断章节-->
+      <component>
+        <section>
+          <code code="29548-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Diagnosis"/>
+          <text/>
+          <!--疾病诊断编码-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.01.024.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="疾病诊断编码"/>
+              <value code="${transfusionInformedConsent.diagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="<@dict_tag value="${transfusionInformedConsent.diagCode!'NA'}" datasetCloumn="DIAG_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--输血章节-->
+      <component>
+        <section>
+          <code code="56836-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of blood transfusion"/>
+          <text/>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.106.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录"/>
+              <!--1无，2有，9未说明-->
+              <value code="${transfusionInformedConsent.bloodTransfusionHistory!'NA'}" codeSystem="2.16.156.10011.2.3.2.42" codeSystemName="输血史标识代码表" displayName="<@dict_tag value="${transfusionInformedConsent.bloodTransfusionHistory!'NA'}" datasetCloumn="BLOOD_TRANSFUSION_HISTORY">${dict.desc}</@dict_tag>" xsi:type="CD"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--治疗计划章节-->
+      <component>
+        <section>
+          <code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="TREATMENT PLAN"/>
+          <text/>
+          <!--输血过程-->
+          <entry>
+            <procedure classCode="PROC" moodCode="EVN">
+              <code/>
+              <!--拟定输血日期时间-->
+              <effectiveTime value="${transfusionInformedConsent.intentTransfusionDate!'NA'}"/>
+              <!--输血方式-->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.266.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="输血方式"/>
+                  <value xsi:type="ST">${transfusionInformedConsent.bloodTransfusionWay!'NA'}</value>
+                </observation>
+              </entryRelationship>
+              <!--输血指征-->
+              <entryRelationship typeCode="CAUS">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE06.00.340.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="输血指征"/>
+                  <value xsi:type="ST">${transfusionInformedConsent.bbloodTransfusionIndication!'NA'}</value>
+                </observation>
+              </entryRelationship>
+              <!--输血品种代码-->
+              <entryRelationship typeCode="COMP">
+                <substanceAdministration classCode="SBADM" moodCode="RQO">
+                  <consumable>
+                    <manufacturedProduct>
+                      <manufacturedMaterial>
+                        <code code="${transfusionInformedConsent.bloodTransfusionVarietyCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.251" codeSystemName="输血品种代码表" displayName="<@dict_tag value="${transfusionInformedConsent.bloodTransfusionVarietyCode!'NA'}" datasetCloumn="BLOOD_TRANSFUSION_VARIETY_CODE">${dict.desc}</@dict_tag>"/>
+                      </manufacturedMaterial>
+                    </manufacturedProduct>
+                  </consumable>
+                </substanceAdministration>
+              </entryRelationship>
+              <!--输血前有关检查项目以及结果-->
+              <entryRelationship typeCode="COMP">
+                <observation classCode="OBS" moodCode="EVN">
+                  <code code="DE05.10.109.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="输血前有关检查项目以及结果"/>
+                  <value xsi:type="ED">${transfusionInformedConsent.checkTransfusItemResults!'NA'}</value>
+                </observation>
+              </entryRelationship>
+            </procedure>
+          </entry>
+        </section>
+      </component>
+      <!--意见章节-->
+      <component>
+        <section>
+          <code displayName="意见章节"/>
+          <text/>
+          <!--医疗机构意见-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.018.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="医疗机构的意见"/>
+              <value xsi:type="ST">${transfusionInformedConsent.orgOpinion!'NA'}</value>
+            </observation>
+          </entry>
+          <!--患者意见-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE06.00.018.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="患者的意见"/>
+              <value xsi:type="ST">${transfusionInformedConsent.patientAgentOpinion!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <!--风险章节-->
+      <component>
+        <section>
+          <code displayName="操作风险"/>
+          <text/>
+          <!--输血风险及可能发生的不良后果-->
+          <entry>
+            <observation classCode="OBS" moodCode="DEF">
+              <code code="DE06.00.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="输血风险及可能发生的不良后果"/>
+              <value xsi:type="ST"/>
+            </observation>
+          </entry>
+        </section>
+      </component>
+    </structuredBody>
+  </component>
+</ClinicalDocument>

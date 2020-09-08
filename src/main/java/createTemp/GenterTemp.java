@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
- * Description:根据xml文件生辰模版
+ * Description:根据xml文件生成ftl模版
  *
  * @version 1.0
  * @author: TheFei

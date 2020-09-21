@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -32,7 +34,9 @@ public class RedCDA
         //所有的cda文档名称
         String[] cdaFileNames = cadTempFile.list();
         HashSet<String> strings = new HashSet<>();
-        for (String cdaFileName : cdaFileNames)
+        List<String> strings1 = Arrays.asList(cdaFileNames);
+        Collections.sort(strings1);
+        for (String cdaFileName : strings1)
         {
             File cda = new File(courseFile + separator + cdaFileName);
             String s = redCDAFileByLine(cda);

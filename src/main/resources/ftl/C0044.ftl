@@ -255,32 +255,33 @@
         <section>
           <code code="30954-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="STUDIES SUMMARY"/>
           <text/>
-          <!--检查/检验项目名称-->
+          <!--检查/检验项目-->
           <entry>
             <observation classCode="OBS " moodCode="EVN ">
-              <code code="DE04.30.020.00" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="卫生信息数据元目录" displayName="检查/检验项目名称"/>
+              <code code="DE04.30.020.00" displayName="检查/检验项目名称" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="卫生信息数据元目录"/>
               <value xsi:type="ST">${salvageRecrod.inspectionItemName!'NA'}</value>
-            </observation>
-          </entry>
-          <!--检查/检验结果-->
-          <entry>
-            <observation classCode="OBS " moodCode="EVN ">
-              <code code="DE04.30.009.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="检查/检验结果"/>
-              <value xsi:type="ST">${salvageRecrod.inspectionResult!'NA'}</value>
-            </observation>
-          </entry>
-          <!--检查/检验定量结果-->
-          <entry>
-            <observation classCode="OBS " moodCode="EVN ">
-              <code code="DE04.30.015.00" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="卫生信息数据元目录" displayName="检查/检验定量结果"/>
-              <value unit="mmHg" value="${salvageRecrod.inspectionQuantifyResult!'NA'}" xsi:type="PQ"/>
-            </observation>
-          </entry>
-          <!--检查(检验)结果代码表-->
-          <entry>
-            <observation classCode="OBS " moodCode="EVN ">
-              <code code="DE04.30.017.00" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="卫生信息数据元目录" displayName="检查/检验结果代码"/>
-              <value code="${salvageRecrod.inspectionResultCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.38" codeSystemName="检查(检验)结果代码表" xsi:type="CD" displayName="<@dict_tag value="${salvageRecrod.inspectionResultCode!'NA'}" datasetCloumn="INSPECTION_RESULT_CODE">${dict.desc}</@dict_tag>"/>
+              <entryRelationship typeCode="COMP">
+                <!--检查/检验结果-->
+                <observation classCode="OBS " moodCode="EVN ">
+                  <code code="DE04.30.009.00" displayName="检查/检验结果" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录"/>
+                  <value xsi:type="ST">${salvageRecrod.inspectionResult!'NA'}</value>
+                </observation>
+              </entryRelationship>
+              <entryRelationship typeCode="COMP">
+                <!--检查/检验定量结果-->
+                <observation classCode="OBS " moodCode="EVN ">
+                  <code code="DE04.30.015.00" displayName="检查/检验定量结果" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="卫生信息数据元目录"/>
+                  <value xsi:type="PQ" value="${salvageRecrod.inspectionQuantifyResult!'NA'}" unit="ng/ml"/>
+                </observation>
+              </entryRelationship>
+              <entryRelationship typeCode="COMP">
+                <!--检查/检验结果代码-->
+                <observation classCode="OBS " moodCode="EVN ">
+                  <code code="DE04.30.017.00" displayName="检查/检验结果代码" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="卫生信息数据元目录"/>
+                  <!--2.正常 1.异常 3.不确定-->
+                  <value code="${salvageRecrod.inspectionResultCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.38" codeSystemName="检查(检验)结果代码表" xsi:type="CD" displayName="<@dict_tag value="${salvageRecrod.inspectionResultCode!'NA'}" datasetCloumn="INSPECTION_RESULT_CODE">${dict.desc}</@dict_tag>"/>
+                </observation>
+              </entryRelationship>
             </observation>
           </entry>
         </section>

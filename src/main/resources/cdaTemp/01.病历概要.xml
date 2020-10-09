@@ -130,7 +130,8 @@
   </relatedDocument>
   <component>
     <structuredBody>
-      <!--实验室检验章节-->
+      <#if (emrBasichealth.aboBloodCode??) && (emrBasichealth.rhBloodCode??)>
+      <!--实验室检验章节0..1-->
       <component>
         <section>
           <code code="30954-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="STUDIES SUMMARY"/>
@@ -157,7 +158,9 @@
           </entry>
         </section>
       </component>
-      <!--既往史章节-->
+      </#if>
+      <#if (emrBasichealth.diseaseHistory??) && (emrBasichealth.infectHistory??) && (emrBasichealth.operationHistory??) && (emrBasichealth.maritalHistory??)>
+      <!--既往史章节0..1-->
       <component>
         <section>
           <code code="11348-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF PAST ILLNESS"/>
@@ -169,6 +172,7 @@
               <value xsi:type="ST">${emrBasichealth.diseaseHistory!'NA'}</value>
             </observation>
           </entry>
+          <#if emrBasichealth.infectHistory??>
           <!--传染病史-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -176,6 +180,8 @@
               <value xsi:type="ST">${emrBasichealth.infectHistory!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if emrBasichealth.operationHistory??>
           <!--手术史-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -183,6 +189,8 @@
               <value xsi:type="ST">${emrBasichealth.operationHistory!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if emrBasichealth.maritalHistory??>
           <!--婚育史条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -190,9 +198,12 @@
               <value xsi:type="ST">${emrBasichealth.maritalHistory!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
-      <!--输血章节-->
+      </#if>
+      <#if emrBasichealth.bloodTransfusionHistory??>
+      <!--输血章节0..1-->
       <component>
         <section>
           <code code="56836-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of blood transfusion"/>
@@ -205,7 +216,9 @@
           </entry>
         </section>
       </component>
-      <!--过敏史章节-->
+      </#if>
+      <#if emrBasichealth.allergyHistory??>
+      <!--过敏史章节0..1-->
       <component>
         <section>
           <code code="48765-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Allergies, adverse reactions, alerts"/>
@@ -219,7 +232,9 @@
           </entry>
         </section>
       </component>
-      <!--预防接种史章节-->
+      </#if>
+      <#if emrBasichealth.preventHistory??>
+      <!--预防接种史章节0..1-->
       <component>
         <section>
           <code code="11369-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF IMMUNIZATIONS"/>
@@ -232,7 +247,9 @@
           </entry>
         </section>
       </component>
-      <!--个人史章节-->
+      </#if>
+      <#if emrBasichealth.personHistory??>
+      <!--个人史章节0..1-->
       <component>
         <section>
           <code code="29762-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Social history"/>
@@ -246,7 +263,9 @@
           </entry>
         </section>
       </component>
-      <!--月经史章节-->
+      </#if>
+      <#if emrBasichealth.menstruationHistory??>
+      <!--月经史章节0..1-->
       <component>
         <section>
           <code code="49033-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Menstrual History"/>
@@ -260,7 +279,9 @@
           </entry>
         </section>
       </component>
-      <!--家族史章节-->
+      </#if>
+      <#if emrBasichealth.familyHistory??>
+      <!--家族史章节0..1-->
       <component>
         <section>
           <code code="10157-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF FAMILY MEMBER DISEASES"/>
@@ -274,6 +295,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--卫生事件章节-->
       <component>
         <section>
@@ -297,12 +319,15 @@
               <value xsi:type="ST">${emrHealthevents.outpNo!'NA'}</value>
             </observation>
           </entry>
+          <#if emrHealthevents.inpNo??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE01.00.014.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="住院号"/>
               <value xsi:type="ST">${emrHealthevents.inpNo!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if (emrHealthevents.inpDatetime??) && (emrHealthevents.dishospitalDatetime??)>
           <entry>
             <organizer classCode="BATTERY" moodCode="EVN">
               <statusCode/>
@@ -322,20 +347,29 @@
             </#if>
             </organizer>
           </entry>
+          </#if>
+          <#if emrHealthevents.morbidityDatetime??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE04.01.018.00" displayName="发病日期时间" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录"/>
               <value xsi:type="TS" value="${emrHealthevents.morbidityDatetime!'NA'}"/>
             </observation>
           </entry>
+          </#if>
+          <#if (emrHealthevents.visitDatetime??) && (emrHealthevents.clinicReason??)>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.053.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="就诊原因"/>
               <!--就诊日期时间 DE06.00.062.00-->
+              <#if emrHealthevents.visitDatetime??>
               <effectiveTime value="${emrHealthevents.visitDatetime!'NA'}"/>
+              <#else>
+              <effectiveTime/>
+              </#if>
               <value xsi:type="ST">${emrHealthevents.clinicReason!'NA'}</value>
             </observation>
           </entry>
+          </#if>
           <!--条目诊断-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -398,12 +432,15 @@
               </observation>
             </entry>
           </#if>
+          <#if emrHealthevents.operationCode??>
           <entry>
             <procedure classCode="PROC" moodCode="EVN">
               <!--手术及操作编码 DE06.00.093.00-->
               <code code="${emrHealthevents.operationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.12" codeSystemName="手术(操作)代码表(ICD-9-CM)" displayName="<@dict_tag value="${emrHealthevents.operationCode!'NA'}" datasetCloumn="OPERATION_CODE">${dict.desc}</@dict_tag>"/>
             </procedure>
           </entry>
+          </#if>
+          <#if (emrHealthevents.drugName??) && (emrHealthevents.drugUsage??) && (emrHealthevents.adverseDrugReactions??) && (emrHealthevents.tcdTypeCode??)>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE08.50.022.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="关键药物名称"/>
@@ -428,6 +465,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          </#if>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.251.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="其他医学处置"/>

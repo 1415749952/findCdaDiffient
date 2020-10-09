@@ -21,7 +21,7 @@
       <patient classCode="PSN" determinerCode="INSTANCE">
         <!--患者身份证号标识-->
         <id extension="<@privacy_tag value="${emrBasicpatient.identityNo!'NA'}" privacyId="1">${privacy}</@privacy_tag>" root="2.16.156.10011.1.3"/>
-        <name><@privacy_tag value="${firstCourseRecord.patientName'NA'}" privacyId="2">${privacy}</@privacy_tag></name>
+        <name><@privacy_tag value="${firstCourseRecord.patientName!'NA'}" privacyId="2">${privacy}</@privacy_tag></name>
         <administrativeGenderCode code="${firstCourseRecord.sexCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${firstCourseRecord.sexCode!'NA'}" datasetCloumn="SEX_CODE">${dict.desc}</@dict_tag>"/>
         <birthTime value="${emrBasicpatient.birthday!'NA'}"/>
         <!--1数据集里是年龄（年）、年龄（月）-->

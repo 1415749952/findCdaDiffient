@@ -27,7 +27,7 @@
         <age unit="岁" value="${preOperationDiscussion.ageYear!'NA'}"/>
         <#else>
         <age unit="月" value="${preOperationDiscussion.patientMonth!'NA'}"/>
-    </#if>
+        </#if>
       </patient>
       <providerOrganization classCode="ORG" determinerCode="INSTANCE">
         <asOrganizationPartOf classCode="PART">

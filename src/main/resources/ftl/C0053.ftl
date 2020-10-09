@@ -334,6 +334,7 @@
           </entry>
         </section>
       </component>
+      <!--治疗计划章节-->
       <component>
         <section>
           <code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="TREATMENT PLAN"/>

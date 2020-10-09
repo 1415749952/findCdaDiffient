@@ -25,11 +25,15 @@
         <id extension="<@privacy_tag value="${emrBasicpatient.identityNo!'NA'}" privacyId="1">${privacy}</@privacy_tag>" root="2.16.156.10011.1.3"/>
         <name><@privacy_tag value="${outpatientEmergencyRecords.patientName!'NA'}" privacyId="2">${privacy}</@privacy_tag></name>
         <administrativeGenderCode code="${outpatientEmergencyRecords.patientSex!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${outpatientEmergencyRecords.patientSex!'NA'}" datasetCloumn="PATIENT_SEX">${dict.desc}</@dict_tag>"/>
+        <#if outpatientEmergencyRecords.patientBirthday??>
         <birthTime value="${outpatientEmergencyRecords.patientBirthday!'NA'}"/>
+        </#if>
         <#if outpatientEmergencyRecords.ageYear??>
         <age unit="岁" value="${outpatientEmergencyRecords.ageYear!'NA'}"/>
         <#else>
+        <#if outpatientEmergencyRecords.patientMonth??>
         <age unit="月" value="${outpatientEmergencyRecords.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
       <providerOrganization>
@@ -87,7 +91,8 @@
   </relatedDocument>
   <component>
     <structuredBody>
-      <!-- 过敏史章节 -->
+      <#if (outpatientEmergencyRecords.allergyHostoryFlag??) && (outpatientEmergencyRecords.allergyHistory??)>
+      <!-- 过敏史章节0..1 -->
       <component>
         <section>
           <code code="48765-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Allergies, adverse reactions, alerts"/>
@@ -106,6 +111,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--主诉章节-->
       <component>
         <section>
@@ -134,7 +140,8 @@
           </entry>
         </section>
       </component>
-      <!-- 既往史章节 -->
+      <#if outpatientEmergencyRecords.pastHistory??>
+      <!-- 既往史章节0..1 -->
       <component>
         <section>
           <code code="11348-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF PAST ILLNESS"/>
@@ -147,7 +154,9 @@
           </entry>
         </section>
       </component>
-      <!--体格检查章节-->
+      </#if>
+      <#if outpatientEmergencyRecords.physicalExamination??>
+      <!--体格检查章节0..1-->
       <component>
         <section>
           <code code="29545-1" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="PHYSICAL EXAMINATION"/>
@@ -161,7 +170,9 @@
           </entry>
         </section>
       </component>
-      <!-- 实验室检验章节 -->
+      </#if>
+      <#if (outpatientEmergencyRecords.auxiliaryexamiItem??) && (outpatientEmergencyRecords.auxiliaryexamiResult??)>
+      <!-- 实验室检验章节0..1 -->
       <component>
         <section>
           <code code="30954-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="STUDIES SUMMARY"/>
@@ -180,6 +191,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!-- 诊断记录章节 -->
       <component>
         <section>
@@ -192,6 +204,7 @@
               <value code="${outpatientEmergencyRecords.newlyDiagnosedCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.39" codeSystemName="初诊标志代码表" displayName="<@dict_tag value="${outpatientEmergencyRecords.newlyDiagnosedCode!'NA'}" datasetCloumn="NEWLY_DIAGNOSED_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
+          <#if outpatientEmergencyRecords.tcmFourObservations??>
           <!--中医“四诊”观察结果-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -199,6 +212,8 @@
               <value xsi:type="ST">${outpatientEmergencyRecords.tcmFourObservations!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if outpatientEmergencyRecords.emergencyPdWmDisCode??>
           <!--条目：诊断-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -206,12 +221,16 @@
               <value xsi:type="CD" code="${outpatientEmergencyRecords.emergencyPdWmDisCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11.1" codeSystemName="诊断代码表(ICD-10)" displayName="<@dict_tag value="${outpatientEmergencyRecords.emergencyPdWmDisCode!'NA'}" datasetCloumn="EMERGENCY_PD_WM_DIS_CODE">${dict.desc}</@dict_tag>"/>
             </observation>
           </entry>
+          </#if>
+          <#if outpatientEmergencyRecords.inhosDiagWmDiagName??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.01.025.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="诊断名称"/>
               <value xsi:type="ST">${outpatientEmergencyRecords.inhosDiagWmDiagName!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if outpatientEmergencyRecords.diseasesCode??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中医病名代码">
@@ -222,6 +241,8 @@
               <value code="${outpatientEmergencyRecords.diseasesCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD" displayName="<@dict_tag value="${outpatientEmergencyRecords.diseasesCode!'NA'}" datasetCloumn="DISEASES_CODE">${dict.desc}</@dict_tag>"/>
             </observation>
           </entry>
+          </#if>
+          <#if outpatientEmergencyRecords.inhosDiagCmDisName??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.172.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中医病名名称">
@@ -232,6 +253,8 @@
               <value xsi:type="ST">${outpatientEmergencyRecords.inhosDiagCmDisName!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if outpatientEmergencyRecords.syndromesCode??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中医证候代码">
@@ -242,6 +265,8 @@
               <value code="${outpatientEmergencyRecords.syndromesCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD" displayName="<@dict_tag value="${outpatientEmergencyRecords.syndromesCode!'NA'}" datasetCloumn="SYNDROMES_CODE">${dict.desc}</@dict_tag>"/>
             </observation>
           </entry>
+          </#if>
+          <#if outpatientEmergencyRecords.inhosDiagCmSyndromeName??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.172.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中医证候名称">
@@ -252,13 +277,16 @@
               <value xsi:type="ST">${outpatientEmergencyRecords.inhosDiagCmSyndromeName!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
-      <!-- 治疗计划章节 -->
+      <#if (outpatientEmergencyRecords.dialecticalAccrod??) && (outpatientEmergencyRecords.therapeuticPrinciple??)>
+      <!-- 治疗计划章节0..1 -->
       <component>
         <section>
           <code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="TREATMENT PLAN"/>
           <text/>
+          <#if outpatientEmergencyRecords.dialecticalAccrod??>
           <!--辨证依据描述-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -266,6 +294,8 @@
               <value xsi:type="ST">${outpatientEmergencyRecords.dialecticalAccrod!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if outpatientEmergencyRecords.therapeuticPrinciple??>
           <!--治则治法-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -273,9 +303,12 @@
               <value xsi:type="ST">${outpatientEmergencyRecords.therapeuticPrinciple!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
-      <!--医嘱章节-->
+      </#if>
+      <#if outpatientEmergencyRecords.adviceItemContent??>
+      <!--医嘱章节0..1-->
       <component>
         <section>
           <code code="46209-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Provider Orders"/>
@@ -386,6 +419,7 @@
           </entry>
         </section>
       </component>
+      </#if>
     </structuredBody>
   </component>
 </ClinicalDocument>

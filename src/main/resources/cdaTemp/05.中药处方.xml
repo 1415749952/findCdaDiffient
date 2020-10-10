@@ -30,7 +30,9 @@
         <#if prescriptionChine.ageYear??>
         <age unit="岁" value="${prescriptionChine.ageYear!'NA'}"/>
         <#else>
+        <#if prescriptionChine.patientMonth??>
         <age unit="月" value="${prescriptionChine.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
       <!-- 开立科室 -->
@@ -150,6 +152,7 @@
               <value xsi:type="CD" code="${prescriptionChine.westernDiagnosisCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="<@dict_tag value="${prescriptionChine.westernDiagnosisCode!'NA'}" datasetCloumn="WESTERN_DIAGNOSIS_CODE">${dict.desc}</@dict_tag>"/>
             </observation>
           </entry>
+          <#if prescriptionChine.chineseDiagnosisCode??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中医诊断病名代码">
@@ -160,6 +163,8 @@
               <value code="${prescriptionChine.chineseDiagnosisCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" displayName="<@dict_tag value="${prescriptionChine.chineseDiagnosisCode!'NA'}" datasetCloumn="CHINESE_DIAGNOSIS_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
+          </#if>
+          <#if prescriptionChine.chineseSyndromeCode??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.130.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中医证候代码">
@@ -170,6 +175,7 @@
               <value code="${prescriptionChine.chineseSyndromeCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.14" codeSystemName="中医病证分类与代码表( GB/T 15657)" xsi:type="CD" displayName="<@dict_tag value="${prescriptionChine.chineseSyndromeCode!'NA'}" datasetCloumn="CHINESE_SYNDROME_CODE">${dict.desc}</@dict_tag>"/>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--用药章节 1..*-->
@@ -220,7 +226,6 @@
               <value xsi:type="PQ" value="${prescriptionChine.recipeEffectiveDay!'NA'}" unit="天"/>
             </observation>
           </entry>
-          <#if prescriptionChine.recipeGroupNo??>
           <!--处方药品组号-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -228,7 +233,7 @@
               <value xsi:type="INT" value="${prescriptionChine.recipeGroupNo!'NA'}"/>
             </observation>
           </entry>
-          </#if>
+          <#if prescriptionChine.tcdDecoctionpieces??>
           <!--中药饮片处方-->
           <entry>
             <observation classCode="OBS" moodCode="EVN ">
@@ -257,6 +262,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          </#if>
           <!-- 处方类别代码 DE08.50.032.00 处方类别代码 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -279,11 +285,13 @@
           </entry>
         </section>
       </component>
+      <#if (prescriptionChine.recipeRemark??) && (prescriptionChine.therapeuticPrinciple??)>
         <!-- 治疗计划章节 -->
       <component>
         <section>
           <code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="TREATMENT PLAN"/>
           <text/>
+          <#if prescriptionChine.recipeRemark??>
           <!--处方备注信息-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -291,6 +299,8 @@
               <value xsi:type="ST">${prescriptionChine.recipeRemark!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if prescriptionChine.therapeuticPrinciple??>
           <!--治则治法-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -298,8 +308,10 @@
               <value xsi:type="ST">${prescriptionChine.therapeuticPrinciple!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
+      </#if>
     </structuredBody>
   </component>
 </ClinicalDocument>

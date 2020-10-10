@@ -28,7 +28,9 @@
         <#if prescriptionWest.ageYear??>
         <age unit="岁" value="${prescriptionWest.ageYear!'NA'}"/>
         <#else>
+        <#if prescriptionWest.patientMonth??>
         <age unit="月" value="${prescriptionWest.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
       <!-- 开立科室 -->
@@ -169,14 +171,12 @@
                   <value xsi:type="ST">${prescriptionWest.drugSpec!'NA'}</value>
                 </observation>
               </entryRelationship>
-              <#if prescriptionWest.usageDosageTotal??>
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE06.00.135.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="药物使用总剂量"/>
                   <value xsi:type="PQ" value="${prescriptionWest.usageDosageTotal!'NA'}" unit="${prescriptionWest.dosageUnit!'NA'}"/>
                 </observation>
               </entryRelationship>
-              </#if> 
             </substanceAdministration>
           </entry>
           <entry>
@@ -185,14 +185,12 @@
               <value xsi:type="PQ" value="${prescriptionWest.recipeEffectiveDay!'NA'}" unit="天"/>
             </observation>
           </entry>
-          <#if prescriptionWest.recipeGroupNo??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE08.50.056.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="处方药品组号"/>
               <value xsi:type="INT" value="${prescriptionWest.recipeGroupNo!'NA'}"/>
             </observation>
           </entry>
-          </#if>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.179.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="处方备注信息"/>

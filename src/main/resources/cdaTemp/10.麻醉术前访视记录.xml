@@ -32,7 +32,9 @@
         <#if visitsRecBefAnesthesia.ageYear??>
         <age unit="岁" value="${visitsRecBefAnesthesia.ageYear!'NA'}"/>
         <#else>
+        <#if visitsRecBefAnesthesia.patientMonth??>
         <age unit="月" value="${visitsRecBefAnesthesia.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
     </patientRole>
@@ -139,13 +141,15 @@
               <value code="${visitsRecBefAnesthesia.preoperationDiagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="<@dict_tag value="${visitsRecBefAnesthesia.preoperationDiagCode!'NA'}" datasetCloumn="PREOPERATION_DIAG_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
+          <#if visitsRecBefAnesthesia.preoperativeComorbidity??>
           <!-- 术前合并疾病 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
-              <code code="DE05.01.073.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="<@dict_tag value="${visitsRecBefAnesthesia.preoperativeComorbidity!'NA'}" datasetCloumn="PREOPERATIVE_COMORBIDITY">${dict.desc}</@dict_tag>"/>
+              <code code="DE05.01.076.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="术前合并疾病"/>
               <value xsi:type="ST">${visitsRecBefAnesthesia.preoperativeComorbidity!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--现病史章节-->
@@ -162,6 +166,7 @@
           </entry>
         </section>
       </component>
+      <#if visitsRecBefAnesthesia.allergyHistory??>
       <!--既往史章节-->
       <component>
         <section>
@@ -176,11 +181,16 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if (visitsRecBefAnesthesia.bodyWeight??) || (visitsRecBefAnesthesia.generalhealthCheckResult??) || (visitsRecBefAnesthesia.mentalStateFlag??) || (visitsRecBefAnesthesia.cardiacAuscultationResult??)
+        || (visitsRecBefAnesthesia.lungAuscultationResult??) || (visitsRecBefAnesthesia.limbsTestResult??) || (visitsRecBefAnesthesia.spinalResult??)
+        || (visitsRecBefAnesthesia.abdominalExamResult??) || (visitsRecBefAnesthesia.tracheaTestResult??) || (visitsRecBefAnesthesia.dentalExaminationResult??)>
       <!--体格检查章节-->
       <component>
         <section>
           <code code="29545-1" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="PHYSICAL EXAMINATION"/>
           <text/>
+          <#if visitsRecBefAnesthesia.bodyWeigh??>
           <!-- 体重 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -188,6 +198,8 @@
               <value unit="kg" value="${visitsRecBefAnesthesia.bodyWeight!'NA'}" xsi:type="PQ"/>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.generalhealthCheckResult??>
           <!-- 一般状况检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -195,6 +207,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.generalhealthCheckResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.mentalStateFlag??>
           <!-- 精神状态正常标志 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -202,6 +216,8 @@
               <value value="${visitsRecBefAnesthesia.mentalStateFlag!'NA'}" xsi:type="BL"/>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.cardiacAuscultationResult??>
           <!-- 心脏听诊结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -209,6 +225,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.cardiacAuscultationResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.lungAuscultationResult??>
           <!-- 肺部听诊结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -216,6 +234,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.lungAuscultationResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.limbsTestResult??>
           <!-- 四肢检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -223,6 +243,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.limbsTestResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.spinalResult??>
           <!-- 脊柱检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -230,6 +252,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.spinalResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.abdominalExamResult??>
           <!-- 腹部检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -237,6 +261,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.abdominalExamResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.tracheaTestResult??>
           <!-- 气管检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -244,6 +270,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.tracheaTestResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.dentalExaminationResult??>
           <!-- 牙齿检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -251,8 +279,10 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.dentalExaminationResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
+      </#if>
       <!-- 实验室检查章节 -->
       <component>
         <section>
@@ -278,6 +308,7 @@
               </component>
             </organizer>
           </entry>
+          <#if visitsRecBefAnesthesia.ecgResults??>
           <!-- 心电图检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -285,6 +316,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.ecgResults!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.xlineResult??>
           <!-- 胸部X线检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -292,6 +325,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.xlineResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.ctResult??>
           <!-- CT检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -299,6 +334,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.ctResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.bInspection??>
           <!-- B超检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -306,6 +343,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.bInspection!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.mriResult??>
           <!-- MRI检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -313,6 +352,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.mriResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.pulmonaryFunctionResults??>
           <!-- 肺功能检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -320,6 +361,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.pulmonaryFunctionResults!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.bloodRoutResult??>
           <!-- 血常规检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -327,6 +370,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.bloodRoutResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.urineTestResults??>
           <!-- 尿常规检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -334,6 +379,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.urineTestResults!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.coagulationTestResults??>
           <!-- 凝血功能检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -341,6 +388,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.coagulationTestResults!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.liverFunctionResult??>
           <!-- 肝功能检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -348,6 +397,8 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.liverFunctionResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecBefAnesthesia.bloodgasAnalysisTestResult??>
           <!-- 血气分析检查结果 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -355,8 +406,10 @@
               <value xsi:type="ST">${visitsRecBefAnesthesia.bloodgasAnalysisTestResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
+      <#if (visitsRecBefAnesthesia.simuloperationCode??) || (visitsRecBefAnesthesia.intentAnesthesiaCode??)>
       <!-- 治疗计划章节 -->
       <component>
         <section>
@@ -405,6 +458,7 @@
           </entry>
         </section>
       </component>
+      </#if>
     </structuredBody>
   </component>
 </ClinicalDocument>

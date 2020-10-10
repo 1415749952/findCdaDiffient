@@ -285,7 +285,7 @@
           </entry>
         </section>
       </component>
-      <#if (prescriptionChine.recipeRemark??) && (prescriptionChine.therapeuticPrinciple??)>
+      <#if (prescriptionChine.recipeRemark??) || (prescriptionChine.therapeuticPrinciple??)>
         <!-- 治疗计划章节 -->
       <component>
         <section>

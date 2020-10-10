@@ -91,7 +91,7 @@
   </relatedDocument>
   <component>
     <structuredBody>
-      <#if (emergencyMedicalRecords.allergyHostoryFlag??) && (emergencyMedicalRecords.allergyHistory??)>
+      <#if (emergencyMedicalRecords.allergyHostoryFlag??) || (emergencyMedicalRecords.allergyHistory??)>
       <!-- 过敏史章节 -->
       <component>
         <section>
@@ -286,7 +286,7 @@
           </#if>
         </section>
       </component>
-      <#if (emergencyMedicalRecords.dialecticalAccrod??) && (emergencyMedicalRecords.therapeuticPrinciple??)>
+      <#if (emergencyMedicalRecords.dialecticalAccrod??) || (emergencyMedicalRecords.therapeuticPrinciple??)>
       <!-- 治疗计划章节 -->
       <component>
         <section>

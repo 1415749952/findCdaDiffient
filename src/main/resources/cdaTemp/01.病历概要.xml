@@ -130,7 +130,7 @@
   </relatedDocument>
   <component>
     <structuredBody>
-      <#if (emrBasichealth.aboBloodCode??) && (emrBasichealth.rhBloodCode??)>
+      <#if (emrBasichealth.aboBloodCode??) || (emrBasichealth.rhBloodCode??)>
       <!--实验室检验章节0..1-->
       <component>
         <section>
@@ -159,7 +159,7 @@
         </section>
       </component>
       </#if>
-      <#if (emrBasichealth.diseaseHistory??) && (emrBasichealth.infectHistory??) && (emrBasichealth.operationHistory??) && (emrBasichealth.maritalHistory??)>
+      <#if (emrBasichealth.diseaseHistory??) || (emrBasichealth.infectHistory??) || (emrBasichealth.operationHistory??) || (emrBasichealth.maritalHistory??)>
       <!--既往史章节0..1-->
       <component>
         <section>
@@ -327,7 +327,7 @@
             </observation>
           </entry>
           </#if>
-          <#if (emrHealthevents.inpDatetime??) && (emrHealthevents.dishospitalDatetime??)>
+          <#if (emrHealthevents.inpDatetime??) || (emrHealthevents.dishospitalDatetime??)>
           <entry>
             <organizer classCode="BATTERY" moodCode="EVN">
               <statusCode/>
@@ -356,7 +356,7 @@
             </observation>
           </entry>
           </#if>
-          <#if (emrHealthevents.visitDatetime??) && (emrHealthevents.clinicReason??)>
+          <#if (emrHealthevents.visitDatetime??) || (emrHealthevents.clinicReason??)>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.053.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="就诊原因"/>
@@ -440,7 +440,7 @@
             </procedure>
           </entry>
           </#if>
-          <#if (emrHealthevents.drugName??) && (emrHealthevents.drugUsage??) && (emrHealthevents.adverseDrugReactions??) && (emrHealthevents.tcdTypeCode??)>
+          <#if (emrHealthevents.drugName??) || (emrHealthevents.drugUsage??) || (emrHealthevents.adverseDrugReactions??) || (emrHealthevents.tcdTypeCode??)>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE08.50.022.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="关键药物名称"/>

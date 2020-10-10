@@ -32,7 +32,9 @@
         <#if generalOperationRecords.ageYear??>
         <age unit="岁" value="${generalOperationRecords.ageYear!'NA'}"/>
         <#else>
+        <#if generalOperationRecords.patientMonth??>
         <age unit="月" value="${generalOperationRecords.patientMonth!'NA'}"/>
+        </#if>
         </#if>
     </patient>
     </patientRole>
@@ -126,6 +128,7 @@
   </componentOf>
   <component>
     <structuredBody>
+      <#if generalOperationRecords.operationFlag??>
       <!--既往史章节-->
       <component>
         <section>
@@ -141,6 +144,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <component>
         <section>
           <code code="10219-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Surgical operation note preoperative Dx"/>
@@ -232,6 +236,7 @@
                   <value xsi:type="ST">${generalOperationRecords.operateRoomNo!'NA'}</value>
                 </observation>
               </entryRelationship>
+              <#if generalOperationRecords.operationLevelCode??>
               <!--手术级别 -->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
@@ -240,10 +245,12 @@
                   <value code="${generalOperationRecords.operationLevelCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.258" codeSystemName="手术级别代码表" displayName="<@dict_tag value="${generalOperationRecords.operationLevelCode!'NA'}" datasetCloumn="OPERATION_LEVEL_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
                 </observation>
               </entryRelationship>
+              </#if>
             </procedure>
           </entry>
         </section>
       </component>
+      <#if generalOperationRecords.operationBleeding??>
       <!--失血章节-->
       <component>
         <section>
@@ -258,11 +265,14 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if (generalOperationRecords.bloodTransferedValue??) || (generalOperationRecords.bloodtransferedReactionCode??)>
       <!--输血章节-->
       <component>
         <section>
           <code code="56836-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of blood transfusion"/>
           <text/>
+          <#if generalOperationRecords.bloodTransferedValue??>
           <!--输血量（mL）-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -271,6 +281,7 @@
               <value unit="mL" value="${generalOperationRecords.bloodTransferedValue!'NA'}" xsi:type="PQ"/>
             </observation>
           </entry>
+          </#if>
           <!--输血反应标志-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -281,6 +292,8 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if generalOperationRecords.anesthesiaMethodCode??>
       <!--麻醉章节-->
       <component>
         <section>
@@ -304,11 +317,14 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if (generalOperationRecords.operationPreMedication??) || (generalOperationRecords.operationAfterMedication??)>
       <!--用药章节-->
       <component>
         <section>
           <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of medication use"/>
           <text/>
+          <#if generalOperationRecords.operationPreMedication??>
           <!--术前用药-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -317,6 +333,8 @@
               <value xsi:type="ST">${generalOperationRecords.operationPreMedication!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if generalOperationRecords.operationAfterMedication??>
           <!--术中用药-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -325,8 +343,11 @@
               <value xsi:type="ST">${generalOperationRecords.operationAfterMedication!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
+      </#if>
+      <#if generalOperationRecords.operationInfusion??>
       <!--输液章节-->
       <component>
         <section>
@@ -342,6 +363,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--术后诊断章节-->
       <component>
         <section>
@@ -413,6 +435,7 @@
           </entry>
         </section>
       </component>
+      <#if generalOperationRecords.isDrainage??>
       <!--引流章节-->
       <component>
         <section>
@@ -446,6 +469,7 @@
           </entry>
         </section>
       </component>
+      </#if>
     </structuredBody>
   </component>
 </ClinicalDocument>

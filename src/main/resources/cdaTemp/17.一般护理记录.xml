@@ -133,6 +133,7 @@
           </entry>
         </section>
       </component>
+      <#if generalCarerEcords.allergyHistory??>
       <!--过敏史章节-->
       <component>
         <section>
@@ -146,6 +147,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--生命体征章节-->
       <component>
         <section>
@@ -225,6 +227,7 @@
           </entry>
         </section>
       </component>
+      <#if generalCarerEcords.dietGuideCode??>
       <!--健康指导章节-->
       <component>
         <section>
@@ -238,6 +241,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--护理记录章节-->
       <component>
         <section>
@@ -299,6 +303,7 @@
           </entry>
         </section>
       </component>
+      <#if (generalCarerEcords.nursingObservationName??) || (generalCarerEcords.patientCondition??)>
       <!--护理观察章节-->
       <component>
         <section>
@@ -325,6 +330,8 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if generalCarerEcords.nursingOperationName??>
       <!--护理操作章节：一个护理操作对应多个操作项目类目，一个操作项目类目又对应多个操作结果-->
       <component>
         <section>
@@ -350,6 +357,8 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if (generalCarerEcords.issueSscFlag??) || (generalCarerEcords.withdrawSscFlag??) || (generalCarerEcords.issueOraFlag??) || (generalCarerEcords.withdrawOraFlag??)>
       <!--手术评估标志章节-->
       <component>
         <section>
@@ -381,6 +390,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <#if generalCarerEcords.isolationTypeCode??>
       <!--护理隔离章节-->
       <component>

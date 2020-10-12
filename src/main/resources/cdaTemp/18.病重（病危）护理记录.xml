@@ -26,7 +26,9 @@
         <#if worsePatientCareRecord.ageYear??>
         <age unit="岁" value="${worsePatientCareRecord.ageYear!'NA'}"/>
         <#else>
+        <#if worsePatientCareRecord.patientMonth??>
         <age unit="月" value="${worsePatientCareRecord.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
       <!--医疗机构信息-->
@@ -119,6 +121,7 @@
   </componentOf>
   <component>
     <structuredBody>
+      <#if (worsePatientCareRecord.allergyHistoryFlag??) || (worsePatientCareRecord.allergyHistory??)>
       <!-- 过敏史章节 -->
       <component>
         <section>
@@ -146,6 +149,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--诊断章节-->
       <component>
         <section>
@@ -213,6 +217,7 @@
           </entry>
         </section>
       </component>
+      <#if worsePatientCareRecord.dietaryStatusCode??>
       <!--健康评估章节-->
       <component>
         <section>
@@ -226,6 +231,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--护理记录章节-->
       <component>
         <section>
@@ -245,6 +251,7 @@
           </entry>
         </section>
       </component>
+      <#if worsePatientCareRecord.nursingObservationName??>
       <!--护理观察章节-->
       <component>
         <section>
@@ -264,6 +271,8 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if (worsePatientCareRecord.nursingOperationName??) || (worsePatientCareRecord.respiratorMonitoringItem??)>
       <!--护理操作章节：一个护理操作对应多个操作项目类目，一个操作项目类目又对应多个操作结果-->
       <component>
         <section>
@@ -295,6 +304,7 @@
           </entry>
         </section>
       </component>
+      </#if>
     </structuredBody>
   </component>
 </ClinicalDocument>

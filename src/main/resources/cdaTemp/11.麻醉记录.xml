@@ -32,7 +32,9 @@
         <#if anesthesiaRecords.ageYear??>
         <age unit="岁" value="${anesthesiaRecords.ageYear!'NA'}"/>
         <#else>
+        <#if anesthesiaRecords.patientMonth??>
         <age unit="月" value="${anesthesiaRecords.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
     </patientRole>
@@ -192,6 +194,7 @@
         <section>
           <code code="18610-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="MEDICATION ADMINISTERED"/>
           <text/>
+          <#if (anesthesiaRecords.routeAdministration??) || (anesthesiaRecords.drugName??)>
           <entry>
             <substanceAdministration classCode="SBADM" moodCode="EVN">
               <text/>
@@ -238,8 +241,10 @@
               </entryRelationship>
             </substanceAdministration>
           </entry>
+          </#if>
         </section>
       </component>
+      <#if anesthesiaRecords.operateInfusionItem??>
       <!-- 输液章节 -->
       <component>
         <section>
@@ -254,6 +259,8 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if (anesthesiaRecords.bloodTransferedDatetime??) || (anesthesiaRecords.bloodTransferedValue??)>
       <!--输血章节-->
       <component>
         <section>
@@ -297,6 +304,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--麻醉章节 -->
       <component>
         <section>
@@ -318,6 +326,7 @@
                   <value code="${anesthesiaRecords.asaStandardCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.255" codeSystemName="美国麻醉医师协会(ASA)分级标准代码表" displayName="<@dict_tag value="${anesthesiaRecords.asaStandardCode!'NA'}" datasetCloumn="ASA_STANDARD_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
                 </observation>
               </entryRelationship>
+              <#if anesthesiaRecords.trachealIntubationCode??>
               <!--气管插管分类 -->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
@@ -325,6 +334,7 @@
                   <value xsi:type="ST">${anesthesiaRecords.trachealIntubationCode!'NA'}</value>
                 </observation>
               </entryRelationship>
+              </#if>
               <!--麻醉药物名称 -->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
@@ -360,6 +370,7 @@
                   <value code="${anesthesiaRecords.anesthesiaComplicatCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.59" codeSystemName="麻醉合并症标志代码表" displayName="<@dict_tag value="${anesthesiaRecords.anesthesiaComplicatCode!'NA'}" datasetCloumn="ANESTHESIA_COMPLICAT_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
                 </observation>
               </entryRelationship>
+              <#if anesthesiaRecords.punctureProcess??>
               <!--穿刺过程 -->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
@@ -367,6 +378,8 @@
                   <value xsi:type="ST">${anesthesiaRecords.punctureProcess!'NA'}</value>
                 </observation>
               </entryRelationship>
+              </#if>
+              <#if anesthesiaRecords.anesthesiaEffect??>
               <!--麻醉效果 -->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
@@ -374,6 +387,7 @@
                   <value xsi:type="ST">${anesthesiaRecords.anesthesiaEffect!'NA'}</value>
                 </observation>
               </entryRelationship>
+              </#if>
               <!--麻醉前用药 -->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
@@ -395,6 +409,7 @@
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.216.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="常规监测项目名称"/>
               <value xsi:type="ST">${anesthesiaRecords.routineMonitorProjName!'NA'}</value>
+              <#if anesthesiaRecords.routineMonitorProjResult??>
               <!--常规监测项目结果 -->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
@@ -402,6 +417,7 @@
                   <value xsi:type="ST">${anesthesiaRecords.routineMonitorProjResult!'NA'}</value>
                 </observation>
               </entryRelationship>
+              </#if>
             </observation>
           </entry>
           <entry>
@@ -409,6 +425,7 @@
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.216.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="特殊监测项目名称"/>
               <value xsi:type="ST">${anesthesiaRecords.specmonitorprojectName!'NA'}</value>
+              <#if anesthesiaRecords.specmonitorprojectResult??>
               <!--特殊监测项目结果 -->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
@@ -416,6 +433,7 @@
                   <value xsi:type="ST">${anesthesiaRecords.specmonitorprojectResult!'NA'}</value>
                 </observation>
               </entryRelationship>
+              </#if>
             </observation>
           </entry>
         </section>
@@ -425,6 +443,7 @@
         <section>
           <code code="8716-3" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="VITAL SIGNS"/>
           <text/>
+          <#if anesthesiaRecords.bodyWeight??>
           <!-- 体重 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -432,6 +451,7 @@
               <value unit="kg" value="${anesthesiaRecords.bodyWeight!'NA'}" xsi:type="PQ"/>
             </observation>
           </entry>
+          </#if>
           <!-- 体温 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -439,6 +459,7 @@
               <value unit="℃" value="${anesthesiaRecords.temperature!'NA'}" xsi:type="PQ"/>
             </observation>
           </entry>
+          <#if anesthesiaRecords.sphygmus??>
           <!-- 脉率 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -446,6 +467,7 @@
               <value unit="次/min" value="${anesthesiaRecords.sphygmus!'NA'}" xsi:type="PQ"/>
             </observation>
           </entry>
+          </#if>
           <!-- 呼吸频率 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -531,6 +553,7 @@
           </entry>
         </section>
       </component>
+      <#if anesthesiaRecords.operationBleeding??>
       <!-- 失血章节 -->
       <component>
         <section>
@@ -545,6 +568,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--术后去向章节 -->
       <component>
         <section>

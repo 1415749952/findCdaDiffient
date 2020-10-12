@@ -184,6 +184,7 @@
   </componentOf>
   <component>
     <structuredBody>
+      <#if (vbncRecord.deliveryTimegravidityTime??) || (vbncRecord.deliveryTime??)>
       <!-- 既往史章节 -->
       <component>
         <section>
@@ -203,17 +204,12 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!-- 阴道分娩章节 -->
       <component>
         <section>
           <code code="57074-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="labor and delivery process"/>
           <text/>
-          <entry>
-            <observation classCode="OBS" moodCode="EVN">
-              <code code="DE02.10.051.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="末次月经日期"/>
-              <value value="${vbncRecord.lastMenstrualPeriod!'NA'}" xsi:type="TS"/>
-            </observation>
-          </entry>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.098.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="预产期"/>
@@ -242,12 +238,6 @@
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE04.30.057.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="前羊水量（mL）"/>
               <value unit="ml" value="${vbncRecord.pamnioticFluidVolume!'NA'}" xsi:type="PQ"/>
-            </observation>
-          </entry>
-          <entry>
-            <observation classCode="OBS" moodCode="EVN">
-              <code code="DE04.10.250.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="宫缩开始日期时间"/>
-              <value value="${vbncRecord.birthDatetime!'NA'}" xsi:type="TS"/>
             </observation>
           </entry>
           <entry>

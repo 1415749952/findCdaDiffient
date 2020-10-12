@@ -221,30 +221,6 @@
             </observation>
           </entry>
           <entry>
-            <observation classCode="OBS" moodCode="EVN">
-              <code code="DE05.10.070.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="此次妊娠特殊情况"/>
-              <value xsi:type="ST">${expectantRecord.specialCasesPregnancy!'NA'}</value>
-            </observation>
-          </entry>
-          <entry>
-            <observation classCode="OBS" moodCode="EVN">
-              <code code="DE02.10.099.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="既往史"/>
-              <value xsi:type="ST">${expectantRecord.pastHistory!'NA'}</value>
-            </observation>
-          </entry>
-          <entry>
-            <observation classCode="OBS" moodCode="EVN">
-              <code code="DE02.10.061.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术史"/>
-              <value xsi:type="ST">${expectantRecord.operationHistory!'NA'}</value>
-            </observation>
-          </entry>
-          <entry>
-            <observation classCode="OBS" moodCode="EVN">
-              <code code="DE02.10.098.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="既往孕产史"/>
-              <value xsi:type="ST">${expectantRecord.pastPregnancyHistory!'NA'}</value>
-            </observation>
-          </entry>
-          <entry>
             <organizer classCode="BATTERY" moodCode="EVN">
               <statusCode/>
               <component>
@@ -281,6 +257,39 @@
           </entry>
         </section>
       </component>
+      <#if (expectantRecord.pastHistory??) || (expectantRecord.operationHistory??) || (expectantRecord.pastPregnancyHistory??)>
+      <!-- 既往史章节 -->
+      <component>
+        <section>
+          <code code="11348-0" displayName="HISTORY OF PAST ILLNESS" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+          <text/>
+          <#if expectantRecord.pastHistory??>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE02.10.099.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="既往史"/>
+              <value xsi:type="ST">${expectantRecord.pastHistory!'NA'}</value>
+            </observation>
+          </entry>
+          </#if>
+          <#if expectantRecord.operationHistory??>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE02.10.061.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术史"/>
+              <value xsi:type="ST">${expectantRecord.operationHistory!'NA'}</value>
+            </observation>
+          </entry>
+          </#if>
+          <#if expectantRecord.pastPregnancyHistory??>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE02.10.098.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="既往孕产史"/>
+              <value xsi:type="ST">${expectantRecord.pastPregnancyHistory!'NA'}</value>
+            </observation>
+          </entry>
+          </#if>
+        </section>>
+      </component>
+      </#if>
       <!-- 产前检查章节 -->
       <component>
         <section>

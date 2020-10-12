@@ -32,7 +32,9 @@
         <#if transfusionRecord.ageYear??>
         <age unit="岁" value="${transfusionRecord.ageYear!'NA'}"/>
         <#else>
+        <#if transfusionRecord.patientMonth??>
         <age unit="月" value="${transfusionRecord.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
     </patientRole>

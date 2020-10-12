@@ -32,7 +32,9 @@
         <#if visitsRecAftAnesthesia.ageYear??>
         <age unit="岁" value="${visitsRecAftAnesthesia.ageYear!'NA'}"/>
         <#else>
+        <#if visitsRecAftAnesthesia.patientMonth??>
         <age unit="月" value="${visitsRecAftAnesthesia.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
       <!--提供患者服务机构-->
@@ -166,6 +168,7 @@
         <section>
           <code code="30954-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="STUDIES SUMMARY"/>
           <text/>
+          <#if (visitsRecAftAnesthesia.aboBlood??) || (visitsRecAftAnesthesia.rhBloodCode??)>
           <entry typeCode="COMP">
             <!-- 血型-->
             <organizer classCode="BATTERY" moodCode="EVN">
@@ -186,6 +189,7 @@
               </component>
             </organizer>
           </entry>
+          </#if>
         </section>
       </component>
       <!-- 术前诊断章节 -->
@@ -271,6 +275,7 @@
               <value value="${visitsRecAftAnesthesia.consciousDatetime!'NA'}" xsi:type="TS"/>
             </observation>
           </entry>
+          <#if visitsRecAftAnesthesia.trachealIntubCode??>
           <!-- 拔除气管插管标志 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -278,6 +283,8 @@
               <value value="${visitsRecAftAnesthesia.trachealIntubCode!'NA'}" xsi:type="BL"/>
             </observation>
           </entry>
+          </#if>
+          <#if visitsRecAftAnesthesia.specialStatus??>
           <!-- 特殊情况 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -285,6 +292,7 @@
               <value xsi:type="ST">${visitsRecAftAnesthesia.specialStatus!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
     </structuredBody>

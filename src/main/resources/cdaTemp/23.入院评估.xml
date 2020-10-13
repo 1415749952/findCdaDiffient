@@ -40,7 +40,9 @@
         <#if admissionAssessment.ageYear??>
         <age unit="岁" value="${admissionAssessment.ageYear!'NA'}"/>
         <#else>
+        <#if admissionAssessment.patientMonth??>
         <age unit="月" value="${admissionAssessment.patientMonth!'NA'}"/>
+        </#if>
         </#if>
         <educationLevel>
           <!--HDSD00.09.073 DE02.01.041.00 学历代码 -->
@@ -272,6 +274,7 @@
         <section>
           <code code="11348-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF PAST ILLNESS"/>
           <text/>
+          <#if admissionAssessment.diseaseHistory??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE02.10.026.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="疾病史(含外伤)"/>
@@ -279,6 +282,8 @@
               <value xsi:type="ST">${admissionAssessment.diseaseHistory!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if admissionAssessment.infectHistory??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE02.10.008.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="传染病史"/>
@@ -286,6 +291,8 @@
               <value xsi:type="ST">${admissionAssessment.infectHistory!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if admissionAssessment.preventHistory??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE02.10.101.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="预防接种史"/>
@@ -293,6 +300,8 @@
               <value xsi:type="ST">${admissionAssessment.preventHistory!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if admissionAssessment.operationHistory??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE02.10.061.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术史"/>
@@ -300,6 +309,8 @@
               <value xsi:type="ST">${admissionAssessment.operationHistory!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if admissionAssessment.bloodTransfusionHistory??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE02.10.100.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="输血史"/>
@@ -307,18 +318,23 @@
               <value xsi:type="ST">${admissionAssessment.bloodTransfusionHistory!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if admissionAssessment.healthStatus??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.031.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="一般健康状况标志"/>
               <value value="${admissionAssessment.healthStatus!'NA'}" xsi:type="BL"/>
             </observation>
           </entry>
+          </#if>
+          <#if admissionAssessment.infectFlag??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.119.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="患者传染性标志"/>
               <value value="${admissionAssessment.infectFlag!'NA'}" xsi:type="BL"/>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--过敏史章节-->
@@ -326,6 +342,7 @@
         <section>
           <code code="48765-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Allergies, adverse reactions, alerts"/>
           <text/>
+          <#if admissionAssessment.allergyHistory??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <!--HDSD00.09.015 DE02.10.022.00 过敏史 -->
@@ -333,6 +350,7 @@
               <value xsi:type="ST">${admissionAssessment.allergyHistory!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--家族史章节-->
@@ -340,6 +358,7 @@
         <section>
           <code code="10157-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF FAMILY MEMBER DISEASES"/>
           <text/>
+          <#if admissionAssessment.familyHistory??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE02.10.103.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="家族史"/>
@@ -347,6 +366,7 @@
               <value xsi:type="ST">${admissionAssessment.familyHistory!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--健康评估章节-->
@@ -363,6 +383,7 @@
             </observation>
           </entry>
           </#if>
+          <#if admissionAssessment.developmentDegreeCode??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.022.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="发育程度代码"/>
@@ -370,6 +391,8 @@
               <value code="${admissionAssessment.developmentDegreeCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.53" codeSystemName="发育程度代码表" displayName="<@dict_tag value="${admissionAssessment.developmentDegreeCode!'NA'}" datasetCloumn="DEVELOPMENT_DEGREE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
+          </#if>
+          <#if admissionAssessment.spiritStatusFlag??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.142.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="精神状态正常标志"/>
@@ -377,6 +400,8 @@
               <value value="${admissionAssessment.spiritStatusFlag!'NA'}" xsi:type="BL"/>
             </observation>
           </entry>
+          </#if>
+          <#if admissionAssessment.sleepStatus??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.065.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="睡眠状况"/>
@@ -384,6 +409,8 @@
               <value xsi:type="ST">${admissionAssessment.sleepStatus!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if admissionAssessment.specialStatus??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.158.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="特殊情况"/>
@@ -391,6 +418,8 @@
               <value xsi:type="ST">${admissionAssessment.specialStatus!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if admissionAssessment.psychologicalStatus??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.084.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="心理状态代码"/>
@@ -398,6 +427,8 @@
               <value xsi:type="CD" code="${admissionAssessment.psychologicalStatus!'NA'}" displayName="<@dict_tag value="${admissionAssessment.psychologicalStatus!'NA'}" datasetCloumn="PSYCHOLOGICAL_STATUS">${dict.desc}</@dict_tag>" codeSystem="2.16.156.10011.2.3.1.140" codeSystemName="心理状态代码表"/>
             </observation>
           </entry>
+          </#if>
+          <#if admissionAssessment.nutritionStatus??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.097.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="营养状态代码"/>
@@ -405,6 +436,8 @@
               <value code="${admissionAssessment.nutritionStatus!'NA'}" codeSystem="2.16.156.10011.2.3.2.54" codeSystemName="营养状态代码表" displayName="<@dict_tag value="${admissionAssessment.nutritionStatus!'NA'}" datasetCloumn="NUTRITION_STATUS">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
+          </#if>
+          <#if admissionAssessment.selfCareStatus??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.122.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="自理能力代码"/>
@@ -412,6 +445,7 @@
               <value code="${admissionAssessment.selfCareStatus!'NA'}" codeSystem="2.16.156.10011.2.3.2.55" codeSystemName="自理能力代码表" displayName="<@dict_tag value="${admissionAssessment.selfCareStatus!'NA'}" datasetCloumn="SELF_CARE_STATUS">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--生活方式章节-->
@@ -498,6 +532,7 @@
         <section>
           <code displayName="护理观察"/>
           <text/>
+          <#if admissionAssessment.nursingObservationName??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE02.10.031.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="护理观察项目名称"/>
@@ -512,6 +547,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!-- 住院过程章节 -->

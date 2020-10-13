@@ -31,7 +31,9 @@
         <#if dischargeAssessment.ageYear??>
         <age unit="岁" value="${dischargeAssessment.ageYear!'NA'}"/>
         <#else>
+        <#if dischargeAssessment.patientMonth??>
         <age unit="月" value="${dischargeAssessment.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
       <providerOrganization>
@@ -156,6 +158,7 @@
         <section>
           <code code="69730-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Instructions"/>
           <text/>
+          <#if dischargeAssessment.dietGuideCode??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.291.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="饮食指导代码"/>
@@ -163,6 +166,8 @@
               <value code="${dischargeAssessment.dietGuideCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.263" codeSystemName="饮食指导代码表" displayName="<@dict_tag value="${dischargeAssessment.dietGuideCode!'NA'}" datasetCloumn="DIET_GUIDE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
+          </#if>
+          <#if dischargeAssessment.lifestyleCounselling??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.238.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="生活方式指导"/>
@@ -170,6 +175,8 @@
               <value xsi:type="ST">${dischargeAssessment.lifestyleCounselling!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if dischargeAssessment.educationalContents??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.124.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="宣教内容"/>
@@ -177,6 +184,8 @@
               <value xsi:type="ST">${dischargeAssessment.educationalContents!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if dischargeAssessment.secondClinic??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.299.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="复诊指导"/>
@@ -184,6 +193,8 @@
               <value xsi:type="ST">${dischargeAssessment.secondClinic!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if dischargeAssessment.drugUsage??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.136.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="用药指导"/>
@@ -191,6 +202,7 @@
               <value xsi:type="ST">${dischargeAssessment.drugUsage!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--健康评估章节 -->
@@ -198,6 +210,7 @@
         <section>
           <code code="51848-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Assessment note"/>
           <text/>
+          <#if dischargeAssessment.selfCareStatus??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.122.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="自理能力代码"/>
@@ -205,6 +218,8 @@
               <value code="${dischargeAssessment.selfCareStatus!'NA'}" codeSystem="2.16.156.10011.2.3.2.55" codeSystemName="自理能力代码表" displayName="<@dict_tag value="${dischargeAssessment.selfCareStatus!'NA'}" datasetCloumn="SELF_CARE_STATUS">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
+          </#if>
+          <#if dischargeAssessment.dietaryStatusCode??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE03.00.080.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="饮食情况代码"/>
@@ -212,6 +227,7 @@
               <value code="${dischargeAssessment.dietaryStatusCode!'NA'}" codeSystem="2.16.156.10011.2.3.2.34" codeSystemName="饮食情况代码表" displayName="<@dict_tag value="${dischargeAssessment.dietaryStatusCode!'NA'}" datasetCloumn="DIETARY_STATUS_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
     </structuredBody>

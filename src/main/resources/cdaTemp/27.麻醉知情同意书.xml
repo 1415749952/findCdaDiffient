@@ -32,7 +32,9 @@
         <#if cseInformedConsent.ageYear??>
         <age unit="岁" value="${cseInformedConsent.ageYear!'NA'}"/>
         <#else>
+        <#if cseInformedConsent.patientMonth??>
         <age unit="月" value="${cseInformedConsent.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
     </patientRole>
@@ -169,6 +171,7 @@
         <section>
           <code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="TREATMENT PLAN"/>
           <text/>
+          <#if (cseInformedConsent.intentAnesthesiaCode??) || (cseInformedConsent.intentOperateDatetime??) ||(cseInformedConsent.intentOperateCode??)>
           <!--拟实施麻醉-->
           <entry>
             <procedure classCode="PROC" moodCode="EVN">
@@ -219,6 +222,7 @@
               </entryRelationship>
             </procedure>
           </entry>
+          </#if>
         </section>
       </component>
       <!--意见章节-->
@@ -247,6 +251,7 @@
         <section>
           <code displayName="操作风险"/>
           <text/>
+          <#if cseInformedConsent.anaesthesiaPossibleAccident??>
           <!--麻醉中可能出现的意外-->
           <entry>
             <observation classCode="OBS" moodCode="DEF">
@@ -254,6 +259,7 @@
               <value xsi:type="ST">${cseInformedConsent.anaesthesiaPossibleAccident!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
     </structuredBody>

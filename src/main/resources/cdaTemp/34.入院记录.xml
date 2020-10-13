@@ -33,7 +33,9 @@
         <id extension="<@privacy_tag value="${emrBasicpatient.identityNo!'NA'}" privacyId="1">${privacy}</@privacy_tag>" root="2.16.156.10011.1.3"/>
         <name><@privacy_tag value="${admissionRecord.patientName!'NA'}" privacyId="2">${privacy}</@privacy_tag></name>
         <administrativeGenderCode code="${admissionRecord.patientSex!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${admissionRecord.patientSex!'NA'}" datasetCloumn="PATIENT_SEX">${dict.desc}</@dict_tag>"/>
+        <#if admissionRecord.maritalStatusCode??>
         <maritalStatusCode code="${admissionRecord.maritalStatusCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.5" codeSystemName="婚姻状况代码表(GB/T 2261.2)" displayName="<@dict_tag value="${admissionRecord.maritalStatusCode!'NA'}" datasetCloumn="MARITAL_STATUS_CODE">${dict.desc}</@dict_tag>"/>
+        </#if>
         <#if admissionRecord.nation??>
         <ethnicGroupCode code="${admissionRecord.nation!'NA'}" codeSystem="2.16.156.10011.2.3.3.3" codeSystemName="民族类别代码表(GB 3304)" displayName="<@dict_tag value="${admissionRecord.nation!'NA'}" datasetCloumn="NATION">${dict.desc}</@dict_tag>"/>
         </#if>
@@ -41,12 +43,16 @@
         <#if admissionRecord.ageYear??>
         <age unit="岁" value="${admissionRecord.ageYear!'NA'}"/>
         <#else>
+        <#if admissionRecord.patientMonth??>
         <age unit="月" value="${admissionRecord.patientMonth!'NA'}"/>
         </#if>
+        </#if>
+        <#if admissionRecord.occupatientionClassCode??>
         <!--职业状况-->
         <occupation>
           <occupationCode code="${admissionRecord.occupatientionClassCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.13" codeSystemName="从业状况(个人身体)代码表(GB/T 2261.4)" displayName="<@dict_tag value="${admissionRecord.occupatientionClassCode!'NA'}" datasetCloumn="OCCUPATIENTION_CLASS_CODE">${dict.desc}</@dict_tag>"/>
         </occupation>
+        </#if>
         </patient>
     </patientRole>
   </recordTarget>
@@ -216,16 +222,19 @@
           </entry>
         </section>
       </component>
+      <#if (admissionRecord.communicableDiseasesFlag??) || (admissionRecord.communicableDiseasesHistory??) || (admissionRecord.healthStatusCode??) || (admissionRecord.diseasesHistory??) || (admissionRecord.maritalHistory??) || (admissionRecord.allergyHistory??) || (admissionRecord.operationHistory??)>
       <!--既往史章节-->
       <component>
         <section>
           <code code="11348-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF PAST ILLNESS"/>
           <text/>
+          <#if admissionRecord.healthStatusCode??>
           <!--一般健康状况标志-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.031.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="一般健康状况标志"/>
               <value value="${admissionRecord.healthStatusCode!'NA'}" xsi:type="BL"/>
+              <#if admissionRecord.diseasesHistory??>
               <!--疾病史（含外伤）-->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
@@ -233,13 +242,16 @@
                   <value xsi:type="ST">${admissionRecord.diseasesHistory!'NA'}</value>
                 </observation>
               </entryRelationship>
+              </#if>
             </observation>
           </entry>
+          </#if>
           <!--患者传染性标志-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE05.10.119.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="患者传染性标志"/>
               <value value="${admissionRecord.communicableDiseasesFlag!'NA'}" xsi:type="BL"/>
+              <#if admissionRecord.communicableDiseasesHistory??>
               <!--传染病史-->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
@@ -247,8 +259,10 @@
                   <value xsi:type="ST">${admissionRecord.communicableDiseasesHistory!'NA'}</value>
                 </observation>
               </entryRelationship>
+              </#if>
             </observation>
           </entry>
+          <#if admissionRecord.maritalHistory??>
           <!--婚育史条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -256,6 +270,8 @@
               <value xsi:type="ST">${admissionRecord.maritalHistory!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if admissionRecord.allergyHistory??>
           <!--过敏史条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -263,6 +279,8 @@
               <value xsi:type="ST">${admissionRecord.allergyHistory!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if admissionRecord.operationHistory??>
           <!--手术史条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -270,8 +288,11 @@
               <value xsi:type="ST">${admissionRecord.operationHistory!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
+      </#if>
+      <#if admissionRecord.preventiveInoculationHistory??>
       <!--预防免疫史章节-->
       <component>
         <section>
@@ -285,11 +306,13 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--输血章节-->
       <component>
         <section>
           <code code="56836-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of blood transfusion"/>
           <text/>
+          <#if admissionRecord.bloodTransfusionHistory??>
           <!--输血史条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -297,8 +320,10 @@
               <value xsi:type="ST">${admissionRecord.bloodTransfusionHistory!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
+      <#if admissionRecord.personHistory??>
       <!--个人史章节-->
       <component>
         <section>
@@ -313,6 +338,8 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if admissionRecord.menstruationHistory??>
       <!--月经史章节-->
       <component>
         <section>
@@ -327,6 +354,8 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if admissionRecord.familyHistory??>
       <!--家族史章节-->
       <component>
         <section>
@@ -341,6 +370,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--生命体征章节-->
       <component>
         <section>
@@ -386,6 +416,7 @@
               </component>
             </organizer>
           </entry>
+          <#if admissionRecord.height??>
           <!--体格检查-身高（cm）-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -393,6 +424,8 @@
               <value unit="cm" value="${admissionRecord.height!'NA'}" xsi:type="PQ"/>
             </observation>
           </entry>
+          </#if>
+          <#if admissionRecord.physicalexamWeight??>
           <!--体格检查-体重（kg）-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -400,6 +433,7 @@
               <value unit="kg" value="${admissionRecord.physicalexamWeight!'NA'}" xsi:type="PQ"/>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--体格检查章节-->
@@ -407,6 +441,7 @@
         <section>
           <code code="29545-1" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="PHYSICAL EXAMINATION"/>
           <text/>
+          <#if admissionRecord.generalhealthCheckResult??>
           <!--体格检查-一般状况检查结果-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -414,6 +449,7 @@
               <value xsi:type="ST">${admissionRecord.generalhealthCheckResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
           <!--体格检查-皮肤和黏膜检查结果-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -456,6 +492,7 @@
               <value xsi:type="ST">${admissionRecord.abdominalCheckResult!'NA'}</value>
             </observation>
           </entry>
+          <#if admissionRecord.physicalexamAnusResult??>
           <!--体格检查-肛门指诊检查结果-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -463,6 +500,8 @@
               <value xsi:type="ST">${admissionRecord.physicalexamAnusResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if admissionRecord.physicalexamGenitalsResult??>
           <!--体格检查-外生殖器检查结果-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -470,6 +509,7 @@
               <value xsi:type="ST">${admissionRecord.physicalexamGenitalsResult!'NA'}</value>
             </observation>
           </entry>
+          </#if>
           <!--体格检查-脊柱检查结果-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -491,6 +531,7 @@
               <value xsi:type="ST">${admissionRecord.examNervoussystemResult!'NA'}</value>
             </observation>
           </entry>
+          <#if admissionRecord.specialistStatus??>
           <!--专科情况-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -498,8 +539,10 @@
               <value xsi:type="ST">${admissionRecord.specialistStatus!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
+      <#if admissionRecord.auxiliaryexamiResult??>
       <!--辅助检查章节-->
       <component>
         <section>
@@ -514,6 +557,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--主要健康问题章节-->
       <component>
         <section>
@@ -540,6 +584,7 @@
                   <value code="${admissionRecord.pdWestDiagCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.11" codeSystemName="ICD-10" displayName="<@dict_tag value="${admissionRecord.pdWestDiagCode!'NA'}" datasetCloumn="PD_WEST_DIAG_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
                 </observation>
               </entryRelationship>
+              <#if admissionRecord.inpAdmissionDiagnosisPicks??>
               <!--入院诊断顺位-->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
@@ -547,6 +592,7 @@
                   <value value="${admissionRecord.inpAdmissionDiagnosisPicks!'NA'}" xsi:type="INT"/>
                 </observation>
               </entryRelationship>
+              </#if>
             </observation>
           </entry>
           <#if admissionRecord.tcmFourResults??>
@@ -601,6 +647,7 @@
             </observation>
           </entry>
           </#if>
+          <#if admissionRecord.correctDiagnosisWmCode??>
           <!--修正诊断-西医条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -626,6 +673,8 @@
               </entryRelationship>
             </observation>
           </entry>
+          </#if>
+          <#if admissionRecord.diseaseNameCode??>
           <!--修正诊断-中医条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -667,6 +716,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          </#if>
           <!--确定诊断-西医条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -730,6 +780,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          <#if admissionRecord.supplementaryDiagnosisCode??>
           <!--补充诊断-西医条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -755,8 +806,10 @@
               </entryRelationship>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
+      <#if admissionRecord.therapeuticPrinciple??>
       <!--治疗计划章节-->
       <component>
         <section>
@@ -771,6 +824,7 @@
           </entry>
         </section>
       </component>
+      </#if>
     </structuredBody>
   </component>
 </ClinicalDocument>

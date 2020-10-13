@@ -31,7 +31,9 @@
         <#if carePlan.ageYear??>
         <age unit="岁" value="${carePlan.ageYear!'NA'}"/>
         <#else>
+        <#if carePlan.patientMonth??>
         <age unit="月" value="${carePlan.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
       <providerOrganization>

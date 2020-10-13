@@ -28,7 +28,9 @@
         <#if operationCareRecord.ageYear??>
         <age unit="岁" value="${operationCareRecord.ageYear!'NA'}"/>
         <#else>
+        <#if operationCareRecord.patientMonth??>
         <age unit="月" value="${operationCareRecord.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
       <!--医疗机构信息-->
@@ -188,6 +190,7 @@
           </entry>
         </section>
       </component>
+      <#if (operationCareRecord.bloodAboCode??) || (operationCareRecord.rhBloodCode??)>
       <!-- 实验室检查章节-->
       <component>
         <section>
@@ -215,6 +218,8 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if operationCareRecord.skinInspectionDescription??>
       <!--皮肤章节-->
       <component>
         <section>
@@ -228,6 +233,8 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if (operationCareRecord.allergyHistoryFlag??) || (operationCareRecord.allergyHistory??)>
       <!-- 过敏史章节 -->
       <component>
         <section>
@@ -255,6 +262,8 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if (operationCareRecord.nursingGradeCode??) || (operationCareRecord.nursingTypeCode??)>
       <!--护理记录章节-->
       <component>
         <section>
@@ -274,6 +283,8 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if (operationCareRecord.nursingObserProjectName??) || (operationCareRecord.nursingObservationResult??)>
       <!--护理观察章节-->
       <component>
         <section>
@@ -293,6 +304,8 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if (operationCareRecord.nursingOperationName??) || (operationCareRecord.nursingOperationItem??)>
       <!--护理操作章节：一个护理操作对应多个操作项目类目，一个操作项目类目又对应多个操作结果-->
       <component>
         <section>
@@ -318,6 +331,8 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if (operationCareRecord.closeafterCheckFlag??) || (operationCareRecord.closebeforeCheckFlag??) || (operationCareRecord.preoperationCheckFlag??)>
       <!--器械物品核对章节-->
       <component>
         <section>
@@ -460,6 +475,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--手术操作章节-->
       <component>
         <section>

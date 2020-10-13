@@ -33,7 +33,9 @@
         <id extension="<@privacy_tag value="${emrBasicpatient.identityNo!'NA'}" privacyId="1">${privacy}</@privacy_tag>" root="2.16.156.10011.1.3"/>
         <name><@privacy_tag value="${h24AdmissionDischargeRecord.patientName!'NA'}" privacyId="2">${privacy}</@privacy_tag></name>
         <administrativeGenderCode code="${h24AdmissionDischargeRecord.patientSex!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${h24AdmissionDischargeRecord.patientSex!'NA'}" datasetCloumn="PATIENT_SEX">${dict.desc}</@dict_tag>"/>
+        <#if h24AdmissionDischargeRecord.maritalStatusCode??>
         <maritalStatusCode code="${h24AdmissionDischargeRecord.maritalStatusCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.5" codeSystemName="婚姻状况代码表(GB/T 2261.2)" displayName="<@dict_tag value="${h24AdmissionDischargeRecord.maritalStatusCode!'NA'}" datasetCloumn="MARITAL_STATUS_CODE">${dict.desc}</@dict_tag>"/>
+        </#if>
         <#if h24AdmissionDischargeRecord.nation??>
         <ethnicGroupCode code="${h24AdmissionDischargeRecord.nation!'NA'}" codeSystem="2.16.156.10011.2.3.3.3" codeSystemName="民族类别代码表(GB 3304)" displayName="<@dict_tag value="${h24AdmissionDischargeRecord.nation!'NA'}" datasetCloumn="NATION">${dict.desc}</@dict_tag>"/>
         </#if>
@@ -41,12 +43,16 @@
         <#if h24AdmissionDischargeRecord.ageYear??>
         <age unit="岁" value="${h24AdmissionDischargeRecord.ageYear!'NA'}"/>
         <#else>
+        <#if h24AdmissionDischargeRecord.patientMonth??>
         <age unit="月" value="${h24AdmissionDischargeRecord.patientMonth!'NA'}"/>
         </#if>
+        </#if>
+        <#if h24AdmissionDischargeRecord.occupatientionClassCode??>
         <!--职业状况-->
         <occupation>
           <occupationCode code="${h24AdmissionDischargeRecord.occupatientionClassCode!'NA'}" displayName="<@dict_tag value="${h24AdmissionDischargeRecord.occupatientionClassCode!'NA'}" datasetCloumn="OCCUPATIENTION_CLASS_CODE">${dict.desc}</@dict_tag>" codeSystem="2.16.156.10011.2.3.3.13" codeSystemName="从业状况(个人身体)代码表(GB/T 2261.4)"/>
         </occupation>
+        </#if>
       </patient>
     </patientRole>
   </recordTarget>
@@ -222,6 +228,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          <#if h24AdmissionDischargeRecord.tcmFourResults??>
           <!--中医“四诊”观察结果-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -229,6 +236,7 @@
               <value xsi:type="ST">${h24AdmissionDischargeRecord.tcmFourResults!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--入院诊断章节-->
@@ -236,6 +244,7 @@
         <section>
           <code code="46241-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HOSPITAL ADMISSION DX"/>
           <text/>
+          <#if h24AdmissionDischargeRecord.inhosDiagWmDiagCode??>
           <!--入院诊断-西医条目-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -250,6 +259,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          </#if>
           <#if h24AdmissionDischargeRecord.inhosDiagCmDisCode??>
           <!--入院诊断-中医条目-->
           <entry>
@@ -282,6 +292,7 @@
           </#if>
         </section>
       </component>
+      <#if h24AdmissionDischargeRecord.therapeuticPrinciple??>
       <!--治疗计划章节-->
       <component>
         <section>
@@ -296,6 +307,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--住院过程章节-->
       <component>
         <section>
@@ -375,6 +387,7 @@
           </#if>
         </section>
       </component>
+      <#if h24AdmissionDischargeRecord.outhosAdvic??>
       <!--医嘱章节-->
       <component>
         <section>
@@ -391,6 +404,7 @@
           </entry>
         </section>
       </component>
+      </#if>
     </structuredBody>
   </component>
 </ClinicalDocument>

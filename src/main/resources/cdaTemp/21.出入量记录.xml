@@ -26,7 +26,9 @@
         <#if intakeOutputRecord.ageYear??>
         <age unit="岁" value="${intakeOutputRecord.ageYear!'NA'}"/>
         <#else>
+        <#if intakeOutputRecord.patientMonth??>
         <age unit="月" value="${intakeOutputRecord.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
       <providerOrganization>
@@ -249,6 +251,7 @@
                   <value code="${intakeOutputRecord.tcdTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.157" codeSystemName="中药使用类别代码表" displayName="<@dict_tag value="${intakeOutputRecord.tcdTypeCode!'NA'}" datasetCloumn="TCD_TYPE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
                 </observation>
               </entryRelationship>
+              <#if intakeOutputRecord.dosageTotal??>
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE06.00.135.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="药物使用总剂量"/>
@@ -256,6 +259,7 @@
                   <value unit="${intakeOutputRecord.dosageUnit!'NA'}" value="${intakeOutputRecord.dosageTotal!'NA'}" xsi:type="PQ"/>
                 </observation>
               </entryRelationship>
+              </#if>
             </substanceAdministration>
           </entry>
         </section>

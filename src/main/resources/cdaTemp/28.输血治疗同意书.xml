@@ -32,7 +32,9 @@
         <#if transfusionInformedConsent.ageYear??>
         <age unit="岁" value="${transfusionInformedConsent.ageYear!'NA'}"/>
         <#else>
+        <#if transfusionInformedConsent.patientMonth??>
         <age unit="月" value="${transfusionInformedConsent.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
     </patientRole>
@@ -171,6 +173,7 @@
         <section>
           <code code="56836-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of blood transfusion"/>
           <text/>
+          <#if transfusionInformedConsent.bloodTransfusionHistory??>
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.106.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录"/>
@@ -178,6 +181,7 @@
               <value code="${transfusionInformedConsent.bloodTransfusionHistory!'NA'}" codeSystem="2.16.156.10011.2.3.2.42" codeSystemName="输血史标识代码表" displayName="<@dict_tag value="${transfusionInformedConsent.bloodTransfusionHistory!'NA'}" datasetCloumn="BLOOD_TRANSFUSION_HISTORY">${dict.desc}</@dict_tag>" xsi:type="CD"/>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--治疗计划章节-->
@@ -185,6 +189,7 @@
         <section>
           <code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="TREATMENT PLAN"/>
           <text/>
+          <#if (transfusionInformedConsent.intentTransfusionDate??) || (transfusionInformedConsent.bloodTransfusionWay??) || (transfusionInformedConsent.bloodTransfusionVarietyCode??)>
           <!--输血过程-->
           <entry>
             <procedure classCode="PROC" moodCode="EVN">
@@ -226,6 +231,7 @@
               </entryRelationship>
             </procedure>
           </entry>
+          </#if>
         </section>
       </component>
       <!--意见章节-->

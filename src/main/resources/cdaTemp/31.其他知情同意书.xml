@@ -34,7 +34,9 @@
         <#if otherInformedConsent.ageYear??>
         <age unit="岁" value="${otherInformedConsent.ageYear!'NA'}"/>
         <#else>
+        <#if otherInformedConsent.patientMonth??>
         <age unit="月" value="${otherInformedConsent.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
     </patientRole>

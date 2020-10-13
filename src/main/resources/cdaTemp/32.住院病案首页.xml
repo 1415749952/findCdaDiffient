@@ -40,12 +40,12 @@
         <!-- 现住址-省（自治区、直辖市）-->
         <state>${inpatientMedicalRecord.currentProvince!'NA'}</state>
         <!--现住址-邮政编码-->
-        <#if inpatientMedicalRecord.currentZipCode??>
         <postalCode>${inpatientMedicalRecord.currentZipCode!'NA'}</postalCode>
-        </#if>
       </addr>
+      <#if inpatientMedicalRecord.currentPhone??>
       <!--电话号码-->
       <telecom value="<@privacy_tag value="${inpatientMedicalRecord.currentPhone!'NA'}" privacyId="5">${privacy}</@privacy_tag>"/>
+      </#if>
       <patient classCode="PSN" determinerCode="INSTANCE">
         <!--患者身份证号-->
         <id extension="<@privacy_tag value="${inpatientMedicalRecord.identityNo!'NA'}" privacyId="1">${privacy}</@privacy_tag>" root="2.16.156.10011.1.3"/>
@@ -53,12 +53,19 @@
         <name><@privacy_tag value="${inpatientMedicalRecord.patientName!'NA'}" privacyId="2">${privacy}</@privacy_tag></name>
         <!--患者性别-->
         <administrativeGenderCode code="${inpatientMedicalRecord.patientSex!'NA'}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="<@dict_tag value="${inpatientMedicalRecord.patientSex!'NA'}" datasetCloumn="PATIENT_SEX">${dict.desc}</@dict_tag>"/>
+        <#if inpatientMedicalRecord.birthday??>
         <!--患者出生日期-->
         <birthTime value="${inpatientMedicalRecord.birthday!'NA'}"/>
+        </#if>
+        <#if inpatientMedicalRecord.maritalStatusCode??>
         <!--患者婚姻状况-->
         <maritalStatusCode code="${inpatientMedicalRecord.maritalStatusCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.5" codeSystemName="婚姻状况代码表(GB/T 2261.2)" displayName="<@dict_tag value="${inpatientMedicalRecord.maritalStatusCode!'NA'}" datasetCloumn="MARITAL_STATUS_CODE">${dict.desc}</@dict_tag>"/>
+        </#if>
+        <#if inpatientMedicalRecord.nation??>
         <!--患者民族类别-->
         <ethnicGroupCode code="${inpatientMedicalRecord.nation!'NA'}" codeSystem="2.16.156.10011.2.3.3.3" codeSystemName="民族类别代码表(GB 3304)" displayName="<@dict_tag value="${inpatientMedicalRecord.nation!'NA'}" datasetCloumn="NATION">${dict.desc}</@dict_tag>"/>
+        </#if>
+        <#if (inpatientMedicalRecord.birthplaceCounty??) || (inpatientMedicalRecord.birthplaceCity??) || (inpatientMedicalRecord.birthplaceProvince??)>
         <!--出生地-->
         <birthplace>
           <place classCode="PLC" determinerCode="INSTANCE">
@@ -76,6 +83,7 @@
             </addr>
           </place>
         </birthplace>
+        </#if>
         <!-- 国籍 -->
         <nationality code="${inpatientMedicalRecord.nationnality!'NA'}" codeSystem="2.16.156.10011.2.3.3.1" codeSystemName="世界各国和地区名称代码(GB/T 2659)" displayName="<@dict_tag value="${inpatientMedicalRecord.nationnality!'NA'}" datasetCloumn="NATIONNALITY">${dict.desc}</@dict_tag>"/>
         <!-- 年龄 -->
@@ -84,12 +92,15 @@
         <#else>
         <age unit="月" value="${inpatientMedicalRecord.patientMonth!'NA'}"/>
         </#if>
+        <#if inpatientMedicalRecord.workunitName??>
         <!-- 工作单位 -->
         <employerOrganization>
           <!-- 工作单位名称 -->
           <name>${inpatientMedicalRecord.workunitName!'NA'}</name>
           <!-- 工作单位电话-->
           <telecom value="${inpatientMedicalRecord.workunitPhone!'NA'}"/>
+          <#if (inpatientMedicalRecord.workunitDoors??) || (inpatientMedicalRecord.workunitVillage??) || (inpatientMedicalRecord.workunitTownship??)
+            || (inpatientMedicalRecord.workunitCounty??) || (inpatientMedicalRecord.workunitCity??) || (inpatientMedicalRecord.workunitProvince??)>
           <!-- 工作地址 -->
           <addr use="WP">
             <!--  工作单位地址-门牌号码-->
@@ -110,6 +121,9 @@
             </#if>
           </addr>
         </employerOrganization>
+        </#if>
+        <#if (inpatientMedicalRecord.accountDoors??) || (inpatientMedicalRecord.accountVillage??) || (inpatientMedicalRecord.accountTownship??)
+        || (inpatientMedicalRecord.accountCounty??) || (inpatientMedicalRecord.accountCity??) || (inpatientMedicalRecord.accountProvince??)>
         <!-- 户口信息 -->
         <household>
           <place classCode="PLC" determinerCode="INSTANCE">
@@ -134,6 +148,8 @@
             </addr>
           </place>
         </household>
+        </#if>
+        <#if (inpatientMedicalRecord.nativeplaceCity??) || (inpatientMedicalRecord.nativeplaceProvince??)>
         <!-- 籍贯信息 -->
         <nativePlace>
           <place classCode="PLC" determinerCode="INSTANCE">
@@ -145,10 +161,13 @@
             </addr>
           </place>
         </nativePlace>
+        </#if>
+        <#if inpatientMedicalRecord.occupationTypeCode??>
         <!--职业状况-->
         <occupation>
           <occupationCode code="${inpatientMedicalRecord.occupationTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.13" codeSystemName="从业状况(个人身体)代码表(GB/T 2261.4)" displayName="<@dict_tag value="${inpatientMedicalRecord.occupationTypeCode!'NA'}" datasetCloumn="OCCUPATION_TYPE_CODE">${dict.desc}</@dict_tag>"/>
         </occupation>
+        </#if>
       </patient>
       <!--提供患者服务机构-->
       <providerOrganization classCode="ORG" determinerCode="INSTANCE">
@@ -349,6 +368,7 @@
   </componentOf>
   <component>
     <structuredBody>
+      <#if (inpatientMedicalRecord.newbornInpWeight??) || (inpatientMedicalRecord.newbornBirthWeight??)>
       <!--生命体征章节-->
       <component>
         <section>
@@ -380,6 +400,7 @@
           </#if>
         </section>
       </component>
+      </#if>
       <!--诊断章节-->
       <component>
         <section>
@@ -466,6 +487,7 @@
             </observation>
           </entry>
           </#if>
+          <#if (inpatientMedicalRecord.headinjuryInpbeforeMin??) || (inpatientMedicalRecord.headinjuryInpbeforecomaHour??) || (inpatientMedicalRecord.headinjuryInpbeforecomaDay??)>
           <!--颅脑损伤患者入院前昏迷时间-->
           <entry typeCode="COMP">
             <organizer classCode="CLUSTER" moodCode="EVN">
@@ -491,6 +513,8 @@
               </component>
             </organizer>
           </entry>
+          </#if>
+          <#if (inpatientMedicalRecord.headinjuryInpaftercomaDay??) || (inpatientMedicalRecord.headinjuryInpaftercomaHour??) || (inpatientMedicalRecord.headinjuryInpaftercomaMinute??)>
           <!--颅脑损伤患者入院后昏迷时间-->
           <entry typeCode="COMP">
             <organizer classCode="CLUSTER" moodCode="EVN">
@@ -516,8 +540,10 @@
               </component>
             </organizer>
           </entry>
+          </#if>
         </section>
       </component>
+      <#if inpatientMedicalRecord.transitionDep??>
       <!--转科记录章节-->
       <component>
         <section>
@@ -541,6 +567,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--出院诊断章节-->
       <component>
         <section>
@@ -642,6 +669,7 @@
           </entry>
         </section>
       </component>
+      <#if (inpatientMedicalRecord.drugAllergyFlag??) || (inpatientMedicalRecord.allergyDrug??)>
       <!--过敏史章节-->
       <component>
         <section>
@@ -670,11 +698,13 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--实验室检查章节-->
       <component>
         <section>
           <code code="30954-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="STUDIES SUMMARY"/>
           <text/>
+          <#if (inpatientMedicalRecord.bloodAboCode??) || (inpatientMedicalRecord.rhBloodCode??)>
           <entry typeCode="COMP">
             <!-- 血型-->
             <organizer classCode="BATTERY" moodCode="EVN">
@@ -695,6 +725,7 @@
               </component>
             </organizer>
           </entry>
+          </#if>
         </section>
       </component>
       <#if inpatientMedicalRecord.operationCode??>
@@ -706,14 +737,10 @@
           <entry>
             <!-- 1..1 手术记录 -->
             <procedure classCode="PROC" moodCode="EVN">
-              <#if inpatientMedicalRecord.operationCode??>
               <code code="${inpatientMedicalRecord.operationCode!'NA'}" codeSystem="2.16.156.10011.2.3.3.12" codeSystemName="手术(操作)代码表(ICD-9-CM)" displayName="<@dict_tag value="${inpatientMedicalRecord.operationCode!'NA'}" datasetCloumn="OPERATION_CODE">${dict.desc}</@dict_tag>"/>
-              </#if>
               <statusCode/>
               <!--手术操作开始日期/时间-->
-              <#if inpatientMedicalRecord.operationStartDatetime??>
               <effectiveTime value="${inpatientMedicalRecord.operationStartDatetime!'NA'}"/>
-              </#if>
               <!--手术者-->
               <performer>
                 <assignedEntity>
@@ -747,45 +774,36 @@
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE06.00.094.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术（操作）名称"/>
-                  <#if inpatientMedicalRecord.operationName??>
                   <value xsi:type="ST">${inpatientMedicalRecord.operationName!'NA'}</value>
-                  </#if>
                 </observation>
               </entryRelationship>
               <!--手术级别 -->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE06.00.255.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术级别"/>
-                  <#if inpatientMedicalRecord.operationLevelCode??>
                   <value code="${inpatientMedicalRecord.operationLevelCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.258" codeSystemName="手术级别代码表" xsi:type="CD" displayName="<@dict_tag value="${inpatientMedicalRecord.operationLevelCode!'NA'}" datasetCloumn="OPERATION_LEVEL_CODE">${dict.desc}</@dict_tag>"/>
-                  </#if>
                 </observation>
               </entryRelationship>
               <!--手术切口类别 -->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE06.00.257.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术切口类别代码"/>
-                  <#if inpatientMedicalRecord.operationTypeCode??>
                   <value code="${inpatientMedicalRecord.operationTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.256" codeSystemName="手术切口类别代码表" xsi:type="CD" displayName="<@dict_tag value="${inpatientMedicalRecord.operationTypeCode!'NA'}" datasetCloumn="OPERATION_TYPE_CODE">${dict.desc}</@dict_tag>"/>
-                  </#if>
                 </observation>
               </entryRelationship>
               <!--手术切口愈合等级-->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE05.10.147.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="手术切口愈合等级"/>
-                  <#if inpatientMedicalRecord.operatIncisHealTypeCode??>
                   <value code="${inpatientMedicalRecord.operatIncisHealTypeCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.257" codeSystemName="手术切口愈合等级代码表" displayName="<@dict_tag value="${inpatientMedicalRecord.operatIncisHealTypeCode!'NA'}" datasetCloumn="OPERAT_INCIS_HEAL_TYPE_CODE">${dict.desc}</@dict_tag>" xsi:type="CD"/>
-                  </#if>
                 </observation>
               </entryRelationship>
+              <#if inpatientMedicalRecord.anesthesiaMethodCode??>
               <!--麻醉方式代码-->
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE06.00.073.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="麻醉方式代码"/>
-                  <#if inpatientMedicalRecord.anesthesiaMethodCode??>
                   <value code="${inpatientMedicalRecord.anesthesiaMethodCode!'NA'}" codeSystem="2.16.156.10011.2.3.1.159" codeSystemName="麻醉方法代码表" xsi:type="CD" displayName="<@dict_tag value="${inpatientMedicalRecord.anesthesiaMethodCode!'NA'}" datasetCloumn="ANESTHESIA_METHOD_CODE">${dict.desc}</@dict_tag>"/>
-                  </#if>
                   <performer>
                     <assignedEntity>
                       <id extension="${inpatientMedicalRecord.anesthesiaDoctorSignature!'NA'}" root="2.16.156.10011.1.4"/>
@@ -797,11 +815,13 @@
                   </performer>
                 </observation>
               </entryRelationship>
+              </#if>
             </procedure>
           </entry>
         </section>
       </component>
       </#if>
+      <#if inpatientMedicalRecord.inhosCount??>
       <!--住院史章节-->
       <component>
         <section>
@@ -816,6 +836,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--住院过程章节-->
       <component>
         <section>
@@ -859,6 +880,7 @@
         <section>
           <code displayName="行政管理"/>
           <text/>
+          <#if inpatientMedicalRecord.inhosAutopsyFlag??>
           <!--亡患者尸检标志-->
           <entry typeCode="COMP">
             <observation classCode="OBS" moodCode="EVN">
@@ -866,6 +888,8 @@
               <value value="${inpatientMedicalRecord.inhosAutopsyFlag!'NA'}" xsi:type="BL"/>
             </observation>
           </entry>
+          </#if>
+          <#if inpatientMedicalRecord.mrQualityCode??>
           <!--病案质量-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -897,6 +921,7 @@
               </author>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--治疗计划章节-->
@@ -904,19 +929,23 @@
         <section>
           <code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="TREATMENT PLAN"/>
           <text/>
+          <#if (inpatientMedicalRecord.outhosPurpose??) || (inpatientMedicalRecord.outhosFlag??)>
           <!-- 有否出院31天内再住院计划 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.194.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院31天内再住院标志"/>
               <value value="${inpatientMedicalRecord.outhosFlag!'NA'}" xsi:type="BL"/>
+              <#if inpatientMedicalRecord.outhosPurpose??>
               <entryRelationship negationInd="false" typeCode="GEVL">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="DE06.00.195.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="出院31天内再住院目的"/>
                   <value xsi:type="ST">${inpatientMedicalRecord.outhosPurpose!'NA'}</value>
                 </observation>
               </entryRelationship>
+              </#if>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--费用章节-->
@@ -931,23 +960,26 @@
               <value codeSystem="2.16.156.10011.2.3.1.269" codeSystemName="医疗付费方式代码表" xsi:type="CD" code="${inpatientMedicalRecord.payWay!'NA'}" displayName="<@dict_tag value="${inpatientMedicalRecord.payWay!'NA'}" datasetCloumn="PAY_WAY">${dict.desc}</@dict_tag>"/>
             </observation>
           </entry>
-        <!--住院总费用 -->
+          <!--住院总费用 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="HDSD00.11.142" codeSystem="2.16.156.10011.2.2.4" codeSystemName="住院病案首页基本数据集" displayName="住院总费用"/>
               <value currency="元" value="${inpatientMedicalRecord.inpTotalcost!'NA'}" xsi:type="MO"/>
+              <#if inpatientMedicalRecord.inpTotalcostOwnpay??>
               <entryRelationship negationInd="false" typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="HDSD00.11.143" codeSystem="2.16.156.10011.2.2.4" codeSystemName="住院病案首页基本数据集" displayName="住院总费用-自付金额(元)"/>
                   <value currency="元" value="${inpatientMedicalRecord.inpTotalcostOwnpay!'NA'}" xsi:type="MO"/>
                 </observation>
               </entryRelationship>
+              </#if>
             </observation>
           </entry>
           <!--综合医疗服务费 -->
           <entry>
             <organizer classCode="CLUSTER" moodCode="EVN">
               <statusCode/>
+              <#if inpatientMedicalRecord.medicalCommonlyserviceCost??>
               <!--综合医疗服务费-一般医疗服务费-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -955,6 +987,8 @@
                   <value currency="元" value="${inpatientMedicalRecord.medicalCommonlyserviceCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
+              <#if inpatientMedicalRecord.medicalCommonlyoperationCost??>
               <!--综合医疗服务费-一般治疗操作费-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -962,6 +996,8 @@
                   <value currency="元" value="${inpatientMedicalRecord.medicalCommonlyoperationCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
+              <#if inpatientMedicalRecord.medicalNursingCost??>
               <!--综合医疗服务费-护理费-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -969,6 +1005,8 @@
                   <value currency="元" value="${inpatientMedicalRecord.medicalNursingCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
+              <#if inpatientMedicalRecord.medicalOtherCost??>
               <!--综合医疗服务费-其他费用-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -976,12 +1014,14 @@
                   <value currency="元" value="${inpatientMedicalRecord.medicalOtherCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
             </organizer>
           </entry>
           <!--诊断类服务费 -->
           <entry>
             <organizer classCode="CLUSTER" moodCode="EVN">
               <statusCode/>
+              <#if inpatientMedicalRecord.diagPathologyCost??>
               <!--诊断-病理诊断费-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -989,6 +1029,8 @@
                   <value currency="元" value="${inpatientMedicalRecord.diagPathologyCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
+              <#if inpatientMedicalRecord.diagLaboratoryCost??>
               <!--诊断-实验室诊断费-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -996,6 +1038,8 @@
                   <value currency="元" value="${inpatientMedicalRecord.diagLaboratoryCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
+              <#if inpatientMedicalRecord.imagingDiagnosisExpense??>
               <!-- 诊断-影像学诊断费-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -1003,6 +1047,8 @@
                   <value currency="元" value="${inpatientMedicalRecord.imagingDiagnosisExpense!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
+              <#if inpatientMedicalRecord.diagClinicalCost??>
               <!--诊断-临床诊断项目费-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -1010,17 +1056,20 @@
                   <value currency="元" value="${inpatientMedicalRecord.diagClinicalCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
             </organizer>
           </entry>
           <!--治疗类服务费 -->
           <entry>
             <organizer classCode="CLUSTER" moodCode="EVN">
               <statusCode/>
+              <#if (inpatientMedicalRecord.treatNooperationItemcost??) || (inpatientMedicalRecord.treatNooperationPhysicscost??)>
               <component>
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="HDSD00.11.129" codeSystem="2.16.156.10011.2.2.4" codeSystemName="住院病案首页基本数据集" displayName="治疗-非手术治疗项目费"/>
                   <!--治疗-非手术治疗项目费-->
                   <value currency="元" value="${inpatientMedicalRecord.treatNooperationItemcost!'NA'}" xsi:type="MO"/>
+                  <#if inpatientMedicalRecord.diagClinicalCost??>
                   <entryRelationship typeCode="COMP">
                     <observation classCode="OBS" moodCode="EVN">
                       <code code="HDSD00.11.130" codeSystem="2.16.156.10011.2.2.4" codeSystemName="住院病案首页基本数据集" displayName="治疗-非手术治疗项目费-临床物理治疗费"/>
@@ -1028,13 +1077,17 @@
                       <value currency="元" value="${inpatientMedicalRecord.treatNooperationPhysicscost!'NA'}" xsi:type="MO"/>
                     </observation>
                   </entryRelationship>
+                  </#if>
                 </observation>
               </component>
+              </#if>
+              <#if (inpatientMedicalRecord.treatOperationtreatCost??) || (inpatientMedicalRecord.treatOperAnaesthesiacost??) || (inpatientMedicalRecord.treatOperationtreatOpercost??)>
               <component>
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="HDSD00.11.131" codeSystem="2.16.156.10011.2.2.4" codeSystemName="住院病案首页基本数据集" displayName="治疗-手术治疗费"/>
                   <!--治疗-手术治疗费-->
                   <value currency="元" value="${inpatientMedicalRecord.treatOperationtreatCost!'NA'}" xsi:type="MO"/>
+                  <#if inpatientMedicalRecord.treatOperAnaesthesiacost??>
                   <entryRelationship typeCode="COMP">
                     <observation classCode="OBS" moodCode="EVN">
                       <code code="HDSD00.11.132" codeSystem="2.16.156.10011.2.2.4" codeSystemName="住院病案首页基本数据集" displayName="治疗-手术治疗费-麻醉费"/>
@@ -1042,6 +1095,8 @@
                       <value currency="元" value="${inpatientMedicalRecord.treatOperAnaesthesiacost!'NA'}" xsi:type="MO"/>
                     </observation>
                   </entryRelationship>
+                  </#if>
+                  <#if inpatientMedicalRecord.treatOperationtreatOpercost??>
                   <entryRelationship typeCode="COMP">
                     <observation classCode="OBS" moodCode="EVN">
                       <code code="HDSD00.11.133" codeSystem="2.16.156.10011.2.2.4" codeSystemName="住院病案首页基本数据集" displayName="治疗-手术治疗费-手术费"/>
@@ -1049,10 +1104,13 @@
                       <value currency="元" value="${inpatientMedicalRecord.treatOperationtreatOpercost!'NA'}" xsi:type="MO"/>
                     </observation>
                   </entryRelationship>
+                  </#if>
                 </observation>
               </component>
+              </#if>
             </organizer>
           </entry>
+          <#if inpatientMedicalRecord.recoveryCost??>
           <!--康复费-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -1060,6 +1118,8 @@
               <value currency="元" value="${inpatientMedicalRecord.recoveryCost!'NA'}" xsi:type="MO"/>
             </observation>
           </entry>
+          </#if>
+          <#if inpatientMedicalRecord.tcmTreatCost??>
           <!--中医治疗费-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -1067,12 +1127,14 @@
               <value currency="元" value="${inpatientMedicalRecord.tcmTreatCost!'NA'}" xsi:type="MO"/>
             </observation>
           </entry>
+          </#if>
           <!--西药费 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
               <code code="HDSD00.11.098" codeSystem="2.16.156.10011.2.2.4" codeSystemName="住院病案首页基本数据集" displayName="西药费"/>
               <!--西药费-->
               <value currency="元" value="${inpatientMedicalRecord.drugCost!'NA'}" xsi:type="MO"/>
+              <#if inpatientMedicalRecord.drugAntibioticsCost??>
               <entryRelationship typeCode="COMP">
                 <observation classCode="OBS" moodCode="EVN">
                   <code code="HDSD00.11.099" codeSystem="2.16.156.10011.2.2.4" codeSystemName="住院病案首页基本数据集" displayName="西药费-抗菌药物费用"/>
@@ -1080,12 +1142,15 @@
                   <value currency="元" value="${inpatientMedicalRecord.drugAntibioticsCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </entryRelationship>
+              </#if>
             </observation>
           </entry>
+          <#if (inpatientMedicalRecord.proprietaryCmExpense??) || (inpatientMedicalRecord.tcdChmCost??)>
           <!--中药费 -->
           <entry>
             <organizer classCode="CLUSTER" moodCode="EVN">
               <statusCode/>
+              <#if inpatientMedicalRecord.proprietaryCmExpense??>
               <!--中药费-中成药费-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -1093,6 +1158,8 @@
                   <value currency="元" value="${inpatientMedicalRecord.proprietaryCmExpense!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
+              <#if inpatientMedicalRecord.tcdChmCost??>
               <!--中药费-中草药费-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -1100,12 +1167,17 @@
                   <value currency="元" value="${inpatientMedicalRecord.tcdChmCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
             </organizer>
           </entry>
+          </#if>
+          <#if (inpatientMedicalRecord.bloodCost??) || (inpatientMedicalRecord.bloodAlburminCost??) || (inpatientMedicalRecord.bloodGlobulinCost??)
+            || (inpatientMedicalRecord.bloodCogulationfactorCost??) || (inpatientMedicalRecord.bloodCellfactorCost??)>
           <!-- 血液和血液制品类服务费 -->
           <entry>
             <organizer classCode="CLUSTER" moodCode="EVN">
               <statusCode/>
+              <#if inpatientMedicalRecord.bloodCost??>
               <!--血费-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -1113,6 +1185,8 @@
                   <value currency="元" value="${inpatientMedicalRecord.bloodCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
+              <#if inpatientMedicalRecord.bloodAlburminCost??>
               <!--白蛋白类制品费-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -1120,6 +1194,8 @@
                   <value currency="元" value="${inpatientMedicalRecord.bloodAlburminCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
+              <#if inpatientMedicalRecord.bloodGlobulinCost??>
               <!--球蛋白类制品费-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -1127,6 +1203,8 @@
                   <value currency="元" value="${inpatientMedicalRecord.bloodGlobulinCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
+              <#if inpatientMedicalRecord.bloodCogulationfactorCost??>
               <!--凝血因子类制品费-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -1134,6 +1212,8 @@
                   <value currency="元" value="${inpatientMedicalRecord.bloodCogulationfactorCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
+              <#if inpatientMedicalRecord.bloodCellfactorCost??>
               <!--细胞因子类制品费-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -1141,12 +1221,16 @@
                   <value currency="元" value="${inpatientMedicalRecord.bloodCellfactorCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
             </organizer>
           </entry>
+          </#if>
+          <#if (inpatientMedicalRecord.checkDmmExpense??) || (inpatientMedicalRecord.expTreatCost??) || (inpatientMedicalRecord.expOpertionCost??)>
           <!-- 耗材类费用 -->
           <entry>
             <organizer classCode="CLUSTER" moodCode="EVN">
               <statusCode/>
+              <#if inpatientMedicalRecord.checkDmmExpense??>
               <!--一次性医用材料费-检查用-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -1154,6 +1238,8 @@
                   <value currency="元" value="${inpatientMedicalRecord.checkDmmExpense!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
+              <#if inpatientMedicalRecord.expTreatCost??>
               <!--一次性医用材料费-治疗用-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -1161,6 +1247,8 @@
                   <value currency="元" value="${inpatientMedicalRecord.expTreatCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
+              <#if inpatientMedicalRecord.expTreatCost??>
               <!--一次性医用材料费-手术用-->
               <component>
                 <observation classCode="OBS" moodCode="EVN">
@@ -1168,8 +1256,11 @@
                   <value currency="元" value="${inpatientMedicalRecord.expOpertionCost!'NA'}" xsi:type="MO"/>
                 </observation>
               </component>
+              </#if>
             </organizer>
           </entry>
+          </#if>
+          <#if inpatientMedicalRecord.otherCost??>
           <!--其他费-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -1177,6 +1268,7 @@
               <value currency="元" value="${inpatientMedicalRecord.otherCost!'NA'}" xsi:type="MO"/>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
     </structuredBody>

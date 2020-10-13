@@ -34,7 +34,9 @@
         <#if specialTreatmentConsent.ageYear??>
         <age unit="岁" value="${specialTreatmentConsent.ageYear!'NA'}"/>
         <#else>
+        <#if specialTreatmentConsent.patientMonth??>
         <age unit="月" value="${specialTreatmentConsent.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
     </patientRole>
@@ -173,10 +175,11 @@
         <section>
           <code code="59772-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Planned procedure"/>
           <text/>
+          <!--拟实施条目-->
           <entry>
-            <!--特殊检查及特殊治疗项目名称-->
             <observation classCode="OBS" moodCode="EVN">
               <code code="DE06.00.306.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="特殊检查及特殊治疗项目名称"/>
+              <!--特殊检查及特殊治疗项目名称-->
               <value xsi:type="ST">${specialTreatmentConsent.speicalExamtreatItem!'NA'}</value>
               <!--特殊检查及特殊治疗目的-->
               <entryRelationship typeCode="COMP">
@@ -187,6 +190,7 @@
               </entryRelationship>
             </observation>
           </entry>
+          <#if specialTreatmentConsent.replaceScheme??>
           <!--替代方案-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -194,19 +198,7 @@
               <value xsi:type="ST">${specialTreatmentConsent.replaceScheme!'NA'}</value>
             </observation>
           </entry>
-        </section>
-      </component>
-      <!--操作风险章节-->
-      <component>
-        <section>
-          <code displayName="操作风险"/>
-          <text/>
-          <entry>
-            <observation classCode="OBS" moodCode="DEF">
-              <code code="DE05.01.075.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="特殊检查及特殊治疗可能引起的并发症及风险"/>
-              <value xsi:type="ST">${specialTreatmentConsent.spexaminationsSptreatCompl!'NA'}</value>
-            </observation>
-          </entry>
+          </#if>
         </section>
       </component>
       <!--意见章节-->
@@ -236,6 +228,21 @@
               <value xsi:type="ST"/>
             </observation>
           </entry>
+        </section>
+      </component>
+      <!--操作风险章节-->
+      <component>
+        <section>
+          <code displayName="操作风险"/>
+          <text/>
+          <#if specialTreatmentConsent.spexaminationsSptreatCompl??>
+          <entry>
+            <observation classCode="OBS" moodCode="DEF">
+              <code code="DE05.01.075.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="特殊检查及特殊治疗可能引起的并发症及风险"/>
+              <value xsi:type="ST">${specialTreatmentConsent.spexaminationsSptreatCompl!'NA'}</value>
+            </observation>
+          </entry>
+          </#if>
         </section>
       </component>
     </structuredBody>

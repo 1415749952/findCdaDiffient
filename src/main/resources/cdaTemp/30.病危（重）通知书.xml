@@ -34,7 +34,9 @@
         <#if criticallyIllNotice.ageYear??>
         <age unit="岁" value="${criticallyIllNotice.ageYear!'NA'}"/>
         <#else>
+        <#if criticallyIllNotice.patientMonth??>
         <age unit="月" value="${criticallyIllNotice.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
     </patientRole>

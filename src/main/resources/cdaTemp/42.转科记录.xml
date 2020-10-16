@@ -29,7 +29,9 @@
         <#if transferenceRecord.ageYear??>
         <age unit="岁" value="${transferenceRecord.ageYear!'NA'}"/>
         <#else>
+        <#if transferenceRecord.patientMonth??>
         <age unit="月" value="${transferenceRecord.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
     </patientRole>
@@ -210,6 +212,15 @@
               <value xsi:type="ST">${transferenceRecord.currentlySituation!'NA'}</value>
             </observation>
           </entry>
+          <#if transferenceRecord.tcmFourResults??>
+          <!--中医“四诊”观察结果-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN ">
+              <code code="DE02.10.028.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中医“四诊”观察结果"/>
+              <value xsi:type="ST">${transferenceRecord.tcmFourResults!'NA'}</value>
+            </observation>
+          </entry>
+          </#if>
           <!--目前诊断-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -243,13 +254,6 @@
             </observation>
           </entry>
           </#if>
-          <!--中医“四诊”观察结果-->
-          <entry>
-            <observation classCode="OBS" moodCode="EVN ">
-              <code code="DE02.10.028.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中医“四诊”观察结果"/>
-              <value xsi:type="ST">${transferenceRecord.tcmFourResults!'NA'}</value>
-            </observation>
-          </entry>
         </section>
       </component>
       <!--计划章节 1..*-->
@@ -264,6 +268,7 @@
               <value xsi:type="ST">${transferenceRecord.assessmentPlan!'NA'}</value>
             </observation>
           </entry>
+          <#if transferenceRecord.therapeuticPrinciple??>
           <!--治则治法-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -271,6 +276,8 @@
               <value xsi:type="ST">${transferenceRecord.therapeuticPrinciple!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if transferenceRecord.mattersNeedAttention??>
           <!--注意事项-->
           <entry>
             <observation classCode="OBS" moodCode="EVN ">
@@ -278,6 +285,7 @@
               <value xsi:type="ST">${transferenceRecord.mattersNeedAttention!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--转科记录章节-->
@@ -315,6 +323,7 @@
           </entry>
         </section>
       </component>
+      <#if (transferenceRecord.adviceContent??) || (transferenceRecord.chinDecocDecway??) || (transferenceRecord.chinDrinkDecway??)>
       <!--用药章节-->
       <component>
         <section>
@@ -343,6 +352,7 @@
           </entry>
         </section>
       </component>
+      </#if>
       <!--住院过程章节-->
       <component>
         <section>

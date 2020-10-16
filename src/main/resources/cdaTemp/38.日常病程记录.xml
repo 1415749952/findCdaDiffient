@@ -144,6 +144,7 @@
           </entry>
         </section>
       </component>
+      <#if dailyCourseRecord.tcmFourResults??>
       <!--诊断章节-->
       <component>
         <section>
@@ -157,41 +158,8 @@
           </entry>
         </section>
       </component>
-      <!--用药章节-->
-      <component>
-        <section>
-          <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF MEDICATION USE"/>
-          <text/>
-          <!--中药煎煮法-->
-          <entry>
-            <observation classCode="OBS" moodCode="EVN ">
-              <code code="DE08.50.047.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中药饮片煎煮法"/>
-              <value xsi:type="ST">${dailyCourseRecord.chinDecocDecway!'NA'}</value>
-            </observation>
-          </entry>
-          <!--中药用药方法-->
-          <entry>
-            <observation classCode="OBS" moodCode="EVN ">
-              <code code="DE06.00.136.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中药用药方法的描述"/>
-              <value xsi:type="ST">${dailyCourseRecord.chinDrinkDecway!'NA'}</value>
-            </observation>
-          </entry>
-        </section>
-      </component>
-      <!--治疗计划章节-->
-      <component>
-        <section>
-          <code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="TREATMENT PLAN"/>
-          <text/>
-          <!--辨证论治-->
-          <entry>
-            <observation classCode="OBS" moodCode="EVN">
-              <code code="DE05.10.131.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="辩证论治"/>
-              <value xsi:type="ST">${dailyCourseRecord.dialecticalDesc!'NA'}</value>
-            </observation>
-          </entry>
-        </section>
-      </component>
+      </#if>
+      <#if dailyCourseRecord.adviceContent??>
       <!--住院医嘱章节-->
       <component>
         <section>
@@ -206,6 +174,50 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if dailyCourseRecord.dialecticalDesc??>
+      <!--治疗计划章节-->
+      <component>
+        <section>
+          <code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="TREATMENT PLAN"/>
+          <text/>
+          <!--辨证论治-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <code code="DE05.10.131.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="辩证论治"/>
+              <value xsi:type="ST">${dailyCourseRecord.dialecticalDesc!'NA'}</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      </#if>
+      <#if (dailyCourseRecord.chinDecocDecway??) || (dailyCourseRecord.chinDrinkDecway??)>
+      <!--用药章节-->
+      <component>
+        <section>
+          <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF MEDICATION USE"/>
+          <text/>
+          <#if dailyCourseRecord.chinDecocDecway??>
+          <!--中药煎煮法-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN ">
+              <code code="DE08.50.047.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中药饮片煎煮法"/>
+              <value xsi:type="ST">${dailyCourseRecord.chinDecocDecway!'NA'}</value>
+            </observation>
+          </entry>
+          </#if>
+          <#if dailyCourseRecord.chinDrinkDecway??>
+          <!--中药用药方法-->
+          <entry>
+            <observation classCode="OBS" moodCode="EVN ">
+              <code code="DE06.00.136.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中药用药方法的描述"/>
+              <value xsi:type="ST">${dailyCourseRecord.chinDrinkDecway!'NA'}</value>
+            </observation>
+          </entry>
+          </#if>
+        </section>
+      </component>
+      </#if>
     </structuredBody>
   </component>
 </ClinicalDocument>

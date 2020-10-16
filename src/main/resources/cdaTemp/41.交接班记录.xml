@@ -28,7 +28,9 @@
         <#if handoverRecord.ageYear??>
         <age unit="岁" value="${handoverRecord.ageYear!'NA'}"/>
         <#else>
+        <#if handoverRecord.patientMonth??>
         <age unit="月" value="${handoverRecord.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
     </patientRole>
@@ -227,6 +229,7 @@
             </observation>
           </entry>
           </#if>
+          <#if handoverRecord.tcmFourResults??>
           <!--中医“四诊”观察结果-->
           <entry>
             <observation classCode="OBS" moodCode="EVN ">
@@ -234,6 +237,7 @@
               <value xsi:type="ST">${handoverRecord.tcmFourResults!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--治疗计划章节-->
@@ -248,6 +252,7 @@
               <value xsi:type="ST">${handoverRecord.succAssessmentPlan!'NA'}</value>
             </observation>
           </entry>
+          <#if handoverRecord.therapeuticPrinciple??>
           <!--治则治法-->
           <entry>
             <observation classCode="OBS" moodCode="EVN">
@@ -255,6 +260,8 @@
               <value xsi:type="ST">${handoverRecord.therapeuticPrinciple!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if handoverRecord.mattersNeedAttention??>
           <!--注意事项-->
           <entry>
             <observation classCode="OBS" moodCode="EVN ">
@@ -262,6 +269,7 @@
               <value xsi:type="ST">${handoverRecord.mattersNeedAttention!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
       <!--住院过程章节-->

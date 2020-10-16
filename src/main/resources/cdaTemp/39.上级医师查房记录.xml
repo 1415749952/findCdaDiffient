@@ -167,6 +167,7 @@
           </entry>
         </section>
       </component>
+      <#if superiorDoctorWardround.tcmFourResults??>
       <!--诊断记录章节-->
       <component>
         <section>
@@ -180,11 +181,14 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if (superiorDoctorWardround.chinDecocDecway??) || (superiorDoctorWardround.chinDrinkDecway??)>
       <!--用药章节-->
       <component>
         <section>
           <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF MEDICATION USE"/>
           <text/>
+          <#if superiorDoctorWardround.chinDecocDecway??>
           <!--中药煎煮法-->
           <entry>
             <observation classCode="OBS" moodCode="EVN ">
@@ -192,6 +196,8 @@
               <value xsi:type="ST">${superiorDoctorWardround.chinDecocDecway!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if superiorDoctorWardround.chinDrinkDecway??>
           <!--中药用药方法-->
           <entry>
             <observation classCode="OBS" moodCode="EVN ">
@@ -199,8 +205,11 @@
               <value xsi:type="ST">${superiorDoctorWardround.chinDrinkDecway!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
+      </#if>
+      <#if (superiorDoctorWardround.assessmentPlan??) || (superiorDoctorWardround.dialecticalDesc??)>
       <!--治疗计划章节-->
       <component>
         <section>
@@ -213,6 +222,7 @@
               <value xsi:type="ST">${superiorDoctorWardround.assessmentPlan!'NA'}</value>
             </observation>
           </entry>
+          <#if superiorDoctorWardround.dialecticalDesc??>
           <!--辩证论治详细描述-->
           <entry>
             <observation classCode="OBS" moodCode="INT">
@@ -220,8 +230,11 @@
               <value xsi:type="ST">${superiorDoctorWardround.dialecticalDesc!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
+      </#if>
+      <#if superiorDoctorWardround.adviceContent??>
       <!--医嘱章节-->
       <component>
         <section>
@@ -236,6 +249,7 @@
           </entry>
         </section>
       </component>
+      </#if>
     </structuredBody>
   </component>
 </ClinicalDocument>

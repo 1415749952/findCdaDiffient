@@ -28,7 +28,9 @@
         <#if intractableDiscussRecord.ageYear??>
         <age unit="岁" value="${intractableDiscussRecord.ageYear!'NA'}"/>
         <#else>
+        <#if intractableDiscussRecord.patientMonth??>
         <age unit="月" value="${intractableDiscussRecord.patientMonth!'NA'}"/>
+        </#if>
         </#if>
       </patient>
       <providerOrganization classCode="ORG" determinerCode="INSTANCE">
@@ -198,6 +200,7 @@
           </entry>
         </section>
       </component>
+      <#if intractableDiscussRecord.tcmFourResults??>
       <!--诊断章节-->
       <component>
         <section>
@@ -211,6 +214,8 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if intractableDiscussRecord.dialecticalDesc??>
       <!--治疗计划章节-->
       <component>
         <section>
@@ -225,11 +230,14 @@
           </entry>
         </section>
       </component>
+      </#if>
+      <#if (intractableDiscussRecord.adviceContent??) || (intractableDiscussRecord.chinDecocDecway??) || (intractableDiscussRecord.chinDrinkDecway??)>
       <!--用药章节-->
       <component>
         <section>
           <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF MEDICATION USE"/>
           <text/>
+          <#if intractableDiscussRecord.adviceContent??>
           <!-- 中药处方医嘱内容 -->
           <entry>
             <observation classCode="OBS" moodCode="EVN ">
@@ -237,13 +245,17 @@
               <value xsi:type="ST">${intractableDiscussRecord.adviceContent!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if intractableDiscussRecord.chinDecocDecway??>
           <!--中药煎煮法-->
           <entry>
             <observation classCode="OBS" moodCode="EVN ">
               <code code="DE08.50.047.00" codeSystem="2.16.156.10011.2.2.1" codeSystemName="卫生信息数据元目录" displayName="中药饮片煎煮法"/>
-              <value xsi:type="ST"/>
+              <value xsi:type="ST">${intractableDiscussRecord.chinDecocDecway!'NA'}</value>
             </observation>
           </entry>
+          </#if>
+          <#if intractableDiscussRecord.chinDrinkDecway??>
           <!--中药用药方法-->
           <entry>
             <observation classCode="OBS" moodCode="EVN ">
@@ -251,8 +263,10 @@
               <value xsi:type="ST">${intractableDiscussRecord.chinDrinkDecway!'NA'}</value>
             </observation>
           </entry>
+          </#if>
         </section>
       </component>
+      </#if>
     </structuredBody>
   </component>
 </ClinicalDocument>

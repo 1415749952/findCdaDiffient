@@ -8691,4 +8691,126 @@ comment on column TREATMENT_RECORD.OPERATOR_DATE is '操作日期时间'
 
 comment on column TREATMENT_RECORD.LAST_MODIFIC_TIME is '最后修改时间'
 /
+create table DIR_EFP_ROREG_INFO
+(
+    OUTPATIENT_SN VARCHAR2(18),
+    INPATIENT_SN VARCHAR2(18),
+    INP_NO VARCHAR2(18),
+    OUTP_NO VARCHAR2(18),
+    DOC_NO VARCHAR2(50) not null
+        constraint DIR_EFP_ROREG_INFO_PK
+        primary key,
+    PATIENT_ID VARCHAR2(20),
+    HEALTH_CARD_NO VARCHAR2(18),
+    ALLERGY_HISTORY VARCHAR2(1000),
+    DISEASE_HISTORY VARCHAR2(1000),
+    OPERATION_HISTORY VARCHAR2(1000),
+    REFERRAL_DATE DATE,
+    REFERRAL_REASON VARCHAR2(100),
+    REFERRAL_DESC VARCHAR2(2000),
+    REFERRAL_DOCTOR_NAME VARCHAR2(50),
+    DIAGNOSIS_DATE DATE,
+    ORG_NAME VARCHAR2(70),
+    SYMPTOMS_DESC VARCHAR2(1000),
+    MAIN_TREAT_MEASURES VARCHAR2(1000),
+    AUXILIARYEXAMI_RESULT VARCHAR2(1000),
+    ASSESSMENT_PLAN VARCHAR2(1000),
+    DISPOSAL_PLAN VARCHAR2(2000),
+    HEALTH_ASSESSMENT_DESC VARCHAR2(2000),
+    MEASURES_GUIDE_DESC VARCHAR2(100),
+    RECEIV_MECHANOUT_CODE VARCHAR2(4),
+    INSTI_DEPART_TRANSO_NAME VARCHAR2(50),
+    RECEIV_MECHAN_IN VARCHAR2(70),
+    INSTI_DEPART_TRANSI_NAME VARCHAR2(50),
+    LAST_MODIFIC_TIME DATE
+)
+    /
+
+comment on table DIR_EFP_ROREG_INFO is 'cda子集主表-转诊(院)记录子集主表(DIR_EFP_ROREG_INFO)'
+/
+
+comment on column DIR_EFP_ROREG_INFO.OUTPATIENT_SN is '门（急）诊流水号'
+/
+
+comment on column DIR_EFP_ROREG_INFO.INPATIENT_SN is '住院流水号'
+/
+
+comment on column DIR_EFP_ROREG_INFO.INP_NO is '住院号'
+/
+
+comment on column DIR_EFP_ROREG_INFO.OUTP_NO is '门诊号'
+/
+
+comment on column DIR_EFP_ROREG_INFO.DOC_NO is '文档编号'
+/
+
+comment on column DIR_EFP_ROREG_INFO.PATIENT_ID is '患者ID'
+/
+
+comment on column DIR_EFP_ROREG_INFO.HEALTH_CARD_NO is '居民健康卡号'
+/
+
+comment on column DIR_EFP_ROREG_INFO.ALLERGY_HISTORY is '过敏史'
+/
+
+comment on column DIR_EFP_ROREG_INFO.DISEASE_HISTORY is '疾病史（含外伤）'
+/
+
+comment on column DIR_EFP_ROREG_INFO.OPERATION_HISTORY is '手术史'
+/
+
+comment on column DIR_EFP_ROREG_INFO.REFERRAL_DATE is '转诊（院）日期'
+/
+
+comment on column DIR_EFP_ROREG_INFO.REFERRAL_REASON is '转诊原因'
+/
+
+comment on column DIR_EFP_ROREG_INFO.REFERRAL_DESC is '转诊记录'
+/
+
+comment on column DIR_EFP_ROREG_INFO.REFERRAL_DOCTOR_NAME is '转诊医师姓名'
+/
+
+comment on column DIR_EFP_ROREG_INFO.DIAGNOSIS_DATE is '诊断日期'
+/
+
+comment on column DIR_EFP_ROREG_INFO.ORG_NAME is '诊断机构名称'
+/
+
+comment on column DIR_EFP_ROREG_INFO.SYMPTOMS_DESC is '相关症状'
+/
+
+comment on column DIR_EFP_ROREG_INFO.MAIN_TREAT_MEASURES is '主要治疗措施'
+/
+
+comment on column DIR_EFP_ROREG_INFO.AUXILIARYEXAMI_RESULT is '辅助检查结果'
+/
+
+comment on column DIR_EFP_ROREG_INFO.ASSESSMENT_PLAN is '治疗方案'
+/
+
+comment on column DIR_EFP_ROREG_INFO.DISPOSAL_PLAN is '处置计划'
+/
+
+comment on column DIR_EFP_ROREG_INFO.HEALTH_ASSESSMENT_DESC is '健康问题评估'
+/
+
+comment on column DIR_EFP_ROREG_INFO.MEASURES_GUIDE_DESC is '康复措施指导'
+/
+
+comment on column DIR_EFP_ROREG_INFO.RECEIV_MECHANOUT_CODE is '转出医疗机构代码'
+/
+
+comment on column DIR_EFP_ROREG_INFO.INSTI_DEPART_TRANSO_NAME is '转出医疗机构科室名称'
+/
+
+comment on column DIR_EFP_ROREG_INFO.RECEIV_MECHAN_IN is '转入医疗机构名称'
+/
+
+comment on column DIR_EFP_ROREG_INFO.INSTI_DEPART_TRANSI_NAME is '转入医疗机构科室名称'
+/
+
+comment on column DIR_EFP_ROREG_INFO.LAST_MODIFIC_TIME is '最后修改时间'
+/
+
 

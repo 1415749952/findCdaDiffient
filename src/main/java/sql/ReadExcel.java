@@ -1,6 +1,7 @@
 package sql;
 
 
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -88,6 +89,7 @@ public class ReadExcel
         {
             return "";
         }
+        xssfCell.setCellType(CellType.STRING);
         return xssfCell.getStringCellValue();
     }
 
